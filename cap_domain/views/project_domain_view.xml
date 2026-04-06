@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="project_domain_tree_view" model="ir.ui.view">
+            <field name="name">project.domain.tree.view</field>
+            <field name="model">project.domain</field>
+            <field name="arch" type="xml">
+                <list create="false">
+                    <field name="name"/>
+                    <field name="default_domain_id"/>
+                    <field name="project_id"/>
+                    <field name="phase_id"/>
+                    <field name="status"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="project_domain_pivot_view" model="ir.ui.view">
+            <field name="name">project.domain.pivot.view</field>
+            <field name="model">project.domain</field>
+            <field name="arch" type="xml">
+                <pivot>
+                    <field name="name" type="row"/>
+                    <field name="phase_id" type="col"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="project_domain_form_view" model="ir.ui.view">
+            <field name="name">project.domain.form.view</field>
+            <field name="model">project.domain</field>
+            <field name="arch" type="xml">
+                <form create="false">
+                    <header>
+                        <field name="status" widget="statusbar" options="{'clickable': '1'}"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="is_pm" invisible="1"/>
+                            <field name="name" required="1" readonly="not is_pm"/>
+                            <field name="default_domain_id"
+                                   options="{'no_create': True, 'no_create_edit': True, 'no_open': True}" readonly="1"/>
+                            <field name="project_id" options="{'no_create': True, 'no_create_edit': True}" readonly="1"/>
+                            <field name="phase_id" options="{'no_create': True, 'no_create_edit': True}" readonly="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="project_domain_tree_view_for_project_view" model="ir.ui.view">
+            <field name="name">project.domain.tree.view</field>
+            <field name="model">project.domain</field>
+            <field name="arch" type="xml">
+                <list create="false">
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+                    <field name="default_domain_id" optional="hide"/>
+                    <field name="project_id" optional="hide"/>
+                    <field name="phase_id"/>
+                    <field name="status" optional="show"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="project_domain_search_view" model="ir.ui.view">
+            <field name="name">project.domain.search.view</field>
+            <field name="model">project.domain</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="default_domain_id"/>
+                    <field name="phase_id"/>
+                    <field name="project_id" />
+                    <filter string="Not Started" name="status" domain="[('status', '=', 'not started')]"/>
+                    <filter string="In Progress" name="status" domain="[('status', '=', 'in progress')]"/>
+                    <filter string="Done" name="status" domain="[('status', '=', 'done')]"/>
+                    <group>
+                        <filter string="Default Domain" name="default_domain_id"
+                                context="{'group_by':'default_domain_id'}"/>
+                        <filter string="Phase" name="phase_id"
+                                context="{'group_by':'phase_id'}"/>
+                        <filter string="Project" name="project_id" domain="[]" context="{'group_by':'project_id'}"/>
+                        <filter string="Status" name="status" context="{'group_by':'status'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_project_domain" model="ir.actions.act_window">
+            <field name="name">Project Domain</field>
+            <field name="res_model">project.domain</field>
+            <field name="view_mode">list,form</field>
+            <field name="context">{}</field>
+        </record>
+
+<!--        embedded action-->
+        <record id="project_embedded_action_project_domain" model="ir.embedded.actions">
+            <field name="parent_res_model">project.project</field>
+            <field name="sequence">100</field>
+            <field name="name">Project Domain</field>
+            <field name="parent_action_id" ref="project.act_project_project_2_project_task_all"/>
+            <field name="python_method">action_project_domain</field>
+            <field name="context">{"from_embedded_action": true}</field>
+        </record>
+
+        <menuitem id="project_domain_ksc_menu" action="action_project_domain"
+                  name="Project Domain" parent="project.menu_project_config"/>
+    </data>
+</odoo>

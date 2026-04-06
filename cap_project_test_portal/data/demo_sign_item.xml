@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Attachment -->
+    <record id="attachment_session_test_sign_tour" model="ir.attachment">
+        <field name="name">Sample Session Test Pdf</field>
+        <field name="datas" type="base64" file="cap_project_test_portal/static/demo/session_test_demo.pdf"/>
+        <field name="mimetype">application/pdf</field>
+    </record>
+
+    <!-- Sign Template with attachment -->
+    <record id="session_test_template_sign_tour" model="sign.template">
+        <field name="name">Session Test Sign Tour</field>
+
+        <field name="active" eval="False"/>
+    </record>
+
+
+</odoo>

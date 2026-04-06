@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record id="hr_employee_skill_validation_url" model="ir.config_parameter">
+            <field name="key">cap_hr_skill.url</field>
+            <field name="value"></field>
+        </record>
+    </data>
+</odoo>

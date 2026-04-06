@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <record id="quality_category_tests" model="quality.category">
+            <field name="name">Tests</field>
+            <field name="weight">20.0</field>
+        </record>
+
+        <record id="quality_category_feedback" model="quality.category">
+            <field name="name">Feedback</field>
+            <field name="weight">20.0</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="auto_trans_conf_comp_rule" model="ir.rule">
+            <field name="name">Auto Transaction Configuration multi company rule</field>
+            <field name="model_id" ref="model_auto_internal_transaction_configuration"/>
+            <field name="domain_force">['|',('company_id','=',False),('company_id', 'in', company_ids)]</field>
+        </record>
+    </data>
+</odoo>

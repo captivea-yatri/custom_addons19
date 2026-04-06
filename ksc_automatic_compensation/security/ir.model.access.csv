@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ksc_auto_compensate,ksc.auto.compensate,model_ksc_auto_compensate,,1,1,1,1
+access_auto_compensate_inv_bill,ksc.auto.compensate.inv.bill,model_auto_compensate_inv_bill,,1,1,1,1

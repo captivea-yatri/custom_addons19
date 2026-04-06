@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="software_tree_view" model="ir.ui.view">
+            <field name="name">cap.software.tree.view</field>
+            <field name="model">software.software</field>
+            <field name="arch" type="xml">
+                <list editable="top">
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="action_software" model="ir.actions.act_window">
+            <field name="name">Software</field>
+            <field name="res_model">software.software</field>
+            <field name="view_mode">list</field>
+        </record>
+
+        <menuitem id="software_menu" action="action_software" name="Software" parent="project.menu_project_config"/>
+    </data>
+</odoo>

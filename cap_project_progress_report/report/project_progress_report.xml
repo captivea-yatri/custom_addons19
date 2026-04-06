@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_report_progress_" model="ir.actions.report">
+            <field name="name">Project Progress Report Full</field>
+            <field name="model">project.progress</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">cap_project_progress_report.report_project_progress</field>
+            <field name="report_file">cap_project_progress_report.project_progress_report_templates</field>
+            <field name="print_report_name">('%s' % (object.name))</field>
+            <field name="binding_model_id" ref="model_project_progress"/>
+            <field name="binding_type">report</field>
+        </record>
+
+
+        <record id="project_progress_report_no_deadline" model="ir.actions.report">
+            <field name="name">Project Progress Report Light</field>
+            <field name="model">project.progress</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">cap_project_progress_report.project_progress_report_no_deadline_id</field>
+            <field name="report_file">cap_project_progress_report.project_progress_report_no_deadline_template</field>
+            <field name="print_report_name">('%s' % (object.name))</field>
+            <field name="binding_model_id" ref="model_project_progress"/>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+</odoo>

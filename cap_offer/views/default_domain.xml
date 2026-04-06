@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="default_domain_view_inherit_view_id_001" model="ir.ui.view">
+        <field name="name">default.domain.inherit.view</field>
+        <field name="model">default.domain</field>
+        <field name="inherit_id" ref="cap_domain.default_domain_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list/field[@name='all_phases']" position="after">
+                <field name="offer_ids" widget="many2many_tags"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

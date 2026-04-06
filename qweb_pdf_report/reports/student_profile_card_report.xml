@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <template id="student_profile_card_report_temp">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <h1>Student Report </h1>
+                           <span>Name: <t t-esc="doc.name"/></span><br/>
+                            <span> Roll_no: <t t-esc ="doc.roll_no"/></span>
+                           <h4><span>Age:<t t-esc ="doc.age"/></span></h4>
+                            DOB:<p t-field ="doc.dob"/>
+                            Fees:<p t-field ="doc.fees"/>
+                            Standard:<p t-field ="doc.std"/>
+                            Division:<p t-field ="doc.div"/>
+                            <p t-if="doc.name=='Yatri'">Yes,this is <span t-esc="doc.name"/></p>
+                            <p t-elif="doc.name=='MY'">Yes,this is my fav student <span t-esc="doc.name"/></p>
+                            <p t-else="">No,this is not Yatri . <br/> This is <span t-esc="doc.name"/> </p>
+                            <t t-foreach="[1,2,3,4,5,6,7,8,9,10]" t-as="res">
+                                <h4 t-esc="res"/>
+                            </t>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+         <record id="student_report_card" model="ir.actions.report">
+            <field name="name">Student Card</field>
+            <field name="model">student</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">qweb_pdf_report.student_profile_card_report_temp</field>
+            <field name="report_file">qweb_pdf_report.student_profile_card_report_temp</field>
+            <field name="binding_model_id" ref="skc_school_management.model_student"/>
+            <field name="binding_type">report</field>
+        </record>
+
+    </data>
+</odoo>

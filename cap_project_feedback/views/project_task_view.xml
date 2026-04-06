@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="project_feedback_account_inherit_view_id" model="ir.ui.view">
+            <field name="name">project.feedback.account.inherit.view.id</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_form2"/>
+            <field name="arch" type="xml">
+                <xpath expr="//span[@id='start_rating_buttons']" position="before">
+                    <button name="access_feedback_list"
+                            type="object" class="oe_stat_button"
+                            icon="fa-bullseye"
+                            string="Feedback"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="cap_project_feedback_inherited_project_sharing_project_task_view_form" model="ir.ui.view">
+            <field name="name">project.sharing.project.task.view.form</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.project_sharing_project_task_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="Feedback">
+                        <field name="feedback_ids" string="Feedback"
+                            context="{'default_project_id': project_id, 'default_phase_id': default_phase_id}">
+                            <list editable="bottom" create="1" delete="0" multi_edit="1" no_open="1">
+                                <field name="name"/>
+                                <field name="description" widget="html" type="html"/>
+                                <field name="project_id" force_save="1" column_invisible="1"/>
+                                <field name="phase_id" readonly="1" options="{'no_open': 1}" force_save="1"/>
+                                <field name="estimated_hours" readonly="1"/>
+                                <field name="impact_on_timeline" readonly="1"/>
+                                <field name="status" readonly="1"/>
+                            </list>
+                        </field>
+                    </page>
+                </xpath>
+                <xpath expr="//notebook/page[@name='description_page']//field[@name='description']" position="attributes">
+                    <attribute name="readonly">0</attribute>
+                </xpath>
+<!--   check all views below same as v16  -->
+                <xpath expr="//sheet//group//group[1]//field[@name='portal_user_names']" position="after">
+                    <field name="default_phase_id" options="{'no_open': True}" readonly="1"/>
+                    <field name="default_domain_id" options="{'no_open': True}" class="o_task_user_field" string='Domain' readonly="1"/>
+                    <field name="id" readonly="1" string='Task ID'/>
+                    <field name="task_url" string="URL" widget="url" readonly="1"/>
+                    <field name="default_domain_ids" class="o_task_user_field" string="Default domain ids"
+                           invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+
+<!--        TODO: check views from front-end side-->
+        <record id="cap_domain_project_task_project_sharing_view_form_inherited_01" model="ir.ui.view">
+            <field name="name">project.sharing.project.task.view.form.inherit.new</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="hr_timesheet.project_sharing_inherit_project_task_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='allocated_hours']" position="after">
+                    <div colspan="2">
+                        <label for="estimate_time" string="Requirement Estimated Time" class="me-2"/>
+                        <field name="estimate_time" class="o_field_float_time oe_inline ms-2" string="Requirement Estimated Time"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+<!--        <record id="cap_domain_project_task_project_sharing_view_tree_inherited_02" model="ir.ui.view">-->
+<!--            <field name="name">project.sharing.project.task.view.form.inherit.tree</field>-->
+<!--            <field name="model">project.task</field>-->
+<!--            <field name="inherit_id" ref="hr_timesheet.project_sharing_inherit_project_task_view_tree"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <xpath expr="//field[@name='allocated_hours']" position="after">-->
+<!--                    <field name="estimate_time" widget="timesheet_uom_no_toggle" sum="Requirement Estimated Time" optional="hide" string="Requirement Estimated Time"/>-->
+<!--                </xpath>-->
+<!--            </field>-->
+<!--        </record>-->
+
+        <record id="cap_domain_project_task_project_sharing_view_form_inherited_03" model="ir.ui.view">
+            <field name="name">project.project.task.view.form.inherit.form</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="hr_timesheet.view_task_form2_inherited"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form[1]/sheet[1]/group[1]/group[2]/div[not(@name)][2]" position="after">
+                    <div colspan="2">
+                        <label for="estimate_time" string="Requirement Estimated Time" class="me-2"/>
+                        <field name="estimate_time" class="o_field_float_time oe_inline ms-2" string="Requirement Estimated Time"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="cap_domain_project_task_project_sharing_view_tree_inherited_04" model="ir.ui.view">
+            <field name="name">project.project.task.view.form.inherit.tree</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="hr_timesheet.view_task_tree2_inherited"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='allocated_hours']" position="after">
+                    <field name="estimate_time" widget="timesheet_uom_no_toggle" sum="Requirement Estimated Time" optional="hide" string="Requirement Estimated Time"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="cap_domain_project_task_project_sharing_view_tree_inherited_05" model="ir.ui.view">
+            <field name="name">project.sharing.project.task.view.tree.inherit</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="cap_project_feedback.project_sharing_project_task_view_tree_custom"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="default_phase_id" string='Phase' readonly="1"/>
+                    <field name="default_domain_id" class="o_task_user_field" string='Domain' readonly="1"/>
+                    <field name="default_domain_ids" class="o_task_user_field" string="Default domain ids"
+                           column_invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

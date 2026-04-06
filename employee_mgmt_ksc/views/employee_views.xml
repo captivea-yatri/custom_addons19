@@ -1,0 +1,70 @@
+<odoo>
+    <!-- Tree View -->
+    <record id="view_employee_list" model="ir.ui.view">
+        <field name="name">employee.ksc.list</field>
+        <field name="model">employee.ksc</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="job_position"/>
+                <field name="department_id"/>
+                <field name="shift_id"/>
+                <field name="job_type"/>
+                <field name="gender"/>
+                <field name="manager_id"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_employee_form" model="ir.ui.view">
+        <field name="name">employee.ksc.form</field>
+        <field name="model">employee.ksc</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="department_id"/>
+                        <field name="shift_id"/>
+                        <field name="job_position"/>
+                        <field name="salary"/>
+                        <field name="hire_date"/>
+                        <field name="gender"/>
+                        <field name="job_type"/>
+                        <field name="is_manager"/>
+                        <field name="manager_id" options="{'no_create': True, 'no_open': True}"/>
+                        <field name="related_user_id"/>
+                        <field name="employee_ids" readonly="1"/>
+                        <field name="increment_percentage" groups="employee_mgmt_ksc.group_manager"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_employee_search" model="ir.ui.view">
+        <field name="name">employee.ksc.search</field>
+        <field name="model">employee.ksc</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="Employee Name"/>
+                <field name="job_position"/>
+                <field name="department_id"/>
+                <filter string="Permanent" name="filter_permanent" domain="[('job_type','=','permanent')]"/>
+                <filter string="Ad Hoc" name="filter_adhoc" domain="[('job_type','=','adhoc')]"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_employee" model="ir.actions.act_window">
+        <field name="name">Employees</field>
+        <field name="res_model">employee.ksc</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_employee" name="Employees" parent="menu_hr_root_custom" action="action_employee"/>
+</odoo>

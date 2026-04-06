@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="cap_view_partner_form_01" model="ir.ui.view">
+            <field name="name">cap.view.partner.form.01</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="cap_partner.cap_view_partner_form_01"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='invoicing']//field[@name='x_studio_sales_status']" position="after">
+                    <field name="desactivate_security_deposit" string="Disactivate Security Deposit"
+                           groups="ksc_auto_invoice.group_security_deposit_configuration"
+                           invisible="is_company != True"/>
+                    <field name="desactivate_security_deposit" string="Disactivate Security Deposit"
+                           groups="!ksc_auto_invoice.group_security_deposit_configuration"
+                           invisible="is_company != True"
+                           readonly="1"/>
+                    <field name="total_security_deposit" string="Total Security Deposit"
+                           invisible="is_company != True"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
+

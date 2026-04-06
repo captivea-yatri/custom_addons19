@@ -1,0 +1,44 @@
+<odoo>
+    <!-- Tree View -->
+    <record id="view_employee_department_list" model="ir.ui.view">
+        <field name="name">employee.department.ksc.list</field>
+        <field name="model">employee.department.ksc</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="manager_id"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_employee_department_form" model="ir.ui.view">
+        <field name="name">employee.department.ksc.form</field>
+        <field name="model">employee.department.ksc</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="manager_id"/>
+                        <field name="employee_ids"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_employee_department_search" model="ir.ui.view">
+        <field name="name">employee.department.ksc.search</field>
+        <field name="model">employee.department.ksc</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" string="Department Name"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Menu --><menuitem id="menu_hr_root_custom" name="HR"/>
+    <menuitem id="menu_employee_department" name="Department" parent="menu_hr_root_custom"/>
+</odoo>

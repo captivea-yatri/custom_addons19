@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="edit_project_form_inherit" model="ir.ui.view">
+            <field name="name">project_form_inherit</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project_forecast.project_view_form_inherit_project_forecast"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='group_time_managment']" position="inside">
+                    <div class="o_setting_box mt-4" groups="planning.group_planning_user" colspan="2">
+                        <div class="o_setting_left_pane">
+                            <field name="invoice_for_groupe_riss"/>
+                        </div>
+                        <div class="o_setting_right_pane">
+                            <label string="Invoice for Groupe Riss" for="invoice_for_groupe_riss"/>
+                            <div class="text-muted" id="invoice_for_groupe_riss_setting">
+                                Generate invoice for riss group
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_country_ksc,res.country.ksc,model_res_country_ksc,,1,1,1,1
+access_state_ksc,res.state.ksc,model_res_state_ksc,,1,1,1,1
+access_city_ksc,res.city.ksc,model_res_city_ksc,,1,1,1,1

@@ -1,0 +1,11 @@
+<odoo>
+    <record id="cap_project_feedback.model_project_feedback" model="ir.model">
+        <field name="website_form_access" eval="True"/>
+    </record>
+    <function model="ir.model.fields" name="formbuilder_whitelist">
+        <value>project.feedback</value>
+        <value eval="[
+                'name', 'project_id', 'priority', 'description',
+            ]"/>
+    </function>
+</odoo>

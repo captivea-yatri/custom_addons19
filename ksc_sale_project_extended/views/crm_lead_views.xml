@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="crm_extended_crm_lead_view_form" model="ir.ui.view">
+        <field name="name">crm.lead.form.view.inherit</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[2]/field[@name='partner_id']" position="attributes">
+               <attribute name="options">{'no_quick_create':True}</attribute>
+            </xpath>
+            <field name="tag_ids" position="after">
+                <field name="est_user"/>
+                <field name="est_hours"/>
+            </field>
+            <field name="tag_ids" position="before">
+                <field name="x_studio_win_date" string="Win Date"/>
+            </field>
+        </field>
+    </record>
+</odoo>

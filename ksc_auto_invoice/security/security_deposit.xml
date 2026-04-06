@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="group_security_deposit_configuration" model="res.groups">
+            <field name="name">Security Deposit Configuration</field>
+
+        </record>
+    </data>
+</odoo>

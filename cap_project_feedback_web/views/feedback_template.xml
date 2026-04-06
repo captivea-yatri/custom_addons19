@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="portal_my_home_feedback" name="Feedbacks" customize_show="True" inherit_id="portal.portal_my_home" priority="40">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-set="portal_service_category_enable" t-value="True"/>
+        </xpath>
+            <div id="portal_client_category" position="inside">
+                <t t-call="portal.portal_docs_entry">
+                    <t t-set="icon" t-value="'/cap_project_feedback_web/static/src/img/feedback.svg'"/>
+                    <t t-set="title">Feedbacks</t>
+                    <t t-set="text">Follow your Feedbacks</t>
+                    <t t-set="url" t-value="'/my/feedback'"/>
+                    <t t-set="placeholder_count" t-value="'feedback_count'"/>
+                </t>
+            </div>
+
+
+    </template>
+
+    <template id="portal_my_projects_feedback" name="My Projects">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Projects</t>
+            </t>
+            <t t-if="not projects">
+                <div class="alert alert-warning mt8" role="alert">
+                    There are no projects.
+                </div>
+            </t>
+            <t t-if="projects" t-call="portal.portal_table">
+                <tbody>
+                    <tr t-foreach="projects" t-as="project">
+                        <td>
+                            <a t-attf-href="/my/feedback/#{project.id}?{{ keep_query() }}">
+                                <span t-field="project.name"/>
+                            </a>
+                        </td>
+                        <td class="text-end">
+                            <t t-set="sessions"
+                               t-value="project.env['project.feedback'].search_count([('project_id', '=', project.id)])"/>
+                            <t t-out="sessions"/>
+                            Feedbacks
+                        </td>
+                    </tr>
+                </tbody>
+            </t>
+        </t>
+    </template>
+
+    <template id="project_feedback_sharing_portal" name="Project Feedback">
+        <t t-call="portal.frontend_layout">
+            <!-- To add the class on div#wrapwrap to remove the overflow -->
+            <t t-set="pageName" t-value="'o_feedback_sharing_container'"/>
+            <t t-set="no_footer" t-value="true"/>
+            <t t-call="cap_project_feedback_web.project_feedback_sharing"/>
+        </t>
+    </template>
+
+    <template id="project_feedback_sharing" name="Project Feedback Sharing">
+        <!--    We need to forward the request lang to ensure that the lang set on the portal match the lang delivered -->
+<!--        TODO : Need to check in database-->
+        <iframe class="flex-grow-1" frameborder="0" width="1920px" height="750px"
+                t-attf-src="/{{ request.context['lang'] }}/my/project_feedback/{{ str(project_id) }}/feedback_sharing"/>
+    </template>
+
+<!-- Backend-style embed that loads Odoo 19 webclient -->
+  <template id="project_feedback_portal_embed" name="Project Feedback Backend Embed (Odoo 19)">
+    <t t-call="web.layout">
+      <t t-set="head_feedback_embed">
+        <!-- ✅ Pass server session info to JS runtime -->
+        <script type="text/javascript">
+          odoo.__session_info__ = <t t-out="json.dumps(session_info, default=str)"/>;
+          // ✅ Skip top-level menu loading (avoid redirect)
+          odoo.loadMenusPromise = Promise.resolve();
+        </script>
+
+        <!-- ✅ Include backend assets -->
+        <t t-call-assets="web.assets_backend"/>
+
+        <!-- ✅ Conditional assets block (avoids missing deps crash) -->
+        <t t-call="web.conditional_assets_tests">
+          <t t-set="ignore_missing_deps" t-value="True"/>
+        </t>
+      </t>
+
+      <!-- Merge head content -->
+      <t t-set="head" t-value="(head_feedback_embed or '') + (head or '')"/>
+      <!-- Backend body classes -->
+      <t t-set="body_classname" t-value="'o_web_client o_project_feedback_portal'"/>
+
+      <!-- Nothing else needed: Odoo mounts the webclient automatically -->
+    </t>
+  </template>
+<!--    ###################################################################################################################-->
+
+    <template id="portal_my_feedback_readonly" inherit_id="portal.portal_sidebar" primary="True" name="My Feedbacks">
+        <xpath expr="//div[hasclass('o_portal_sidebar')]" position="inside">
+            <div class="row o_portal_sale_sidebar">
+                <t t-call="portal.portal_record_sidebar">
+                    <t t-set="classes" t-value="'col-lg-4 col-xxl-3 d-print-none'"/>
+                    <t t-set="entries">
+                        <div class="d-flex flex-wrap flex-column gap-4">
+                            <ul class="list-group list-group-flush flex-wrap flex-row flex-lg-column">
+                                <li class="navspy list-group-item ps-0 flex-grow-1" t-ignore="true"
+                                    role="complementary">
+                                    <ul class="nav flex-column bs-sidenav"></ul>
+                                </li>
+                                <li class="list-group-item d-grid align-content-start">
+                                    <h6 class="my-3">
+                                        <a t-attf-href="/my/feedback/#{feedback_id.project_id.id}">
+                                            <t t-out="feedback_id.sudo().project_id.sudo().name"></t>
+                                        </a>
+                                    </h6>
+                                    <h6 class="my-0">
+                                        <t t-out="feedback_id.sudo().assignee_id.sudo().name"></t>
+                                    </h6>
+                                </li>
+                                <li t-if="feedback_id.sudo().project_id.sudo().user_id"
+                                    class="list-group-item flex-grow-1">
+                                    <div class="small mb-1">
+                                        <strong class="text-muted">Salesperson</strong>
+                                    </div>
+                                    <div class="row flex-nowrap">
+                                        <span t-field="feedback_id.sudo().project_id.sudo().user_id"
+                                              t-options='{"widget": "contact", "fields": ["name", "phone"], "no_marker": True}'/>
+                                    </div>
+                                    <div class="row flex-nowrap">
+                                        <a href="#discussion" class="small">
+                                            <i class="fa fa-comment"></i>
+                                            Send
+                                            <message></message>
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </t>
+                </t>
+                <div id="feedback_content" class="o_portal_content col-12 col-lg-8 col-xxl-9">
+                    <div t-attf-class="card #{'pb-5' if report_type == 'html' else ''}" id="portal_feedback_content">
+                        <div t-call="cap_project_feedback_web.project_feedback_portal_content"/>
+                    </div>
+                    <hr/>
+                    <div class="mt-2 mt-4">
+                        <h3>Communication history</h3>
+                        <t t-call="portal.message_thread">
+                            <t t-set="object" t-value="feedback_id"/>
+                        </t>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="project_feedback_portal_content" name="Project Feedback Portal Content">
+        <!-- Intro -->
+        <div id="project_introduction"
+             t-attf-class="pb-2 pt-3 #{'card-header bg-white' if report_type == 'html' else ''}">
+            <h2 class="my-0">
+                <t t-out="feedback_id.name"/>
+            </h2>
+        </div>
+
+        <div t-attf-class="#{'card-body' if report_type == 'html' else ''}">
+            <div id="my_informations">
+                <div t-att-data-order-id="feedback_id.id" t-if="page_name == 'feedbacks' or feedback_id">
+                </div>
+                <div class="row" id="so_project_name" style="margin-top:10px;">
+                    <div class="mb-0 col-6" t-if="feedback_id.project_id.name">
+                        <strong>Project Name:</strong>
+                        <a t-attf-href="/my/feedback/#{feedback_id.project_id.id}">
+                            <span t-field="feedback_id.project_id.name"/>
+                        </a>
+                    </div>
+                </div>
+                <div class="row" id="so_project_date">
+                    <div class="mb-0 col-6">
+                        <strong>Task:</strong>
+                        <a t-attf-href="/my/projects/#{feedback_id.project_id.id}">
+                            <span t-field="feedback_id.task_id"/>&amp;nbsp;
+                        </a>
+                    </div>
+                </div>
+                <div class="row" id="so_project_estm_hours">
+                    <div class="mb-0 col-6">
+                        <strong>Estimated Hours:</strong>
+                        <span t-field="feedback_id.estimated_hours" t-options='{"widget": "float_time"}'/>
+                    </div>
+                </div>
+                <div class="row" id="so_project_users">
+                    <div class="mb-0 col-6">
+                        <strong>Assignee:</strong>
+                        <span t-field="feedback_id.assignee_id.name"/>&amp;nbsp;
+                    </div>
+                </div>
+                <div class="row" id="so_project_maturity">
+                    <div class="mb-0 col-6">
+                        <strong>Maturity:</strong>
+                        <span t-field="feedback_id.maturity"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="so_project_hours">
+                <div class="row" id="so_project_efforts">
+                    <div class="mb-0 col-6">
+                        <strong>Phase:</strong>
+                        <span t-field="feedback_id.phase_id"/>&amp;nbsp;
+                    </div>
+                </div>
+                <div class="row" id="so_project_timeline">
+                    <div class="mb-0 col-6">
+                        <strong>Impact On Timeline:</strong>
+                        <span t-field="feedback_id.impact_on_timeline"/>&amp;nbsp;
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="so_project_description">
+                <div class="row" id="my_so_description">
+                    <div class="mb-0 col-6">
+                        <strong>Description:</strong>
+                        <span t-field="feedback_id.description"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+</odoo>

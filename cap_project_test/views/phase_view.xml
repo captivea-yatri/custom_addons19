@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="phase_inherit_view" model="ir.ui.view">
+            <field name="name">phase.inherit.view</field>
+            <field name="model">project.phase</field>
+            <field name="inherit_id" ref="cap_domain.project_phase_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group" position="before">
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_list_task"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-tasks">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_text">Tasks</span>
+                            </div>
+                        </button>
+                        <button name="action_phase_test_object"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-flask icon">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_text">Task</span>
+                                <span class="o_stat_text">Test</span>
+                            </div>
+                        </button>
+                        <button name="action_phase_execution_test_object"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-check-square-o icon">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_text">Execution</span>
+                                <span class="o_stat_text">Test</span>
+                            </div>
+                        </button>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

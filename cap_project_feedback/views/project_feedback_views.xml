@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="new_project_feedback_view_tree_id" model="ir.ui.view">
+        <field name="name">new.project.feedback.view.tree</field>
+        <field name="model">project.feedback</field>
+        <field name="arch" type="xml">
+            <list editable="top" create="1" delete="1" multi_edit="1" default_order="create_date desc">
+                <field name="name"/>
+                <field name="description" widget="html" type="html"/>
+                <field name="project_id" required="True" options="{'no_create': True, 'no_create_edit':True}"/>
+                <field name="assignee_id" options="{'no_create': True, 'no_create_edit':True}"/>
+                <field name="domain_id" options="{'no_create': True, 'no_create_edit':True}" column_invisible="1"/>
+                <field name="default_domain_ids" column_invisible="1"/>
+                <field name="default_domain_id" required="True" domain="[('id', 'in', default_domain_ids)]"
+                                   options="{'no_create': True,'no_open': True, 'no_create_edit': True}"/>
+                <field name="phase_id" required="True" options="{'no_create': True, 'no_create_edit':True}"/>
+                <field name="priority" widget="priority"/>
+                <field name="estimated_effort"/>
+                <field name="estimated_hours" widget="float_time"/>
+                <field name="impact_on_timeline"/>
+                <field name="maturity"/>
+                <field name="tag_ids" widget="many2many_tags"/>
+                <field name="status"/>
+                <field name="transformed_in_task" optional="hide" readonly="1"/>
+                <field name="task_id" optional="hide" options="{'no_create': True, 'no_create_edit':True}"/>
+                <button name="action_read_feedback" type="object" string="Setup" class="float-end btn-secondary"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="new_project_feedback_form_view_id" model="ir.ui.view">
+        <field name="name">new.project.feedback.form.view</field>
+        <field name="model">project.feedback</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="status" widget="statusbar" clickable="True"
+                           options="{'clickable': '1', 'fold_field': 'fold'}"/>
+                    <button name="transform_feedback_into_task" string="convert a task" type="object"
+                            invisible="transformed_in_task == 1 or task_id != False"
+                            class="oe_highlight"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="default_domain_ids" invisible="1"/>
+                            <field name="name"/>
+                            <field name="project_id" required="True"
+                                   options="{'no_create': True,'no_open': True, 'edit':False}"/>
+                            <field name="assignee_id"
+                                   options="{'no_create': True,'no_open': True, 'no_create_edit':True}"/>
+                            <field name="default_domain_id"
+                                   required="True"
+                                   domain="[('id', 'in', default_domain_ids)]"
+                                   options="{'no_create': True,'no_open': True, 'no_create_edit':True}"/>
+                            <field name="phase_id" required="True" options="{'no_create': True, 'no_create_edit':True}"/>
+                            <field name="estimated_effort"/>
+                            <field name="maturity"/>
+                        </group>
+                        <group>
+                            <field name="priority" widget="priority"/>
+                            <field name="estimated_hours" widget="float_time"/>
+                            <field name="impact_on_timeline"/>
+                            <field name="transformed_in_task" readonly="True"/>
+                            <field name="tag_ids" widget="many2many_tags"/>
+                            <field name="task_id"
+                                   options="{'no_create': True, 'no_create_edit':True}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="description_page" string="Description">
+                            <field name="description" widget="html" type="html" placeholder="description..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="my_project_feedback_search_view" model="ir.ui.view">
+        <field name="name">my.project.feedback.search.view</field>
+        <field name="model">project.feedback</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="project_id"/>
+                <field name="assignee_id"/>
+
+                    <filter string="Estimated Hours" name="estimated_effort"/>
+                    <filter name="task_id" string="Task"/>
+                    <filter name="priority" string="Priority"/>
+
+
+                    <filter name="open" string="Open" domain="[('status','in',['new','pending_estimation','waiting_feedback_arbitration'])]"/>
+                    <filter name="postponed" string="Postponed" domain="[('status','=','postpone')]"/>
+                    <filter name="closed" string="Closed" domain="[('status','in',['validated_task_created','linked','cancelled'])]"/>
+
+                    <filter string="Phase" name="phase_id" context="{'group_by':'phase_id'}"/>
+                    <filter string="Default Domain" name="default_domain_id" context="{'group_by':'default_domain_id'}"/>
+                    <filter string="Status" name="status" context="{'group_by':'status'}"/>
+
+            </search>
+        </field>
+    </record>
+
+    <record id="my_project_feedback_action_detail" model="ir.actions.act_window">
+        <field name="name">Feedback</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">project.feedback</field>
+        <field name="view_ids"
+               eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'list', 'view_id': ref('new_project_feedback_view_tree_id')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('new_project_feedback_form_view_id')})]"/>
+        <field name="view_id" ref="cap_project_feedback.new_project_feedback_view_tree_id"/>
+        <field name="view_mode">list,form</field>
+    </record>
+
+<!--    embedded action-->
+    <record id="project_embedded_action_feedbacks" model="ir.embedded.actions">
+        <field name="parent_res_model">project.project</field>
+        <field name="sequence">100</field>
+        <field name="name">Feedbacks</field>
+        <field name="parent_action_id" ref="project.act_project_project_2_project_task_all"/>
+        <field name="python_method">action_view_feedback_project</field>
+        <field name="context">{"from_embedded_action": true}</field>
+    </record>
+
+    <menuitem id="project_feedback_menu_id" name="Project Feedback" parent="project.menu_main_pm"
+              sequence="7" action="cap_project_feedback.my_project_feedback_action_detail"/>
+
+</odoo>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="template_test_tree_view" model="ir.ui.view">
+            <field name="name">template.test.tree.view</field>
+            <field name="model">template.test</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                    <field name="template_requirement_id"/>
+                    <field name="template_domain_id"/>
+                    <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="template_test_form_view" model="ir.ui.view">
+            <field name="name">template.test.form.view</field>
+            <field name="model">template.test</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1 class="d-flex flex-row">
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="template_requirement_id"
+                                       options="{'no_create': True, 'no_create_edit': True}"/>
+                                <field name="template_domain_id" readonly="True" options="{'no_open': True}"/>
+                            </group>
+                            <group>
+                                <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="description" string="Description">
+                                <field name="description"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="template_test_search_view" model="ir.ui.view">
+            <field name="name">template.test.search.view</field>
+            <field name="model">template.test</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="template_requirement_id"/>
+                    <field name="template_domain_id"/>
+                    <field name="tag_ids"/>
+
+                        <filter string="Name" name="name" context="{'group_by':'name'}"/>
+                        <filter string="Template Domain" name="template_domain_id"
+                                context="{'group_by':'template_domain_id'}"/>
+                        <filter string="Template Requirement" name="template_requirement_id"
+                                context="{'group_by':'template_requirement_id'}"/>
+                        <filter string="Tags" name="tag_ids"
+                                context="{'group_by':'tag_ids'}"/>
+
+                </search>
+            </field>
+        </record>
+
+        <record id="action_template_test" model="ir.actions.act_window">
+            <field name="name">Template Test</field>
+            <field name="res_model">template.test</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <menuitem id="template_test_main_menu" groups="cap_domain.operation_quality_manager" name="Test Admin"
+                  parent="project.menu_main_pm" sequence="9"/>
+        <menuitem id="template_test_sub_menu" action="action_template_test"
+                  name="Template test" sequence="4"
+                  parent="template_test_main_menu"/>
+    </data>
+</odoo>

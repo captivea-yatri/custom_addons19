@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record model="ir.rule" id="project_test_rule">
+            <field name="name">Project/Test: multi-company</field>
+            <field name="model_id" ref="model_test_test"/>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+            <field name="domain_force">[('project_id.company_id', 'in', company_ids)]</field>
+        </record>
+        <record model="ir.rule" id="task_test_rule">
+            <field name="name">Task/Test: multi-company</field>
+            <field name="model_id" ref="model_test_test"/>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+            <field name="domain_force">[('task_id.company_id', 'in', company_ids)]</field>
+        </record>
+
+        <record model="ir.rule" id="session_test_rule">
+            <field name="name">Session/Test: multi-company</field>
+            <field name="model_id" ref="model_session_test"/>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+            <field name="domain_force">[('project_id.company_id', 'in', company_ids)]</field>
+        </record>
+
+        <record model="ir.rule" id="execution_test_rule">
+            <field name="name">Execution/Test: multi-company</field>
+            <field name="model_id" ref="model_execution_test"/>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+            <field name="domain_force">[('project_id.company_id', 'in', company_ids)]</field>
+        </record>
+
+    </data>
+</odoo>

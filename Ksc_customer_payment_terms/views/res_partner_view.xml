@@ -1,0 +1,15 @@
+<!--<?xml version="1.0" encoding="UTF-8" ?>-->
+<!--<odoo>-->
+<!--    <data>-->
+<!--        <record model="ir.ui.view" id="base_view_inherited_partner_form">-->
+<!--            <field name="name">base_view_inherited_partner_form</field>-->
+<!--            <field name="model">res.partner</field>-->
+<!--            <field name="inherit_id" ref="base.view_partner_form"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <xpath expr="//field[@name='vat']" position="after">-->
+<!--                    <field name="is_default_after_first_payment" invisible="1"/>-->
+<!--                </xpath>-->
+<!--            </field>-->
+<!--        </record>-->
+<!--    </data>-->
+<!--</odoo>-->

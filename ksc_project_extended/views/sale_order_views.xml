@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sale_order_view_form_inherit_project_ksc" model="ir.ui.view">
+        <field name="name">sale_order_view_form_inherit_project_ksc</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <field name="show_update_fpos" position="after">
+                <field name="x_studio_block_timesheet_log"/>
+            </field>
+            <group name="sale_reporting" position="before">
+                <group string="invoicing authorization">
+                    <field name="authorized_invoicing_amount"/>
+                    <field name="not_invoiced_amount"/>
+                </group>
+            </group>
+        </field>
+    </record>
+</odoo>

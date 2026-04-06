@@ -1,0 +1,15 @@
+<odoo>
+    <record id="hr_emp_public_view" model="ir.ui.view">
+        <field name="name">hr.employee.public.view</field>
+        <field name="model">hr.employee.public</field>
+        <field name="inherit_id" ref="hr_skills.hr_employee_public_view_form_inherit"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='resume']" position="inside">
+                <group>
+                    <field name="functional_knowledge_score"/>
+                    <field name="global_knowledge_score"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

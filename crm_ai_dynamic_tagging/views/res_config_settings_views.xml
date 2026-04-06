@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_res_config_settings_crm_ai_dynamic_tagging" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.crm.ai.dynamic.tagging</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="crm.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app string="CRM AI Tagging" name="crm_ai_dynamic_tagging">
+                    <block title="CRM AI Dynamic Tagging">
+                        <setting string="Enable AI Dynamic Tagging" help="Use AI to infer website and industry tags for CRM leads.">
+                            <field name="crm_ai_enabled"/>
+                        </setting>
+
+                        <setting string="AI API URL">
+                            <field name="crm_ai_api_url" placeholder="https://your-api-endpoint/v1/chat/completions"/>
+                        </setting>
+
+                        <setting string="AI API Key">
+                            <field name="crm_ai_api_key" password="True"/>
+                        </setting>
+
+                        <setting string="AI Model">
+                            <field name="crm_ai_model" placeholder="gpt-4.1-mini"/>
+                        </setting>
+
+                        <setting string="API Timeout">
+                            <field name="crm_ai_timeout"/>
+                        </setting>
+
+                        <setting string="Max New Tags Per Lead">
+                            <field name="crm_ai_max_new_tags"/>
+                        </setting>
+
+                        <setting string="Queue on Create">
+                            <field name="crm_ai_process_on_create"/>
+                        </setting>
+
+                        <setting string="Queue on Update">
+                            <field name="crm_ai_process_on_write"/>
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+</odoo>

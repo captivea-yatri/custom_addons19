@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <template id="account_check_printing_cpe.ckca_check_cpe" name="ckca_check CPE" inherit_id="l10n_ca_check_printing.ckca_check">
+        <xpath expr="//div" position="replace">
+            <div class="ckca_check">
+<!--                <div class="sequence_number" t-if="page['sequence_number']" t-esc="page['sequence_number']"/>-->
+                <div class="ckca_date" t-esc="page['payment_date_canada']" style="top: 0.21in; left: 6.62in; width: 1.47in; text-align: left;"/>
+                <div class="ckca_date_format" style="top: 0.4in; left: 6.62in; width: 1.47in; text-align: left;">MM/DD/YYYY</div>
+                <table width="100%" style="padding:0px; top: 1.5in; left: 0.46875in;">
+                    <tr>
+                        <td colspan="4" style="width:auto; text-align: center;">
+                            <div t-esc="page['partner_name']"/>
+                        </td>
+                    </tr>
+                    <tr t-if="o.partner_id.street">
+                        <td colspan="4" style="width:auto;text-align: center;">
+                            <div class="ckus_payee_street" t-esc="o.partner_id.street"/>
+                        </td>
+                    </tr>
+                    <tr t-if="o.partner_id.street2">
+                        <td colspan="4" style="width:auto; text-align: center;">
+                            <div class="ckus_payee_street" t-esc="o.partner_id.street2"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:auto;padding-right: 5px;">
+                            <div class="ckus_payee_street">
+                                <span t-if="o.partner_id.city">
+                                    <span t-field="o.partner_id.city"/>
+                                </span>
+                            </div>
+                        </td>
+                        <td style="width: 0.25in;padding-right: 5px;">
+                            <div class="ckus_payee_street">
+                                <span t-if="o.partner_id.state_id">
+                                    <span t-field="o.partner_id.state_id.code"/>
+                                </span>
+                            </div>
+                        </td>
+                        <td style="width:auto;">
+                            <div class="ckus_payee_street" t-if="o.partner_id.zip" t-esc="o.partner_id.zip"/>
+                        </td>
+                    </tr>
+                </table>
+                <div class="ckca_amount" style="top: 0.97625in; left: 6.895in; width: 1.08in; text-align: left ;">
+                    <t t-esc="page['amount']"/>
+                </div>
+                <div class="ckca_amount_in_word" t-esc="page['amount_in_word']" style="top: 0.97625in;left: 0.46875in;width: 6in; font-size: 14.5px; font-weight: 400 !important;"/>
+            </div>
+        </xpath>
+    </template>
+
+</odoo>

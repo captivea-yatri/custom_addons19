@@ -1,0 +1,18 @@
+<odoo>
+    <template id="homepage_button_template" name="Homepage Button Template" inherit_id="website.homepage">
+        <xpath expr="//div[@id='wrap']" position="inside">
+            <div class="o_custom_button">
+                <button class="hello-btn btn-primary o_button_action">Hello </button>
+            </div>
+        </xpath>
+    </template>
+    <template id="input_text_area" name="Input Text Area" inherit_id="website_sale.payment">
+        <xpath expr="//div[@id='address_on_payment']" position="inside">
+
+            <label for="nameInput">Enter your name:</label>
+<input type="text" id="nameInput" placeholder="e.g., John Doe" t-att-data-sale-order="website_sale_order.id"/>
+<!--<button class="hello-btn1 btn-primary o_button_action">Submit</button>-->
+
+        </xpath>
+    </template>
+</odoo>

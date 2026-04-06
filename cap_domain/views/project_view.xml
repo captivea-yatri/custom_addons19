@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="project_project_inherit_view_for_domain" model="ir.ui.view">
+            <field name="name">project.project.inherit.view.for.domain</field>
+            <field name="model">project.project</field>
+            <field name="priority">20</field>
+            <field name="inherit_id" ref="project.edit_project"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='user_id']" position="after">
+                    <field name="default_domain_ids" string="Default Domain" widget="many2many_tags"
+                           options="{'no_create': True, 'no_create_edit': True}"/>
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page string="Phase">
+                        <field name="phase_ids">
+                            <list editable="bottom">
+                                <field name="sequence" widget="handle"/>
+                                <field name="name" required="1"/>
+                                <field name="filtered_default_domain_ids" widget="many2many_tags" column_invisible="1"/>
+                                <field name="complementary_default_domain_ids" domain="[('active','=',True),('all_phases', '=',True),('id', 'in', filtered_default_domain_ids)]" options="{'no_create': True}" readonly="0" widget="many2many_tags"/>
+                                <field name="active"/>
+                                <field name="project_id" column_invisible="1"/>
+                            </list>
+                        </field>
+                    </page>
+                </xpath>
+                <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+                    <button class="oe_stat_button" name="action_project_domain" type="object"
+                            icon="fa-brands fa-superpowers">
+                        <div class="o_stat_info o_field_widget">
+                            <span class="o_stat_text">
+                                Project
+                            </span>
+                            <span class="o_stat_text">
+                                Domains
+                            </span>
+                        </div>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

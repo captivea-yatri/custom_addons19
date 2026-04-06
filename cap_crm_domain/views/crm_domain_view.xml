@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="cap_crm_domain_inherit_view" model="ir.ui.view">
+        <field name="name">cap.crm.domain.inherit.view</field>
+        <field name="model">default.domain</field>
+        <field name="inherit_id" ref="cap_domain.default_domain_tree_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="used_on_opportunities"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

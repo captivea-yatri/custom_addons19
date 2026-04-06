@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Tree View -->
+        <record id="skill_validator_tree_view" model="ir.ui.view">
+            <field name="name">skill.validator.tree.view</field>
+            <field name="model">hr.skill.validator</field>
+            <field name="arch" type="xml">
+                <list editable="top">
+                    <field name="domain_skill_id" required="True"/>
+                    <field name="validator_id" domain="[('share', '=', False)]" required="True"  options="{'no_create': True}"/>
+                    <field name="companies_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Search View -->
+        <record id="skill_validator_search_view" model="ir.ui.view">
+    <field name="name">skill.validator.search.view</field>
+    <field name="model">hr.skill.validator</field>
+    <field name="arch" type="xml">
+        <search>
+            <!-- Searchable fields -->
+            <field name="domain_skill_id"/>
+            <field name="validator_id"/>
+            <field name="companies_ids"/>
+
+            <!-- Group By filters (must have name!) -->
+            <filter string="Validator" name="group_by_validator_id" context="{'group_by':'validator_id'}"/>
+            <filter string="Domain Skill" name="group_by_domain_skill_id" context="{'group_by':'domain_skill_id'}"/>
+        </search>
+    </field>
+</record>
+
+
+        <!-- Action -->
+        <record id="action_skill_validator" model="ir.actions.act_window">
+            <field name="name">Skills Validator</field>
+            <field name="res_model">hr.skill.validator</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <!-- Menu -->
+        <menuitem id="skill_validator_main_menu" action="action_skill_validator"
+                  name="Skills Validator" parent="hr.menu_config_employee"/>
+    </data>
+</odoo>

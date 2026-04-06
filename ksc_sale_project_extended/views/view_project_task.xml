@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="project_extended_view_task_form2" model="ir.ui.view">
+        <field name="name">project.view_task_form2.ksc_project</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="priority">100</field>
+        <field name="arch" type="xml">
+            <page name="extra_info" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </page>
+            <xpath expr="//notebook" position="inside">
+                <page string="Date" name="date">
+                    <group>
+                        <group>
+                            <field name="create_date"/>
+                            <field name="write_date"/>
+                            <field name="date_deadline"/>
+                        </group>
+                        <group>
+                            <field name="date_assign"/>
+                            <field name="x_studio_development_completion_date"/>
+                            <field name="date_last_stage_update"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+            <xpath expr="//form[1]/sheet[1]/group[1]/group[2]/field[@name='partner_id']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <field name="sale_line_id" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record id="project_extended_view_task_form_3" model="ir.ui.view">
+        <field name="name">project.view_task_form3.ksc_project</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_tree2"/>
+        <field name="arch" type="xml">
+            <field name="user_ids" position="after">
+                <field name="sale_order_line_ids" invisible="1"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

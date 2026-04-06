@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="task_validation_status_tree_view" model="ir.ui.view">
+            <field name="name">task.validation.status.tree.view</field>
+            <field name="model">task.validation.status</field>
+            <field name="arch" type="xml">
+                <list create="0">
+                    <field name="session_test_id"/>
+                    <field name="task_id"/>
+                    <field name="status"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="task_validation_status_form_view" model="ir.ui.view">
+            <field name="name">task.validation.status.form.view</field>
+            <field name="model">task.validation.status</field>
+            <field name="arch" type="xml">
+                <form create="0">
+                    <header>
+                        <field name="status" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="session_test_id"/>
+                                <field name="task_id" readonly="True"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_task_validation_status" model="ir.actions.act_window">
+            <field name="name">Task Validation Status</field>
+            <field name="res_model">task.validation.status</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <menuitem id="task_validation_status_menu" action="action_task_validation_status"
+                  name="Task Validation Status" parent="template_test_main_menu" sequence="5"/>
+    </data>
+</odoo>

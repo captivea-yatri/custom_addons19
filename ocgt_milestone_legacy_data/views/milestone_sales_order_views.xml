@@ -1,0 +1,32 @@
+<odoo>
+    <!-- List View -->
+    <record id="view_milestone_sale_order_list" model="ir.ui.view">
+        <field name="name">milestone.sale.order.list</field>
+        <field name="model">milestone.sale.order</field>
+        <field name="arch" type="xml">
+            <list string="Sales Orders" editable="bottom" create="true" edit="true">
+                <field name="so_number"/>
+                <field name="so_date"/>
+                <field name="partner_id"/>
+                <field name="product_id"/>
+                <field name="order_quantity"/>
+                <field name="rate"/>
+                <field name="order_amount"/>
+                <field name="invoice_amount"/>
+            </list>
+        </field>
+    </record>
+
+
+
+    <!-- Action -->
+    <record id="action_milestone_sale_order" model="ir.actions.act_window">
+        <field name="name">Sales Orders</field>
+        <field name="res_model">milestone.sale.order</field>
+        <field name="view_mode">list</field>
+    </record>
+
+    <!-- Menu -->
+  <menuitem id="milestone_child1" name="Sale" parent="milestonelegacydata" action="action_milestone_sale_order"/>
+
+</odoo>

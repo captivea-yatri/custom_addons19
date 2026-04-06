@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="view_cron_failure_history_form">
+        <field name="name">cron.failure.history.form</field>
+        <field name="model">cron.failure.history</field>
+        <field name="arch" type="xml">
+            <form string="Cron Failures">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="action_name"/>
+                            <field name="error_message"/>
+                            <field name="time_of_failure"/>
+                        </group>
+                        <group>
+                            <field name="description" readonly="is_solved == True"/>
+                            <field name="is_solved"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_cron_failure_history_tree" model="ir.ui.view">
+        <field name="name">cron.failure.history.tree</field>
+        <field name="model">cron.failure.history</field>
+        <field name="arch" type="xml">
+            <list string="Cron Failures">
+                <field name="action_name"/>
+                <field name="error_message"/>
+                <field name="time_of_failure"/>
+                <field name="is_solved"/>
+                <field name="description"
+                       readonly="is_solved == True"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_cron_failure_history_search" model="ir.ui.view">
+        <field name="name">cron.failure.history.search</field>
+        <field name="model">cron.failure.history</field>
+        <field name="arch" type="xml">
+            <search string="Cron Failures">
+                <field name="action_name"/>
+                <field name="error_message"/>
+                <separator/>
+
+                    <filter string="Action Name" name="action_name" domain="[]" context="{'group_by':'action_name'}"/>
+                    <filter string="Is Error Solved" name="is_solved" domain="[]" context="{'group_by':'is_solved'}"/>
+
+            </search>
+        </field>
+    </record>
+
+    <record id="action_cron_failure_history" model="ir.actions.act_window">
+        <field name="name">Cron Failure History</field>
+        <field name="res_model">cron.failure.history</field>
+        <field name="view_mode">list,form,search</field>
+    </record>
+
+    <menuitem parent="base.menu_automation" name="Cron Failure History" id="menu_action_cron_failure_history" action="action_cron_failure_history"/>
+</odoo>

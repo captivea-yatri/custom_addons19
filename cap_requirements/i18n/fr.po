@@ -1,0 +1,960 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* cap_requirements
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-12-12 08:01+0000\n"
+"PO-Revision-Date: 2024-12-12 08:01+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: cap_requirements
+#: model:ir.model.fields,help:cap_requirements.field_project_requirement__role_id
+msgid ""
+" Who will do the task, only one role per requirement, you can only have one "
+"responsible. Roles are also used to compute all the figures"
+msgstr ""
+
+#. module: cap_requirements
+#. odoo-python
+#: code:addons/cap_requirements/model/project_requirement.py:0
+#, python-format
+msgid ""
+"%s:\n"
+"    - PM_TIME: %d\n"
+"    - BA_TIME: %d\n"
+"    - CONF_TIME: %d\n"
+"    - DEV_TIME: %d\n"
+"    - ARCH_TIME: %d\n"
+"    - Error: %s"
+msgstr ""
+
+#. module: cap_requirements
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_project_inherit_view_for_requirement
+msgid ""
+"<span class=\"o_stat_text\">\n"
+"                                Requirement\n"
+"                            </span>\n"
+"                            <span class=\"o_stat_text\">\n"
+"                                For Analysis\n"
+"                            </span>"
+msgstr ""
+
+#. module: cap_requirements
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_project_inherit_view_for_requirement
+msgid ""
+"<span class=\"o_stat_text\">\n"
+"                                Requirement\n"
+"                            </span>\n"
+"                            <span class=\"o_stat_text\">\n"
+"                                For Workshop\n"
+"                            </span>"
+msgstr ""
+
+#. module: cap_requirements
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_domain_form_view_inherit_cap_project_requirement
+msgid ""
+"<span class=\"o_stat_text\">Project</span>\n"
+"                            <span class=\"o_stat_text\">Requirement</span>"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,field_description:cap_requirements.field_template_requirement__active
+msgid "Active"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,field_description:cap_requirements.field_project_requirement__advised_estimated_time
+msgid "Advised Estimated Time"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,field_description:cap_requirements.field_project_requirement__answer
+#: model:ir.model.fields,field_description:cap_requirements.field_project_task__answer
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_requirement_form_view
+msgid "Answer"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,field_description:cap_requirements.field_template_requirement__is_answer_mandatory
+msgid "Answer mandatory"
+msgstr ""
+
+#. module: cap_requirements
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_requirement_search_view
+msgid "Architect"
+msgstr ""
+
+#. module: cap_requirements
+#: model_terms:ir.ui.view,arch_db:cap_requirements.template_requirement_form_view
+msgid "Archived"
+msgstr ""
+
+#. module: cap_requirements
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_requirement_tree_view_for_analysis
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_requirement_tree_view_for_workshop
+msgid "Are you sure to want delete this requirement?"
+msgstr ""
+
+#. module: cap_requirements
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_requirement_search_view
+msgid "BA"
+msgstr ""
+
+#. module: cap_requirements
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_project_inherit_view_for_requirement
+msgid "Calculate Advised Estimated Time"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,field_description:cap_requirements.field_meta_template_requirement__calculation_formula
+msgid "Calculation Formula"
+msgstr ""
+
+#. module: cap_requirements
+#: model_terms:ir.ui.view,arch_db:cap_requirements.create_project_requirement_form_view
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_planning_form_view
+msgid "Close"
+msgstr ""
+
+#. module: cap_requirements
+#. odoo-python
+#: code:addons/cap_requirements/model/project_requirement.py:0
+#, python-format
+msgid "Comment cela se fera"
+msgstr ""
+
+#. module: cap_requirements
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_requirement_search_view
+msgid "Configurator"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,field_description:cap_requirements.field_project_domain_history__configurator_time
+msgid "Configurator Time"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,help:cap_requirements.field_project_domain__core_time
+msgid "Core time will be: BA + Conf + Dev + architect time"
+msgstr ""
+
+#. module: cap_requirements
+#. odoo-python
+#: code:addons/cap_requirements/model/project_requirement.py:0
+#, python-format
+msgid "Coût du module"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.actions.act_window,name:cap_requirements.action_create_project_requirement
+msgid "Create Project Requirement"
+msgstr ""
+
+#. module: cap_requirements
+#: model_terms:ir.ui.view,arch_db:cap_requirements.create_project_requirement_form_view
+msgid "Create Task"
+msgstr ""
+
+#. module: cap_requirements
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_project_inherit_view_for_requirement
+msgid "Create Task From Project Requirement"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,field_description:cap_requirements.field_meta_template_requirement__create_uid
+#: model:ir.model.fields,field_description:cap_requirements.field_project_domain_history__create_uid
+#: model:ir.model.fields,field_description:cap_requirements.field_project_planning_wizard__create_uid
+#: model:ir.model.fields,field_description:cap_requirements.field_project_requirement__create_uid
+#: model:ir.model.fields,field_description:cap_requirements.field_project_requirement_wizard__create_uid
+#: model:ir.model.fields,field_description:cap_requirements.field_template_requirement__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,field_description:cap_requirements.field_meta_template_requirement__create_date
+#: model:ir.model.fields,field_description:cap_requirements.field_project_domain_history__create_date
+#: model:ir.model.fields,field_description:cap_requirements.field_project_planning_wizard__create_date
+#: model:ir.model.fields,field_description:cap_requirements.field_project_requirement__create_date
+#: model:ir.model.fields,field_description:cap_requirements.field_project_requirement_wizard__create_date
+#: model:ir.model.fields,field_description:cap_requirements.field_template_requirement__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: cap_requirements
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_requirement_search_view
+msgid "Custom Requirements"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,field_description:cap_requirements.field_project_domain_history__date
+msgid "Date"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,field_description:cap_requirements.field_project_domain_history__default_domain_id
+#: model:ir.model.fields,field_description:cap_requirements.field_project_requirement__default_domain_id
+#: model:ir.model.fields,field_description:cap_requirements.field_project_requirement__default_domain_ids
+msgid "Default Domain"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,field_description:cap_requirements.field_template_requirement__default_estimate_time
+msgid "Default Estimate Time"
+msgstr ""
+
+#. module: cap_requirements
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_requirement_form_view
+#: model_terms:ir.ui.view,arch_db:cap_requirements.template_requirement_form_view
+msgid "Deliverable From Customer"
+msgstr ""
+
+#. module: cap_requirements
+#. odoo-python
+#: code:addons/cap_requirements/model/project_requirement.py:0
+#: model:ir.model.fields,field_description:cap_requirements.field_project_requirement__deliverable_from_the_customer
+#: model:ir.model.fields,field_description:cap_requirements.field_template_requirement__deliverable_from_the_customer
+#, python-format
+msgid "Deliverable From The Customer"
+msgstr ""
+
+#. module: cap_requirements
+#. odoo-python
+#: code:addons/cap_requirements/model/project_requirement.py:0
+#: code:addons/cap_requirements/model/project_requirement.py:0
+#: model:ir.model.fields,field_description:cap_requirements.field_project_requirement__description
+#: model:ir.model.fields,field_description:cap_requirements.field_template_requirement__description
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_requirement_form_view
+#: model_terms:ir.ui.view,arch_db:cap_requirements.template_requirement_form_view
+#, python-format
+msgid "Description"
+msgstr ""
+
+#. module: cap_requirements
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_requirement_search_view
+msgid "Developer"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,field_description:cap_requirements.field_meta_template_requirement__display_name
+#: model:ir.model.fields,field_description:cap_requirements.field_project_domain_history__display_name
+#: model:ir.model.fields,field_description:cap_requirements.field_project_planning_wizard__display_name
+#: model:ir.model.fields,field_description:cap_requirements.field_project_requirement__display_name
+#: model:ir.model.fields,field_description:cap_requirements.field_project_requirement_wizard__display_name
+#: model:ir.model.fields,field_description:cap_requirements.field_template_requirement__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,help:cap_requirements.field_project_requirement__maturity
+msgid ""
+"Do you have all informations to do the task ?.\n"
+"• For form modifications : should be always 'no' : We don't ask for the type of fields, name, descriptions, automations....it is not the purpose of the analysis, we have an additional analysis to do that.\n"
+"• It can be a yes when it a simple check box to tick, you are sure of what to do.\n"
+"• Maturity is a tool to help the discussion in the presentation : The more No you have the more uncertain is the figure given."
+msgstr ""
+
+#. module: cap_requirements
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_requirement_search_view
+msgid "Domain"
+msgstr ""
+
+#. module: cap_requirements
+#. odoo-python
+#: code:addons/cap_requirements/model/project_requirement.py:0
+#, python-format
+msgid "Domaine du projet"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields.selection,name:cap_requirements.selection__project_domain_history__status__done
+msgid "Done"
+msgstr "Terminé"
+
+#. module: cap_requirements
+#. odoo-python
+#: code:addons/cap_requirements/model/project_requirement.py:0
+#: model:ir.model.fields,field_description:cap_requirements.field_project_requirement__estimate_time
+#, python-format
+msgid "Estimate Time"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,help:cap_requirements.field_project_domain__estimated_time
+msgid "Estimated time will be: BA + PM + Conf + Dev + architect time."
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.actions.server,name:cap_requirements.export_project_rquirement_xls_card
+msgid "Export Project Requirement"
+msgstr ""
+
+#. module: cap_requirements
+#. odoo-python
+#: code:addons/cap_requirements/model/project_requirement.py:0
+#: model:ir.model.fields,field_description:cap_requirements.field_project_requirement__features_not_discussed_in_pre_sales
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_requirement_search_view
+#, python-format
+msgid "Features Not Discussed In Pre Sales"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields.selection,name:cap_requirements.selection__project_domain_history__status__feedback
+msgid "Feedback"
+msgstr "Feedbacks"
+
+#. module: cap_requirements
+#. odoo-python
+#: code:addons/cap_requirements/model/project_requirement.py:0
+#, python-format
+msgid "Fonctionnalités non abordées lors des préventes"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,field_description:cap_requirements.field_template_requirement__all_apps
+msgid "For all Apps and All Phase ?"
+msgstr ""
+
+#. module: cap_requirements
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_requirement_search_view
+msgid "Functional requirements"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,field_description:cap_requirements.field_project_task__is_functional_task
+msgid "Functional task"
+msgstr ""
+
+#. module: cap_requirements
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_requirement_search_view
+#: model_terms:ir.ui.view,arch_db:cap_requirements.template_requirement_search_view
+msgid "Group By"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,field_description:cap_requirements.field_project_task__help
+#: model:ir.model.fields,field_description:cap_requirements.field_template_requirement__help
+#: model_terms:ir.ui.view,arch_db:cap_requirements.template_requirement_form_view
+msgid "Help"
+msgstr ""
+
+#. module: cap_requirements
+#. odoo-python
+#: code:addons/cap_requirements/model/project_requirement.py:0
+#: model:ir.model.fields,field_description:cap_requirements.field_project_requirement__how_it_will_be_done
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_requirement_form_view
+#, python-format
+msgid "How It Will Be Done"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,field_description:cap_requirements.field_project_task__how_it_will_be_done
+msgid "How it will be done"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,field_description:cap_requirements.field_meta_template_requirement__id
+#: model:ir.model.fields,field_description:cap_requirements.field_project_domain_history__id
+#: model:ir.model.fields,field_description:cap_requirements.field_project_planning_wizard__id
+#: model:ir.model.fields,field_description:cap_requirements.field_project_requirement__id
+#: model:ir.model.fields,field_description:cap_requirements.field_project_requirement_wizard__id
+#: model:ir.model.fields,field_description:cap_requirements.field_template_requirement__id
+msgid "ID"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,help:cap_requirements.field_project_requirement__module_cost
+msgid ""
+"If you plan to use a module, please put the max price (if many modules "
+"available) so the customer know what to add in the project price."
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,help:cap_requirements.field_project_domain__implementation_time
+msgid "Implementation time will be: Conf + Dev + architect time"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields.selection,name:cap_requirements.selection__project_domain_history__status__in_progress
+msgid "In Progress"
+msgstr "En cours"
+
+#. module: cap_requirements
+#: model:ir.model.fields,field_description:cap_requirements.field_project_task_type__is_done_for_captivea
+msgid "Is Done for Captivea"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,help:cap_requirements.field_project_requirement__used
+msgid ""
+"Is the task necessary for the customer \"No\" has as many weight than a "
+"\"yes\".No means that you put aside a feature on purpose.The customer need "
+"to see it so he can validate that we will not do it.(never remove a line)"
+msgstr ""
+
+#. module: cap_requirements
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_domain_form_view_inherit_cap_project_requirement
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_domain_history_form_view
+msgid "KPI Based on requirements"
+msgstr ""
+
+#. module: cap_requirements
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_domain_form_view_inherit_cap_project_requirement
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_domain_history_form_view
+msgid "KPI based on tasks"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model,name:cap_requirements.model_project_phase
+msgid "Ksc Phase Information"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,field_description:cap_requirements.field_meta_template_requirement____last_update
+#: model:ir.model.fields,field_description:cap_requirements.field_project_domain_history____last_update
+#: model:ir.model.fields,field_description:cap_requirements.field_project_planning_wizard____last_update
+#: model:ir.model.fields,field_description:cap_requirements.field_project_requirement____last_update
+#: model:ir.model.fields,field_description:cap_requirements.field_project_requirement_wizard____last_update
+#: model:ir.model.fields,field_description:cap_requirements.field_template_requirement____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,field_description:cap_requirements.field_meta_template_requirement__write_uid
+#: model:ir.model.fields,field_description:cap_requirements.field_project_domain_history__write_uid
+#: model:ir.model.fields,field_description:cap_requirements.field_project_planning_wizard__write_uid
+#: model:ir.model.fields,field_description:cap_requirements.field_project_requirement__write_uid
+#: model:ir.model.fields,field_description:cap_requirements.field_project_requirement_wizard__write_uid
+#: model:ir.model.fields,field_description:cap_requirements.field_template_requirement__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,field_description:cap_requirements.field_meta_template_requirement__write_date
+#: model:ir.model.fields,field_description:cap_requirements.field_project_domain_history__write_date
+#: model:ir.model.fields,field_description:cap_requirements.field_project_planning_wizard__write_date
+#: model:ir.model.fields,field_description:cap_requirements.field_project_requirement__write_date
+#: model:ir.model.fields,field_description:cap_requirements.field_project_requirement_wizard__write_date
+#: model:ir.model.fields,field_description:cap_requirements.field_template_requirement__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: cap_requirements
+#. odoo-python
+#: code:addons/cap_requirements/model/project_requirement.py:0
+#, python-format
+msgid "Livrable du client"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,help:cap_requirements.field_project_domain__local_time
+msgid "Local time  will be: PM + BA"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,field_description:cap_requirements.field_project_requirement__manual_estimate
+msgid "Manual Estimate"
+msgstr ""
+
+#. module: cap_requirements
+#. odoo-python
+#: code:addons/cap_requirements/model/project_requirement.py:0
+#: model:ir.model.fields,field_description:cap_requirements.field_project_requirement__maturity
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_requirement_search_view
+#, python-format
+msgid "Maturity"
+msgstr ""
+
+#. module: cap_requirements
+#. odoo-python
+#: code:addons/cap_requirements/model/project_requirement.py:0
+#, python-format
+msgid "Maturité"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.actions.act_window,name:cap_requirements.meta_template_requirement_action
+#: model:ir.model.fields,field_description:cap_requirements.field_template_requirement__meta_template_requirement_id
+#: model:ir.ui.menu,name:cap_requirements.meta_template_requirement_menu
+msgid "Meta Template Requirement"
+msgstr ""
+
+#. module: cap_requirements
+#. odoo-python
+#: code:addons/cap_requirements/model/project_requirement.py:0
+#: model:ir.model.fields,field_description:cap_requirements.field_project_requirement__module_cost
+#, python-format
+msgid "Module Cost"
+msgstr ""
+
+#. module: cap_requirements
+#. odoo-python
+#: code:addons/cap_requirements/model/project_requirement.py:0
+#: model:ir.model.fields,field_description:cap_requirements.field_meta_template_requirement__name
+#: model:ir.model.fields,field_description:cap_requirements.field_project_domain_history__name
+#: model:ir.model.fields,field_description:cap_requirements.field_project_requirement__name
+#: model:ir.model.fields,field_description:cap_requirements.field_template_requirement__name
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_requirement_search_view
+#: model_terms:ir.ui.view,arch_db:cap_requirements.template_requirement_search_view
+#, python-format
+msgid "Name"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields.selection,name:cap_requirements.selection__project_requirement__features_not_discussed_in_pre_sales__no
+#: model:ir.model.fields.selection,name:cap_requirements.selection__project_requirement__maturity__no
+#: model:ir.model.fields.selection,name:cap_requirements.selection__project_requirement__used__no
+msgid "No"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,help:cap_requirements.field_project_requirement__estimate_time
+#: model:ir.model.fields,help:cap_requirements.field_project_requirement__manual_estimate
+msgid ""
+"No 0 time ! Odoo calculate a default one, please review itand tick the "
+"manual box if you want to modify the advised time"
+msgstr ""
+
+#. module: cap_requirements
+#. odoo-python
+#: code:addons/cap_requirements/model/project_requirement.py:0
+#, python-format
+msgid "Nom"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields.selection,name:cap_requirements.selection__project_domain_history__status__not_started
+msgid "Not Started"
+msgstr "Non commencé"
+
+#. module: cap_requirements
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_requirement_search_view
+msgid "Not discussed in presale"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,help:cap_requirements.field_project_domain__offshore_time
+msgid "Offshore time will be: Conf + dev + architect time"
+msgstr ""
+
+#. module: cap_requirements
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_requirement_search_view
+msgid "PM"
+msgstr ""
+
+#. module: cap_requirements
+#. odoo-python
+#: code:addons/cap_requirements/model/project_requirement.py:0
+#: code:addons/cap_requirements/model/project_requirement.py:0
+#: model:ir.model.fields,field_description:cap_requirements.field_project_domain_history__phase_id
+#: model:ir.model.fields,field_description:cap_requirements.field_project_planning_wizard__phase_id
+#: model:ir.model.fields,field_description:cap_requirements.field_project_requirement__phase_id
+#: model:ir.model.fields,field_description:cap_requirements.field_project_requirement_wizard__phase_id
+#: model_terms:ir.ui.view,arch_db:cap_requirements.create_project_requirement_form_view
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_planning_form_view
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_requirement_search_view
+#, python-format
+msgid "Phase"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,field_description:cap_requirements.field_project_phase__planning_start_date
+#: model:ir.model.fields,field_description:cap_requirements.field_project_planning_wizard__planning_start_date
+msgid "Planning Start Date"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model,name:cap_requirements.model_project_project
+#: model:ir.model.fields,field_description:cap_requirements.field_project_domain_history__project_id
+#: model:ir.model.fields,field_description:cap_requirements.field_project_planning_wizard__project_id
+#: model:ir.model.fields,field_description:cap_requirements.field_project_requirement__project_id
+#: model:ir.model.fields,field_description:cap_requirements.field_project_requirement_wizard__project_id
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_requirement_search_view
+msgid "Project"
+msgstr ""
+
+#. module: cap_requirements
+#. odoo-python
+#: code:addons/cap_requirements/model/project_requirement.py:0
+#: model:ir.model.fields,field_description:cap_requirements.field_project_domain_history__project_domain_id
+#: model:ir.model.fields,field_description:cap_requirements.field_project_requirement__project_domain_id
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_requirement_search_view
+#, python-format
+msgid "Project Domain"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.actions.act_window,name:cap_requirements.action_project_domain_history
+#: model:ir.model,name:cap_requirements.model_project_domain_history
+#: model:ir.ui.menu,name:cap_requirements.project_domain_history_ksc_menu
+msgid "Project Domain History"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model,name:cap_requirements.model_project_domain
+msgid "Project Domain Information"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.actions.act_window,name:cap_requirements.action_project_planning_wizard
+msgid "Project Planning"
+msgstr ""
+
+#. module: cap_requirements
+#. odoo-python
+#: code:addons/cap_requirements/model/project_requirement.py:0
+#: model:ir.actions.act_window,name:cap_requirements.action_project_requirement
+#: model:ir.ui.menu,name:cap_requirements.Project_requirement_sub_menu
+#: model_terms:ir.ui.view,arch_db:cap_requirements.cap_domain_inherited_project_task_extended_view
+#, python-format
+msgid "Project Requirement"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model,name:cap_requirements.model_project_requirement
+msgid "Project Requirement Information"
+msgstr ""
+
+#. module: cap_requirements
+#: model_terms:ir.ui.view,arch_db:cap_requirements.template_requirement_form_view
+msgid "Questions"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,field_description:cap_requirements.field_project_requirement__questions_to_ask
+#: model:ir.model.fields,field_description:cap_requirements.field_template_requirement__questions_to_ask
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_requirement_form_view
+msgid "Questions To Ask"
+msgstr ""
+
+#. module: cap_requirements
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_project_inherit_view_for_requirement
+msgid "Refresh Domain Calculation"
+msgstr ""
+
+#. module: cap_requirements
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_requirement_search_view
+msgid "Remove analysis"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,field_description:cap_requirements.field_project_domain__architect_time
+#: model:ir.model.fields,field_description:cap_requirements.field_project_domain_history__architect_time
+msgid "Req Architect Time"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,field_description:cap_requirements.field_project_domain__business_analyst_time
+msgid "Req Business Analyst Time"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,field_description:cap_requirements.field_project_domain__configurator_time
+#: model:ir.model.fields,field_description:cap_requirements.field_project_domain_history__business_analyst_time
+msgid "Req Configurator Time"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,field_description:cap_requirements.field_project_domain__core_time
+#: model:ir.model.fields,field_description:cap_requirements.field_project_domain_history__core_time
+msgid "Req Core Time"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,field_description:cap_requirements.field_project_domain__developer_time
+#: model:ir.model.fields,field_description:cap_requirements.field_project_domain_history__developer_time
+msgid "Req Developer Time"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,field_description:cap_requirements.field_project_domain__estimated_time
+#: model:ir.model.fields,field_description:cap_requirements.field_project_domain_history__estimated_time
+msgid "Req Estimated time"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,field_description:cap_requirements.field_project_domain__implementation_time
+#: model:ir.model.fields,field_description:cap_requirements.field_project_domain_history__implementation_time
+msgid "Req Implementation Time"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,field_description:cap_requirements.field_project_domain__local_time
+#: model:ir.model.fields,field_description:cap_requirements.field_project_domain_history__local_time
+msgid "Req Local Time"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,field_description:cap_requirements.field_project_domain__offshore_time
+#: model:ir.model.fields,field_description:cap_requirements.field_project_domain_history__offshore_time
+msgid "Req Offshore Time"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,field_description:cap_requirements.field_project_domain__project_manager_time
+#: model:ir.model.fields,field_description:cap_requirements.field_project_domain_history__project_manager_time
+msgid "Req Project Manager Time"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.ui.menu,name:cap_requirements.template_requirement_main_menu
+msgid "Requirement Admin"
+msgstr ""
+
+#. module: cap_requirements
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_task_inherit_view
+msgid "Requirement Infos"
+msgstr ""
+
+#. module: cap_requirements
+#. odoo-python
+#: code:addons/cap_requirements/model/project_requirement.py:0
+#: model:ir.model.fields,field_description:cap_requirements.field_project_requirement__role_id
+#: model:ir.model.fields,field_description:cap_requirements.field_template_requirement__role_id
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_requirement_search_view
+#: model_terms:ir.ui.view,arch_db:cap_requirements.template_requirement_search_view
+#, python-format
+msgid "Role"
+msgstr ""
+
+#. module: cap_requirements
+#. odoo-python
+#: code:addons/cap_requirements/model/project_requirement.py:0
+#, python-format
+msgid "Rôle"
+msgstr ""
+
+#. module: cap_requirements
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_requirement_tree_view_for_analysis
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_requirement_tree_view_for_workshop
+msgid "SETUP"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,field_description:cap_requirements.field_project_requirement__sequence
+#: model:ir.model.fields,field_description:cap_requirements.field_template_requirement__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,field_description:cap_requirements.field_project_domain_history__status
+msgid "Status"
+msgstr "statut"
+
+#. module: cap_requirements
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_planning_form_view
+msgid "Submit"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,field_description:cap_requirements.field_project_requirement__tag_ids
+#: model:ir.model.fields,field_description:cap_requirements.field_template_requirement__tag_ids
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_requirement_search_view
+#: model_terms:ir.ui.view,arch_db:cap_requirements.template_requirement_search_view
+msgid "Tags"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model,name:cap_requirements.model_project_task
+msgid "Task"
+msgstr ""
+
+#. module: cap_requirements
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_task_inherit_view
+msgid "Task Description....."
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,field_description:cap_requirements.field_project_domain__task_estimated_time
+#: model:ir.model.fields,field_description:cap_requirements.field_project_domain_history__task_estimated_time
+msgid "Task Estimated time"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model,name:cap_requirements.model_project_task_type
+msgid "Task Stage"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,field_description:cap_requirements.field_project_domain__task_passed_time
+#: model:ir.model.fields,field_description:cap_requirements.field_project_domain_history__task_passed_time
+msgid "Task passed time"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,field_description:cap_requirements.field_template_requirement__template_domain_id
+#: model_terms:ir.ui.view,arch_db:cap_requirements.template_requirement_search_view
+msgid "Template Domain"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.actions.act_window,name:cap_requirements.action_template_requirement
+#: model:ir.ui.menu,name:cap_requirements.template_requirement_sub_menu
+msgid "Template Requirement"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model,name:cap_requirements.model_template_requirement
+msgid "Template Requirement Information"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,field_description:cap_requirements.field_project_requirement__template_requirements_id
+msgid "Template requirement"
+msgstr ""
+
+#. module: cap_requirements
+#. odoo-python
+#: code:addons/cap_requirements/model/project_requirement.py:0
+#, python-format
+msgid "Temps estimé"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,help:cap_requirements.field_project_requirement__how_it_will_be_done
+#: model:ir.model.fields,help:cap_requirements.field_project_task__how_it_will_be_done
+msgid ""
+"Things can be done in many ways in Odoo, when you think of one, keep a track"
+" here so later on we will know what was way we thought of and"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,help:cap_requirements.field_project_requirement__features_not_discussed_in_pre_sales
+msgid ""
+"This is a field to be used when preparing the presentation with the sales "
+":often customers ask for things not expressed in presales. In such cases,it "
+"is important to be able to find out them so the sales can justify the "
+"difference between the first estimate and the analysis estimate"
+msgstr ""
+
+#. module: cap_requirements
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_requirement_search_view
+msgid "Time not set"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,help:cap_requirements.field_project_requirement__phase_id
+msgid ""
+"Try to think of a way to phase your project:\n"
+"• Our aim is to build a MVP for phase 1\n"
+"• Our message is to go live as fast as possible,build your phases with that in mind.\n"
+"• We should always push the customer to reduce the first phase to its minimum"
+msgstr ""
+
+#. module: cap_requirements
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_project_inherit_view_for_requirement
+msgid "Update Project Planning"
+msgstr ""
+
+#. module: cap_requirements
+#. odoo-python
+#: code:addons/cap_requirements/model/project_requirement.py:0
+#: model:ir.model.fields,field_description:cap_requirements.field_project_requirement__used
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_requirement_search_view
+#, python-format
+msgid "Used"
+msgstr ""
+
+#. module: cap_requirements
+#. odoo-python
+#: code:addons/cap_requirements/model/project_requirement.py:0
+#, python-format
+msgid "Utilisée"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,field_description:cap_requirements.field_project_phase__weekly_capacity
+#: model:ir.model.fields,field_description:cap_requirements.field_project_planning_wizard__weekly_capacity
+msgid "Weekly Capacity"
+msgstr ""
+
+#. module: cap_requirements
+#. odoo-python
+#: code:addons/cap_requirements/model/project.py:0
+#, python-format
+msgid "Wrong python code defined for meta template :  : "
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields.selection,name:cap_requirements.selection__project_requirement__features_not_discussed_in_pre_sales__yes
+#: model:ir.model.fields.selection,name:cap_requirements.selection__project_requirement__maturity__yes
+#: model:ir.model.fields.selection,name:cap_requirements.selection__project_requirement__used__yes
+msgid "Yes"
+msgstr ""
+
+#. module: cap_requirements
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_domain_tree_view_for_project_view_inherited_requirement
+msgid "architect_time"
+msgstr ""
+
+#. module: cap_requirements
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_domain_tree_view_for_project_view_inherited_requirement
+msgid "business_analyst_time"
+msgstr ""
+
+#. module: cap_requirements
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_domain_tree_view_for_project_view_inherited_requirement
+msgid "configurator_time"
+msgstr ""
+
+#. module: cap_requirements
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_domain_tree_view_for_project_view_inherited_requirement
+msgid "core_time"
+msgstr ""
+
+#. module: cap_requirements
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_domain_tree_view_for_project_view_inherited_requirement
+msgid "developer_time"
+msgstr ""
+
+#. module: cap_requirements
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_domain_tree_view_for_project_view_inherited_requirement
+msgid "estimated_time"
+msgstr ""
+
+#. module: cap_requirements
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_domain_tree_view_for_project_view_inherited_requirement
+msgid "implementation_time"
+msgstr ""
+
+#. module: cap_requirements
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_domain_tree_view_for_project_view_inherited_requirement
+msgid "local_time"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model,name:cap_requirements.model_meta_template_requirement
+msgid "meta.template.requirement"
+msgstr ""
+
+#. module: cap_requirements
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_domain_tree_view_for_project_view_inherited_requirement
+msgid "offshore_time"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model.fields,field_description:cap_requirements.field_project_task__project_requirement_id
+msgid "project Requirement"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model,name:cap_requirements.model_project_planning_wizard
+msgid "project.planning.wizard"
+msgstr ""
+
+#. module: cap_requirements
+#: model:ir.model,name:cap_requirements.model_project_requirement_wizard
+msgid "project.requirement.wizard"
+msgstr ""
+
+#. module: cap_requirements
+#: model_terms:ir.ui.view,arch_db:cap_requirements.project_domain_tree_view_for_project_view_inherited_requirement
+msgid "project_manager_time"
+msgstr ""

@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+employee_user_access,employee_user_access,model_employee,,1,0,0,0
+employee_manager_access,employee_manager_access,model_employee,,1,1,1,1

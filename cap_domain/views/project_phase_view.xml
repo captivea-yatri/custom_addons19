@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="project_phase_tree_view" model="ir.ui.view">
+            <field name="name">project.phase.tree.view</field>
+            <field name="model">project.phase</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                    <field name="project_id"/>
+                    <field name="active" column_invisible="1"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="project_phase_form_view" model="ir.ui.view">
+            <field name="name">project.phase.form.view</field>
+            <field name="model">project.phase</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+                                invisible="active"/>
+                        <group>
+                            <field name="name"/>
+                            <field name="project_id"/>
+                            <field name="active" widget="boolean_toggle"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="project_phase_search_view" model="ir.ui.view">
+            <field name="name">project.phase.search.view</field>
+            <field name="model">project.phase</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="project_id"/>
+                    <filter string="Name" name="name" domain="[('name', '!=', False)]"/>
+                    <filter string="Project" name="project_id" domain="[('project_id', '!=', False)]"/>
+                    <filter string="Archive" name="active" domain="[('active', '=', False)]"/>
+                    <group>
+                        <filter string="Name" name="name" context="{'group_by':'name'}"/>
+                        <filter string="Project" name="project_id" context="{'group_by':'project_id'}"/>
+                        <filter string="Active" name="active" context="{'group_by': 'active'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_project_phase" model="ir.actions.act_window">
+            <field name="name">Project Phase</field>
+            <field name="res_model">project.phase</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <menuitem id="project_phase_menu" action="action_project_phase"
+                  name="Phase" parent="project.menu_project_config"/>
+    </data>
+</odoo>

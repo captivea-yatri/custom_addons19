@@ -1,0 +1,13 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+product_category_ksc_access,product_category_ksc,model_product_category_ksc,,1,1,1,1
+product_ksc_access,product_ksc,model_product_ksc,,1,1,1,1
+product_uom_category_ksc_access,product_uom_category_ksc,model_product_uom_category_ksc,,1,1,1,1
+product_uom_ksc_access,product_uom_ksc,model_product_uom_ksc,,1,1,1,1
+res_partner_ksc_access,res_partner_ksc,model_res_partner_ksc,,1,1,1,1
+sale_order_ksc_salesperson_access,sale_order_ksc_salesperson,model_sale_order_ksc,,1,0,1,0
+sale_order_ksc_manager_access,sale_order_ksc_manager,model_sale_order_ksc,,1,1,1,1
+sale_order_line_ksc_access,sale_order_line_ksc,model_sale_order_line_ksc,,1,1,1,1
+crm_team_ksc_access,crm_team_ksc,model_crm_team_ksc,,1,1,1,1
+crm_lead_ksc_access,crm_lead_ksc,model_crm_lead_ksc,,1,1,1,1
+crm_lead_line_ksc_access,crm_lead_line_ksc,model_crm_lead_line_ksc,,1,1,1,1
+stock_warehouse_ksc_access,stock_warehouse_ksc,model_stock_warehouse_ksc,,1,1,1,1

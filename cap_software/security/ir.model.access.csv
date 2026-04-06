@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_software,access_software,model_software_software,,1,1,1,1
+access_software_version,software_version_menu,model_software_version,,1,1,1,1

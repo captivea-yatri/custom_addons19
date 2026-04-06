@@ -1,0 +1,40 @@
+<odoo>
+    <data>
+        <record id="task_type_edit_inherit" model="ir.ui.view">
+            <field name="name">project.task.type.form.inherit</field>
+            <field name="model">project.task.type</field>
+            <field name="inherit_id" ref="project.task_type_edit"/>
+            <field name="arch" type="xml">
+                <field name="sequence" position="after">
+                    <field name="is_validate"/>
+                    <field name="hold"/>
+                    <field name="is_permanent_task"/>
+                    <field name="stage"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="task_history_log_view_form" model="ir.ui.view">
+            <field name="name">task.history.log.form</field>
+            <field name="model">task.history.log</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group col="4">
+                            <field name="project_id" invisible="1"/>
+                            <field name="phase_id" invisible="1"/>
+                            <field name="name" invisible="1" force_save="1"/>
+                            <field name="task_id"
+                                   domain="[('project_id', '=', project_id), '|', ('default_phase_id', '=', phase_id), ('default_phase_id', '=', False)]"
+                                   context="{'default_project_id': project_id, 'is_past_done_task': True}"
+                                   options="{'no_create': True}" required="1"/>
+                            <field name="is_planned"/>
+                            <field name="state" readonly="1" force_save="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

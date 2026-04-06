@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_lead_list_ksc" model="ir.ui.view">
+        <field name="name">crm.lead.ksc.list</field>
+        <field name="model">crm.lead.ksc</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="order_id"/>
+                <field name="lead_line_ids"/>
+            </list>
+        </field>
+    </record>
+
+
+
+    <record id="view_lead_form_ksc" model="ir.ui.view">
+        <field name="name">crm.lead.ksc.form</field>
+        <field name="model">crm.lead.ksc</field>
+        <field name="arch" type="xml">
+            <form>
+                  <header>
+                    <!-- ✅ New Syntax: use invisible="condition" -->
+                        <button name="action_mark_won"
+                            string="Mark as Won"
+                            type="object"
+                            class="btn-primary"
+                            invisible="state == 'won'"/>
+
+                        <button name="action_mark_lost"
+                            string="Mark as Lost"
+                            type="object"
+                            class="btn-secondary"
+                            invisible="state == 'lost'"/>
+
+                        <button name="action_generate_sales_quotation"
+                            string="Generate Sales Quotation"
+                            type="object"
+                            class="btn-success"
+                            invisible="state != 'won'"/>
+
+                         <field name="state" widget="statusbar" statusbar_visible="new,won,lost"/>
+                    </header>
+                <group>
+
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="order_id"/>
+                    <field name="lead_line_ids"/>
+<!--                    <field name="state"/>-->
+
+                </group>
+
+            </form>
+        </field>
+    </record>
+
+
+
+
+    <record id="action_crm_lead" model="ir.actions.act_window">
+        <field name="name">CRM Lead</field>
+        <field name="res_model">crm.lead.ksc</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_crm_team"
+              name="Leads"
+              parent="menu_my_sales_category"
+              action="action_crm_lead"/>
+</odoo>

@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_default_domain_ksc,default_domain_ksc_menu,model_default_domain,,1,1,1,1
+access_project_domain_ksc,project_domain_ksc_menu,model_project_domain,,1,1,1,1
+access_project_phase,access_project_phase,model_project_phase,,1,1,1,1

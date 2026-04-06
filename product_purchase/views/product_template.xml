@@ -1,0 +1,62 @@
+<odoo>
+    <data>
+
+        <record model="ir.actions.act_window" id="action_purchase_line_product_tree">
+            <field name="context">{}</field>
+            <field name="domain">[('product_id.product_tmpl_id','in',active_ids), ('state', 'in', ['purchase',
+                'done'])]
+            </field>
+            <field name="name">Purchases</field>
+            <field name="res_model">purchase.order.line</field>
+            <field name="view_id" ref="purchase.purchase_order_line_tree"/>
+        </record>
+
+
+        <record id="view_product_template_purchase_buttons_from" model="ir.ui.view">
+            <field name="name">product.template.purchase.button.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+<!--            <field name="groups_id" eval="[(4, ref('purchase.group_purchase_user'))]"/>-->
+            <field name="arch" type="xml">
+                <xpath expr="//button" position="before">
+                    <button class="oe_stat_button" name="%(product_purchase.action_purchase_line_product_tree)d"
+                            type="action" icon="fa-shopping-cart" groups="purchase.group_purchase_user">
+                        <field string="Purchases" name="purchase_count" widget="statinfo" readonly="False" force_save="1"/>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="product_purchase.list">
+            <field name="name">product_purchase list</field>
+            <field name="model">product_purchase.product_purchase</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                    <field name="value"/>
+                    <field name="value2"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- actions opening views on models -->
+
+        <record model="ir.actions.act_window" id="product_purchase.action_window">
+            <field name="name">product_purchase window</field>
+            <field name="res_model">product_purchase.product_purchase</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+<!--        <menuitem name="product_purchase" id="product_purchase.menu_root"/>-->
+
+<!--        &lt;!&ndash; menu categories &ndash;&gt;-->
+
+<!--      <menuitem name="Menu 1" id="product_purchase.menu_1" parent="product_purchase.menu_root"/>-->
+
+<!--        &lt;!&ndash; actions &ndash;&gt;-->
+
+<!--        <menuitem name="List" id="product_purchase.menu_1_list" parent="product_purchase.menu_1"-->
+<!--                  action="product_purchase.action_window"/>-->
+
+    </data>
+</odoo>

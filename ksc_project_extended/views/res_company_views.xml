@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="cap_view_company_form_project_config" model="ir.ui.view">
+        <field name="name">project.config.res.company.form</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="cap_partner.cap_view_company_form"/>
+        <field name="priority">16</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='number_of_days_authorized_in_late']" position="before">
+                    <field name="team_manager_project_id"/>
+                    <field name="project_leave_id"/>
+            </xpath>
+            <xpath expr="//field[@name='number_of_days_authorized_in_late']" position="after">
+                <field name="number_of_days_authorized_to_backlog_timesheet"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="hr_job_inherited_form_view" model="ir.ui.view">
+        <field name="name">hr.job.form1</field>
+        <field name="model">hr.job</field>
+        <field name="inherit_id" ref="hr.view_hr_job_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='recruitment_target']" position="after">
+              <label for="team_manager_hours_allocation"/>
+              <div class="o_row" name="team_manager_hours_allocation">
+                  <field name="team_manager_hours_allocation" class="col-3 ps-0"/>
+              </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="update_fees_view_from" model="ir.ui.view">
+        <field name="name">update.fees.view.list</field>
+        <field name="model">update.student.fees</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                <field name="total_fees"/>
+                </group>
+
+            <footer>
+                <button string="Update Fees" type="object" name="update_student_fees"/>
+                <button string="Cancel" special="cancel" class="btn btn-secondary"/>
+            </footer>
+
+            </form>
+        </field>
+    </record>
+
+    <record id="update_fees_view_action" model="ir.actions.act_window">
+        <field name="name">Student Fees Update</field>
+        <field name="res_model">update.student.fees</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+        <record id="update_fees_view_action_window" model="ir.actions.act_window">
+            <field name="name">Student Fees Update</field>
+            <field name="res_model">update.student.fees</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="skc_school_management.update_fees_view_from" />
+            <field name="binding_model_id" ref="model_student" />
+            <field name="binding_view_types">list,form</field>
+    </record>
+
+    <menuitem name="Student Fees Update" id="menu_student_fees_update" parent="new_menu" action="skc_school_management.update_fees_view_action_window"/>
+
+</odoo>

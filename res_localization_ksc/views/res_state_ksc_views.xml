@@ -1,0 +1,38 @@
+<odoo>
+    <record id="view_state_ksc_list" model="ir.ui.view">
+        <field name="name">res.state.ksc.list</field>
+        <field name="model">res.state.ksc</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="country_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_state_ksc_form" model="ir.ui.view">
+        <field name="name">res.state.ksc.form</field>
+        <field name="model">res.state.ksc</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="code"/>
+                        <field name="country_id"/>
+                        <field name="city_ids"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_state_ksc" model="ir.actions.act_window">
+        <field name="name">States</field>
+        <field name="res_model">res.state.ksc</field>
+        <field name="view_mode">list,form</field>
+    </record>
+<menuitem id="Localization" name="Localization"/>
+<menuitem id="state_child" name="State" parent="Localization" action="action_state_ksc"/>
+</odoo>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="group_can_change_customer_status" model="res.groups">
+        <field name="name">Can change customer status</field>
+<!--        <field name="category_id" ref="base.module_category_extra"/>-->
+    </record>
+
+    <record id="unlock_customer" model="res.groups">
+        <field name="name">Authorize to unlock Customer</field>
+<!--        <field name="category_id" ref="base.module_category_extra"/>-->
+    </record>
+</odoo>

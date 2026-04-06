@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="cap_view_partner_form_01" model="ir.ui.view">
+        <field name="name">cap.view.partner.form.01</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="priority">99</field>
+        <field name="arch" type="xml">
+
+            <div name="button_box" position="inside">
+                    <button class="oe_stat_button" type="object"
+                        name="action_view_projects"
+                        icon="fa-puzzle-piece">
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_value">
+                            <field name="project_count"/>
+                        </span>
+                        <span class="o_stat_text">Project</span>
+                    </div>
+                </button>
+                </div>
+            <xpath expr="//notebook" position="inside">
+                <page string="Customer Status">
+                    <group>
+                        <group name="invoicing" string="Invoicing">
+                            <field name="x_studio_sales_status"
+                                   invisible="not customer_since_date"
+                                   readonly="not is_company and not parent_id"/>
+                            <field name="x_studio_authorize_to_log_hours_with_late_invoice" invisible="0"
+                                   groups="cap_partner.unlock_customer"/>
+                            <field name="x_studio_authorize_late_amount"
+                                   invisible="not x_studio_authorize_to_log_hours_with_late_invoice"
+                                   groups="cap_partner.unlock_customer"/>
+                            <field name="x_studio_authorize_late_until"
+                                   invisible="not x_studio_authorize_to_log_hours_with_late_invoice"
+                                   groups="cap_partner.unlock_customer"/>
+                            <field name="late_invoice_status" readonly="1"/>
+                            <field name="quotation_sent_date"/>
+                        </group>
+
+                        <group name="operation_status" string="OPERATION STATUS">
+                            <field name="project_ids" invisible="1"/>
+                            <field name="code" invisible="1"/>
+                            <field name="remaining_hours"/>
+                            <field name="project_status_id" invisible="not project_status_id"/>
+                            <field name="solution"
+                                   invisible="not customer_since_date" readonly="not is_company and parent_id"/>
+                            <field name="enterprise_key"
+                                   invisible="not customer_since_date or solution not in ['oe_with_us', 'oe_with_other_partner']"
+                                   required="solution in 'oe_with_us' and code != 'analysis'"
+                                   readonly="not is_company and parent_id"/>
+                            <field name="cap_has_left_company"/>
+                        </group>
+                        <group name="data" string="DATA">
+                            <field name="status"/>
+                            <field name="x_studio_customer_of" string="Customer of" force_save="True" readonly="1"/>
+                            <field name="customer_since_date"
+                                   invisible="not customer_since_date"/>
+                            <field name="no_customer_since" invisible="not no_customer_since"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+            <xpath expr="//field[@name='child_ids']/kanban/field[@name='color']" position="after">
+                <field name="cap_has_left_company"/>
+            </xpath>
+            <xpath expr="//field[@name='child_ids']/form/sheet/group[2]/field[@name='comment']"
+                   position="after">
+                <field name="cap_has_left_company"/>
+            </xpath>
+            <xpath expr="//field[@name='child_ids']/kanban/templates/t/main/field[@name='name']"
+                   position="after">
+                <i t-if="record.cap_has_left_company.raw_value">(has left company)</i>
+            </xpath>
+            <xpath expr="//field[@name='child_ids']/kanban/templates/t/main/div[3]" position="after">
+                <div t-if="record.cap_has_left_company.raw_value"
+                     class="partner-has-left-company"
+                     style="width: 100%; position: absolute; background: rgba(0,0,0,0.1); height: 100%; top: 0; left: 0;">
+                </div>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="Customer" invisible="not is_company or parent_id">
+                    <group>
+                        <group>
+                            <field name="customer_satisfaction" widget="priority"/>
+                            <field name="last_customer_satisfaction_update"/>
+                            <field name="agree_to_recommend_us"/>
+                        </group>
+                        <group>
+                            <field name="last_agree_to_recommend_us"/>
+                            <field name="communicate_contact_to_our_lead"/>
+                            <field name="last_communicate_contact_to_our_lead_update"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="contact_information_to_communicate_to_our_lead"/>
+                            <field name="status_of_testimonial"/>
+                        </group>
+                        <group>
+                            <field name="status_of_both_way_communication"/>
+                        </group>
+                    </group>
+                </page>
+                <page string="Customer" name="customer_disabled"
+                      invisible="is_company or not parent_id">
+                    <div>
+                        <p>Customer-related settings are managed on
+                            <button name="open_commercial_entity" type="object" string="the parent customer"
+                                    class="oe_link"/>
+                        </p>
+                    </div>
+                </page>
+            </xpath>
+            <xpath expr="//notebook/page/field[@name='child_ids']" position="attributes">
+                <attribute name="context">{'default_type': 'contact'}</attribute>
+            </xpath>
+            <xpath expr="//notebook/page/field[@name='child_ids']/form/sheet/div/div/div/div[3]"
+                   position="after">
+                <div invisible="type != 'contact'">
+                    <i class="fa fa-fw me-1 fa-suitcase text-primary" title="Position"/>
+                    <field name="job_position_for_marketing" required="1" placeholder="Job Position"/>
+                </div>
+                <div invisible="type != 'contact'">
+                    <i class="fa fa-fw me-1 fa-suitcase text-primary" title="Position"/>
+                    <field name="category_id" widget="many2many_tags"
+                       options="{'color_field': 'color', 'no_create_edit': True}"
+                       placeholder="Category : e.g. &quot;B2B&quot;, &quot;VIP&quot;, &quot;Consulting&quot;, ..."/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="res_partner_view_inherit_late_inv_status">
+        <field name="name">res.partner.view.inherit.late.inv</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <field name="category_id" position="after">
+                <field name="late_invoice_status" readonly="1"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="cap_view_partner_property_form" model="ir.ui.view">
+        <field name="name">cap.view.partner.property.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="account.view_partner_property_form"/>
+        <field name="priority">16</field>
+        <field name="arch" type="xml">
+            <xpath expr="/form//field[@name='property_account_payable_id']" position="after">
+                <field name="property_company_bank_account_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="cap_view_partner_kanban_01" model="ir.ui.view">
+        <field name="name">cap.view.partner.kanban.01</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.res_partner_kanban_view"/>
+        <field name="priority">16</field>
+        <field name="arch" type="xml">
+            <xpath expr="//templates/t/aside" position="after">
+                <field name="cap_has_left_company" style="display:none" invisible="1"/>
+                <div t-if="undefined !== record.cap_has_left_company and record.cap_has_left_company.raw_value"
+                     class="partner-has-left-company"
+                     style="width: 100%; position: absolute; background: rgba(0,0,0,0.1); height: 100%; top: 0; left: 0;">
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="res_partner_view_tree_inherit_cap" model="ir.ui.view">
+        <field name="name">res.partner.view.tree.inherit.cap</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='email']" position="after">
+                <field name="quotation_sent_date"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="act_project_project_views" model="ir.actions.act_window">
+        <field name="name">Project</field>
+        <field name="res_model">project.project</field>
+        <field name="view_mode">list,form,kanban</field>
+        <field name="context">{'default_partner_id': active_id}</field>
+        <field name="view_id" ref="project.view_project_kanban"/>
+        <field name="search_view_id" ref="project.view_project_project_filter"/>
+    </record>
+
+</odoo>
+

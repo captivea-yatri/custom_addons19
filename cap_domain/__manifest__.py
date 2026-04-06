@@ -1,0 +1,27 @@
+# -*- coding: utf-8 -*-
+{
+    'name': 'Domain',
+    'description': " This module is used for domain ",
+    "author": "Konsultoo Software Consulting PVT. LTD.",
+    "website": "https://www.konsultoo.com/",
+    "category": "Extra Tools",
+    "version": "19.0.0.1",
+    'depends': ['timesheet_grid', 'planning', 'ksc_project_extended'],
+    'data': [
+        'data/data.xml',
+        "security/ir.model.access.csv",
+        "security/domain_security_view.xml",
+        "views/default_domain_view.xml",
+        "views/project_domain_view.xml",
+        "views/project_view.xml",
+        "views/project_phase_view.xml",
+        "views/account_analytic_line_view.xml",
+        "views/project_task_view.xml",
+        "views/planning_role_views.xml",
+        "views/res_partner.xml",
+    ],
+    'license': 'LGPL-3',
+    "installable": True,
+    "application": False,
+    "auto_install": False,
+}

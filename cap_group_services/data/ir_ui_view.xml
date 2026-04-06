@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+<record id="default_tree_view_group_service" model="ir.ui.view" >
+<field name="active" eval="True"/>
+<field name="arch" type="xml">
+<list string="Group Services">
+	<field name="name"/>
+	<field name="department_id"/>
+	<field name="description" />
+	<field name="invoicing" />
+	<field name="invoicing_ondemand_by" />
+	<field name="description_price" />
+	<field name="price" />
+</list>
+</field>
+<field name="group_ids" eval="[(6, 0, [])]"/>
+<field name="model">group.service</field>
+<field name="name">Default tree view for group service</field>
+<field name="priority">1</field>
+<field name="type">list</field>
+</record>
+
+  <record id="default_form_view_group_service" model="ir.ui.view" >
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <form>
+        <sheet string="Group Service">
+          <group>
+			<field name="name" required="True"/>
+			<field name="department_id" required="True"/>
+			<field name="invoicing" required="True"/>
+			<field name="invoicing_ondemand_by" />
+            <field name="description"/>
+			<field name="description_price" />
+			<field name="price" />
+          </group>
+        </sheet>
+      </form>
+    </field>
+    <field name="group_ids" eval="[(6, 0, [])]"/>
+    <field name="model">group.service</field>
+    <field name="name">Default form view for group service</field>
+    <field name="priority">1</field>
+    <field name="type">form</field>
+  </record>
+
+
+  <record id="group_service_search_view" model="ir.ui.view">
+            <field name="name">group.service.search.view</field>
+            <field name="model">group.service</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+
+
+                        <filter string="Department" name="department_id"
+                                context="{'group_by':'department_id'}"/>
+						<filter string="Invoicing" name="invoicing"
+                                context="{'group_by':'invoicing'}"/>
+                </search>
+            </field>
+        </record>
+</odoo>

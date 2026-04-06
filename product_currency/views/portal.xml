@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="portal_my_home_product_currency" name="Product" customize_show="True"
+              inherit_id="portal.portal_my_home" priority="40">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Product Currency</t>
+                <t t-set="url" t-value="'/product_currency/product_currency/objects/'"/>
+                <t t-set="placeholder_count" t-value="'currency_counts'"/>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="portal_breadcrumbs" inherit_id="portal.portal_breadcrumbs">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'currency_list_view'" class="breadcrumb-item">Product Currency</li>
+            <li t-if="page_name == 'currency_form_view'" class="breadcrumb-item">
+                <a href="/product_currency/product_currency/objects/#{currency.id}">Currency</a>
+            </li>
+        </xpath>
+    </template>
+
+    <template id="currency_list_view">
+        <t t-call="portal.portal_layout">
+            <t t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th class="text-center">Name</th>
+                        <th class="text-center">value</th>
+                        <th class="text-center">value2</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="currency" t-as="currency">
+                        <tr>
+                            <td calss="text-center">
+                                <a t-attf-href="/product_currency/product_currency/objects/#{currency.id}">
+                                    <t t-esc="currency.name"/>
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <t t-esc="currency.value"/>
+                            </td>
+                            <td class="text-center">
+                                <t t-esc="currency.value2"/>
+                            </td>
+                        </tr>
+                    </t>
+                </tbody>
+            </t>
+        </t>
+    </template>
+
+    <template id="currency_form_view" inherit_id="portal.portal_sidebar">
+        <xpath expr="//div[hasclass('o_portal_sidebar')]" position="inside">
+            <t t-if="page_name == 'currency_form_view'">
+                <section style="background-color: #eee;">
+                    <div class="container py-5">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="card mb-4">
+                                    <div class="card-body text-center">
+                                        <h5 class="my-3">
+                                            <t t-out="currency.name"/>
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="card mb-4">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Name</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">
+                                                    <t t-out="currency.name"/>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                            <div class="row">
+                                                <div class="col-sm-3">
+                                                    <p class="mb-0">Value</p>
+                                                </div>
+                                                <div class="col-sm-9">
+                                                    <p class="text-muted mb-0">
+                                                        <t t-out="currency.value"/>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </hr>
+                                        <hr>
+                                            <div class="row">
+                                                <div class="col-sm-3">
+                                                    <p class="mb-0">value2</p>
+                                                </div>
+                                                <div class="col-sm-9">
+                                                    <p class="text-muted mb-0">
+                                                        <t t-out="currency.value2"/>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </hr>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </t>
+        </xpath>
+    </template>
+</odoo>

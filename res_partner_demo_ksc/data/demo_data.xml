@@ -1,0 +1,42 @@
+<odoo>
+    <record id="demo_customer_1" model="res.partner.demo1">
+        <field name="name">John Doe</field>
+        <field name="city">New York</field>
+        <field name="state">NY</field>
+        <field name="country">USA</field>
+        <field name="gender">male</field>
+        <field name="is_spectacles">True</field>
+    </record>
+
+    <record id="demo_customer_2" model="res.partner.demo1">
+        <field name="name">Emma Smith</field>
+        <field name="city">Los Angeles</field>
+        <field name="state">CA</field>
+        <field name="country">USA</field>
+        <field name="gender">female</field>
+    </record>
+
+    <record id="demo_customer_3" model="res.partner.demo1">
+        <field name="name">Raj Patel</field>
+        <field name="city">Mumbai</field>
+        <field name="state">MH</field>
+        <field name="country">India</field>
+        <field name="gender">male</field>
+    </record>
+
+    <record id="demo_customer_4" model="res.partner.demo1">
+        <field name="name">Sana Ali</field>
+        <field name="city">Dubai</field>
+        <field name="state">DXB</field>
+        <field name="country">UAE</field>
+        <field name="gender">female</field>
+    </record>
+
+    <record id="demo_customer_5" model="res.partner.demo1">
+        <field name="name">Chris Jordan</field>
+        <field name="city">London</field>
+        <field name="state">LDN</field>
+        <field name="country">UK</field>
+        <field name="gender">trans</field>
+    </record>
+</odoo>

@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_sale_order_form_inherit_project_ksc" model="ir.ui.view">
+        <field name="name">sale_order_form_inherit_project_ksc</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//page[@name='other_information']" position="after">
+                <page name="rate_increase_information"
+                      string="Rate Increase">
+                    <group>
+                        <group name="rate_increase_information" string="Rate Increase">
+                            <field name="disable_increase_rate"/>
+                            <field name="increase_rate"/>
+                            <field name="last_update_date"/>
+                            <field name="next_update_date"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+
+            <xpath expr="//page[@name='order_lines']/field[@name='order_line']/list/field[@name='product_template_id']" position="replace">
+                <field name="skip_product_template_id_domain" column_invisible="1"/>
+                <field name="product_template_id"
+                                    string="Product"
+                                    readonly="id and not product_updatable"
+                                    required="not display_type and not is_downpayment"
+                                    context="{
+                                        'partner_id': parent.partner_id,
+                                        'quantity': product_uom_qty,
+                                        'pricelist': parent.pricelist_id,
+                                        'uom':product_uom_id,
+                                        'company_id': parent.company_id,
+                                        'default_list_price': price_unit,
+                                        'default_uom_id': product_uom_id,
+                                    }"
+                                    options="{
+                                        'no_open': True,
+                                    }"
+                                    optional="show"
+                                    domain="[('sale_ok', '=', True), '|', ('company_id', '=', False),('company_id', '=', company_id),('id', 'not in', skip_product_template_id_domain)]"
+                                    widget="sol_product_many2one"
+                                    placeholder="Type to find a product..."/>
+            </xpath>
+
+            <xpath expr="//form/sheet/notebook/page[@name='order_lines']/field[@name='order_line']"
+                   position="attributes">
+                <attribute name="groups">ksc_sale_project_extended.group_modify_line_of_quotation</attribute>
+            </xpath>
+
+<!--            ############################################################################################################-->
+
+            <xpath expr="//form/sheet/notebook/page[@name='order_lines']/field[@name='order_line']" position="after">
+                <field
+                        name="order_line"
+                        widget="section_and_note_one2many"
+                        mode="list,kanban"
+                        readonly="state == 'cancel' or locked"
+                        groups="!ksc_sale_project_extended.group_modify_line_of_quotation">
+                    <list
+                            string="Sales Order Lines"
+                            create="false"
+                            delete="false"
+                            no_open="1"
+                            editable="bottom"
+                    >
+                        <field name="order_id" column_invisible="True"/>
+                        <field name="sequence" widget="handle"/>
+                        <!-- We do not display the type because we don't want the user to be bothered with that information if he has no section or note. -->
+                        <field name="display_type" column_invisible="True"/>
+                        <field name="categ_id" column_invisible="True"/>
+                        <field name="product_type" column_invisible="True"/>
+                        <field name="product_updatable" column_invisible="True"/>
+                        <field name="is_downpayment" column_invisible="True"/>
+                        <field
+                                name="product_id"
+                                readonly="not product_updatable"
+
+                                force_save="1"
+                                context="{
+                                        'partner_id': parent.partner_id,
+                                        'quantity': product_uom_qty,
+                                        'pricelist': parent.pricelist_id,
+                                        'uom':product_uom_id,
+                                        'company_id': parent.company_id,
+                                        'default_lst_price': price_unit,
+                                        'default_description_sale': name
+                                    }"
+                                options="{
+                                                    'no_open': True,
+                                                }"
+                                domain="[('sale_ok', '=', True), '|', ('company_id', '=', False), ('company_id', '=', parent.company_id)]"
+                                widget="sol_product_many2one"
+                                required="not display_type"
+                        />
+                        <field name="product_template_id"
+                               string="Product"
+                               column_invisible="True"
+                               readonly="not product_updatable"
+
+                               context="{
+                                        'partner_id': parent.partner_id,
+                                        'quantity': product_uom_qty,
+                                        'pricelist': parent.pricelist_id,
+                                        'uom':product_uom_id,
+                                        'company_id': parent.company_id,
+                                        'default_list_price': price_unit,
+                                        'default_description_sale': name
+                                    }"
+                               options="{
+                                        'no_open': True,
+                                    }"
+                               domain="[('sale_ok', '=', True), '|', ('company_id', '=', False), ('company_id', '=', parent.company_id)]"
+                               widget="sol_product_many2one"
+                               required="not display_type"
+                               placeholder="Type to find a product..."/>
+                        <field name="name" widget="section_and_note_text" optional="show" readonly="True"/>
+                        <field name="analytic_distribution" widget="analytic_distribution"
+                               optional="hide"
+                               groups="analytic.group_analytic_accounting"
+                               options="{'product_field': 'product_id', 'business_domain': 'sale_order', 'amount_field': 'price_subtotal'}"/>
+                        <field
+                                name="product_uom_qty"
+                                decoration-info="(not display_type and invoice_status == 'to invoice')"
+                                decoration-bf="(not display_type and invoice_status == 'to invoice')"
+                                readonly="is_downpayment or state in ['cancel', 'sale'] or order_id.locked"
+                                context="{
+                                        'partner_id': parent.partner_id,
+                                        'quantity': product_uom_qty,
+                                        'pricelist': parent.pricelist_id,
+                                        'uom': product_uom_id,
+                                        'company_id': parent.company_id
+                                    }"
+                                />
+                        <field
+                                name="qty_delivered"
+                                decoration-info="(not display_type and invoice_status == 'to invoice')"
+                                decoration-bf="(not display_type and invoice_status == 'to invoice')"
+                                column_invisible="parent.state != 'sale'"
+                                string="Delivered"
+                                readonly="qty_delivered_method != 'manual' or is_downpayment"
+                                optional="show"/>
+
+                        <field name="qty_delivered_method" column_invisible="True"/>
+                        <field
+                                name="qty_invoiced"
+                                decoration-info="(not display_type and invoice_status == 'to invoice')"
+                                decoration-bf="(not display_type and invoice_status == 'to invoice')"
+                                column_invisible="parent.state != 'sale'"
+                                string="Invoiced"
+                                optional="show"/>
+
+                        <field name="qty_to_invoice" column_invisible="True"/>
+                        <field name="product_uom_readonly" column_invisible="True"/>
+                        <field name="product_uom_id" column_invisible="True" groups="!uom.group_uom"/>
+                        <field
+                                name="product_uom_id"
+                                force_save="1"
+                                string="UoM"
+                                readonly="product_uom_readonly"
+                                required="not display_type"
+                                context="{'company_id': parent.company_id}"
+                                groups="uom.group_uom"
+                                options='{"no_open": True}'
+                                optional="show"/>
+
+                        <field
+                                name="customer_lead"
+                                optional="hide"
+                                readonly="parent.state not in ['draft', 'sent', 'sale'] or is_downpayment"/>
+<!--                        <field name="product_packaging_qty" invisible="not product_id or not product_packaging_id"-->
+<!--                               groups="product.group_stock_packaging" optional="show"/>-->
+<!--                        <field name="product_packaging_id" invisible="not product_id"-->
+<!--                               context="{'default_product_id': product_id, 'tree_view_ref':'product.product_packaging_tree_view', 'form_view_ref':'product.product_packaging_form_view'}"-->
+<!--                               groups="product.group_stock_packaging" optional="show"/>-->
+                        <field
+                                name="price_unit"
+                                readonly="qty_invoiced &gt; 0 or state in ['cancel', 'sale'] or order_id.locked"
+                                />
+
+                        <field
+                                name="tax_ids"
+                                widget="many2many_tags"
+                                options="{'no_create': True}"
+                                domain="[('type_tax_use', '=', 'sale'), ('company_id', 'parent_of', parent.company_id), ('country_id', '=', parent.tax_country_id)]"
+                                context="{'active_test': True}"
+                                readonly="qty_invoiced &gt; 0 or is_downpayment"
+                                optional="show"/>
+                        <field name="discount" string="Disc.%"
+                               optional="show" readonly="1" widget="sol_discount"/>
+                        <field name="is_downpayment" column_invisible="True"/>
+                        <field name="price_subtotal" string="Tax excl." invisible="is_downpayment" widget="monetary"/>
+                        <field name="price_total" widget="monetary"
+                               string="Tax incl."
+                               column_invisible="parent.tax_calculation_rounding_method == 'round_globally'"
+                               invisible="is_downpayment"
+                               optional="hide"/>
+                        <!-- Others fields -->
+                        <field name="tax_calculation_rounding_method" column_invisible="True"/>
+                        <field name="state" column_invisible="True"/>
+                        <field name="invoice_status" column_invisible="True"/>
+                        <field name="currency_id" column_invisible="True"/>
+                        <field name="price_tax" column_invisible="True"/>
+                        <field name="company_id" column_invisible="True"/>
+                    </list>
+                </field>
+            </xpath>
+
+<!--            ############################################################################################################################-->
+
+            <field name="state" position="before">
+                <field name="linked_project" invisible="1"/>
+                <button name="%(ksc_sale_project_extended.action_link_po_so_view_form)d" string="Create/Link Project"
+                        invisible="linked_project or state != 'sale'"
+                        type="action"
+                        class="btn-primary"/>
+            </field>
+            <xpath expr="//page/field[@name='order_line']/list/field[@name='product_uom_qty']" position="after">
+                <field name="x_studio_qty_in_hours"/>
+                <field name="x_studio_remaining_quantity"/>
+                <field name="x_studio_consumed_qty" readonly="1"/>
+                <field name="restrict_description_modification" column_invisible="True"/>
+            </xpath>
+
+            <xpath expr="//field[@name='order_line']/list/field[@name='name']" position="attributes">
+                <attribute name="readonly">restrict_description_modification</attribute>
+            </xpath>
+
+            <field name="payment_term_id" position="after">
+                <field name="total_remaining_qty"/>
+            </field>
+        </field>
+    </record>
+</odoo>

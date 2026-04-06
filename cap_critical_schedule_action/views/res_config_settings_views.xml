@@ -1,0 +1,23 @@
+<odoo>
+    <data>
+        <!-- Inherit the res.config.settings form view -->
+        <record id="view_res_config_settings_inherit_critical_sch_action" model="ir.ui.view">
+            <field name="name">res.config.settings.form.inherit.critical.action</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <div id="languages" position="before">
+                    <div>
+                        <h2>Cron Failure Configuration:</h2>
+                        <div class="row mt16 o_settings_container">
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <label for="cron_email_recipient_ids"/>
+                                <field name="cron_email_recipient_ids" widget="many2many_tags" options="{'no_create': True,'no_create_edit': True}"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </field>
+        </record>
+    </data>
+</odoo>

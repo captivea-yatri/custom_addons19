@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record id="operation_quality_manager" model="res.groups">
+            <field name="name">Operation Quality Manager</field>
+            <field name="user_ids" eval="[(4, ref('base.user_admin'))]"/>
+        </record>
+
+        <record model="ir.rule" id="project_domain_rule">
+            <field name="name">Project/Domain: multi-company</field>
+            <field name="model_id" ref="model_project_domain"/>
+            <field name="domain_force">['|', ('project_id.company_id', '=', False), ('project_id.company_id', 'in',
+                company_ids)]
+            </field>
+        </record>
+    </data>
+</odoo>

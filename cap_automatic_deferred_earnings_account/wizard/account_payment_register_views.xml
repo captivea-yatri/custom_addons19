@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_account_reg_payment_form_inherit" model="ir.ui.view">
+            <field name="name">account.payment.register.form.inherit</field>
+            <field name="model">account.payment.register</field>
+            <field name="inherit_id" ref="account.view_account_payment_register_form"/>
+            <field name="arch" type="xml">
+                <data>
+                    <xpath expr="//group[@name='group1']" position="before">
+                        <h5 class="text-danger" style="width: 100% !important">TO REGISTER A PAYMENT, YOU MUST HAVE A PROOF THAT THE PAYMENT IS EFFECTIVELY DONE (CHECK RECEIVE, Proof of ACH, ...)</h5>
+                    </xpath>
+                    <xpath expr="//group[@name='group2']" position="after">
+                        <field name="description" placeholder="Please Provide Details Here" required="True"/>
+                    </xpath>
+                </data>
+            </field>
+        </record>
+    </data>
+</odoo>

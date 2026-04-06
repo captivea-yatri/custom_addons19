@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="mail_notification_layout_custom" inherit_id="mail.mail_notification_layout">
+        <xpath expr="//body[@style='font-family:Verdana, Arial,sans-serif; color: #454748;']/div[1]/div[2]" position="after">
+            <t t-if="message.model == 'project.task'">
+                <div style="font-size: 13px; margin-top: 8px;">
+                    <t t-if="record.project_id">
+                        <strong>Project:</strong> <span t-out="record.project_id.name"/>
+                    </t>
+                </div>
+<!--                uncomment when we install cap_domain-->
+<!--                <div style="font-size: 13px;">-->
+<!--                    <t t-if="record.default_domain_id">-->
+<!--                        <strong>Domain :</strong> <span t-out="record.default_domain_id.name"/>-->
+<!--                    </t>-->
+<!--                </div>-->
+<!--                <div style="font-size: 13px;">-->
+<!--                    <t t-if="record.default_phase_id">-->
+<!--                        <strong>Phase  :</strong> <span t-out="record.default_phase_id.name"/>-->
+<!--                    </t>-->
+<!--                </div>-->
+            </t>
+            <t t-if="message.model == 'session.test'">
+                <div style="font-size: 13px; margin-top: 8px;">
+                    <t t-if="record.project_id">
+                        <strong>Project:</strong>
+                        <span t-out="record.project_id.name"/> - <span t-out="record.name"/>
+                    </t>
+                </div>
+                <div style="font-size: 13px;">
+                    <t t-if="record.task_ids">
+                        <strong>Task :</strong>
+                        <li t-foreach="record.task_ids" t-as="task">
+                            <span t-out="task.name"/>
+                        </li>
+                    </t>
+                </div>
+                <div style="font-size: 13px;">
+                    <t t-if="record.domain_ids">
+                        <strong>Domain :</strong>
+                        <li t-foreach="record.domain_ids" t-as="domain">
+                            <span t-out="domain.name"/>
+                        </li>
+                    </t>
+                </div>
+                <div style="font-size: 13px;">
+                    <t t-if="record.phase_id">
+                        <strong>Phase :</strong>
+                        <span t-out="record.phase_id.name"/>
+                    </t>
+                </div>
+            </t>
+            <t t-if="message.model == 'project.feedback'">
+                <div style="font-size: 13px; margin-top: 8px;">
+                    <t t-if="record.project_id">
+                        <strong>Project:</strong> <span t-out="record.project_id.name"/>
+                    </t>
+                </div>
+                <div style="font-size: 13px;">
+                    <t t-if="record.task_id">
+                        <strong>Task   :</strong> <span t-out="record.task_id.name"/>
+                    </t>
+                </div>
+<!--                uncomment when we install cap_domain-->
+<!--                <div style="font-size: 13px;">-->
+<!--                    <t t-if="record.default_domain_id">-->
+<!--                        <strong>Domain :</strong> <span t-out="record.default_domain_id.name"/>-->
+<!--                    </t>-->
+<!--                </div>-->
+                <div style="font-size: 13px;">
+                    <t t-if="record.phase_id">
+                    <strong>Phase  :</strong> <span t-out="record.phase_id.name"/>
+                    </t>
+                </div>
+            </t>
+            <t t-if="message.model == 'execution.test'">
+                <div style="font-size: 13px; margin-top: 8px;">
+                    <t t-if="record.project_id">
+                        <strong>Project:</strong>
+                        <span t-out="record.project_id.name"/>
+                    </t>
+                </div>
+                <div style="font-size: 13px;">
+                    <t t-if="record.session_test_id">
+                        <strong>Test Session :</strong>
+                        <span t-out="record.session_test_id.name"/>
+                    </t>
+                </div>
+                <div style="font-size: 13px;">
+                    <t t-if="record.task_id">
+                        <strong>Task :</strong>
+                        <span t-out="record.task_id.name"/>
+                    </t>
+                </div>
+                <div style="font-size: 13px;">
+                    <t t-if="record.test_id">
+                        <strong>Test :</strong>
+                        <span t-out="record.test_id.name"/>
+                    </t>
+                </div>
+                <div style="font-size: 13px;">
+                    <t t-if="record.phase_id">
+                        <strong>Phase :</strong>
+                        <span t-out="record.phase_id.name"/>
+                    </t>
+                </div>
+                <div style="font-size: 13px;">
+                    <t t-if="record.domain_id">
+                        <strong>Domain :</strong>
+                        <span t-out="record.domain_id.name"/>
+                    </t>
+                </div>
+            </t>
+            <hr/>
+        </xpath>
+        <xpath expr="//body[@style='font-family:Verdana, Arial,sans-serif; color: #454748;']/div[1]/div[3]" position="before">
+            <strong>Message :</strong>
+        </xpath>
+    </template>
+</odoo>

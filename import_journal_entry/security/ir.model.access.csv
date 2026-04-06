@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_gen_journal_entry_user,access_gen_journal_entry_user,model_gen_journal_entry,import_journal_entry.group_import_journal_entry,1,1,1,1

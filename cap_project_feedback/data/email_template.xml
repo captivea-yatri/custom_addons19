@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="project_message_task_assignee_mail">
+            <span>Dear <t t-esc="assignee_name"/>,
+            </span>
+            <br/>
+            <br/>
+            <span style="margin-top: 8px;">
+                <t t-esc="model_description or 'document'"/> -
+                <t t-esc="object.display_name"/>
+                is created for task <t t-esc="object.task_id.name"/>
+            </span>
+            <br/>
+        </template>
+    </data>
+</odoo>

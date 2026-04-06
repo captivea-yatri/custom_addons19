@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="project_project_inherit_view_for_requirement" model="ir.ui.view">
+            <field name="name">project.project.inherit.view.for.requirement</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.edit_project"/>
+            <field name="priority">21</field>
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+                    <button class="oe_stat_button" name="action_project_workshop" type="object"
+                            icon="fa-list">
+                        <div class="o_stat_info o_field_widget">
+                            <span class="o_stat_text">
+                                Requirement
+                            </span>
+                            <span class="o_stat_text">
+                                For Workshop
+                            </span>
+                        </div>
+                    </button>
+                    <button class="oe_stat_button" name="action_project_analysis" type="object"
+                            icon="fa-list">
+                        <div class="o_stat_info o_field_widget">
+                            <span class="o_stat_text">
+                                Requirement
+                            </span>
+                            <span class="o_stat_text">
+                                For Analysis
+                            </span>
+                        </div>
+                    </button>
+                </xpath>
+                <xpath expr="//header" position="inside">
+                    <button name="action_calculate_estimate_time" string="Calculate Advised Estimated Time"
+                            type="object" class="oe_highlight"/>
+                    <button name="refresh_project_domain_calculations" string="Refresh Domain Calculation"
+                            type="object" class="oe_highlight"/>
+                    <button name="%(cap_requirements.action_create_project_requirement)d"
+                            string="Create Task From Project Requirement" type="action" class="oe_highlight"/>
+                    <button name="%(cap_requirements.action_project_planning_wizard)d"
+                            string="Update Project Planning" type="action" class="oe_highlight"/>
+                </xpath>
+            </field>
+        </record>
+
+<!--   check below xpath   -->
+        <record id="project_project_inherit_view_for_domain_planning" model="ir.ui.view">
+            <field name="name">project.project.inherit.view.for.domain.planning</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="cap_domain.project_project_inherit_view_for_domain"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='project_id']" position="after">
+                    <field name="weekly_capacity"/>
+                    <field name="planning_start_date"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+                <!--   Scheduled Action For Session Test   -->
+        <record forcecreate="True" id="ir_cron_session_test" model="ir.cron">
+            <field name="name">Not enough test sessions executed</field>
+            <field name="model_id" ref="cap_project_test.model_session_test"/>
+            <field name="state">code</field>
+            <field name="code">
+#Variables
+cron_id = env.ref('cap_project_test.ir_cron_session_test')
+issue_type = env['quality.issue.type'].search([('ir_cron_id', '=', cron_id.id)])
+quality_category = issue_type.quality_category
+today = datetime.date.today()
+seven_days_before = today + dateutil.relativedelta.relativedelta(days=-7)
+role_ids = env['planning.role'].search(['|', ('is_configurator', '=', True), ('is_developer', '=', True)])
+
+#Projects to consider : with status "Pre Live", not "on hold" and not "Test excluded"
+project_ids = env['project.project'].search([('exclude_for_tests', '=', False), ('project_status_id.code', '=', 'pre_live'), ('on_hold_reason', '=', False), ('create_date', '>', '2024-01-01')])
+
+#Loop on filtered projects to check
+for project_id in project_ids:
+    # Get the Employee from all the employees
+    employee_id = issue_type.get_employee(project_id, quality_category.role_ids)
+    #For Warning Type of Quality issue logs
+    if quality_category.warning_before_penalty:
+        #Get the last penalty log before create warning log
+        last_penalty_log = env['quality.issue.log'].search([('project_id', '=', project_id.id), ('employee_id', '=', employee_id.id), ('log_type', '=', 'penalty'), ('quality_issue_type', '=', issue_type.id)], order='id desc', limit=1)
+
+        # Create a warning only if:
+        # - No penalty log exists yet, or
+        # - The last penalty log is older than 4 days
+        if not last_penalty_log or (last_penalty_log and last_penalty_log.logged_date + dateutil.relativedelta.relativedelta(days=4) &lt;= today):
+            first_day_of_the_month = today.replace(day=1)
+            domain = [('project_id', '=', project_id.id), ('logged_date', '>=', first_day_of_the_month)]
+            msg = "WARNING: \nNot Enough Session Test Created for Project : {}, A minimum of 2 session test is required per 100 consumed hours. If the required session tests are not created, a Penalty quality issue will be raised.".format(project_id.name)
+            type = 'warning'
+
+            #Timesheets to consider: timesheets logged for Developer and Configurator only
+            timesheet_ids = project_id.timesheet_ids.filtered(lambda timesheet: timesheet.task_id.role_id.id in role_ids.ids)
+            #Calculate consumed quantity on the project for tasks with role conf, dev only
+            consumed_qty = int(sum(timesheet_ids.mapped('unit_amount')))
+
+            #We only consider the necessity of making tests if number of produced hours is higher than 100h
+            if consumed_qty >= 100:
+                session_test_id = env['session.test'].search([('project_id', '=', project_id.id)])
+                #If there is no test sessions or if there is less than 2 tests every 100 hours
+                if not session_test_id or (2 * int(consumed_qty / 100)) > len(session_test_id):
+                    # Create a warning log for each role concerned by this quality issue
+                    for role_id in quality_category.role_ids:
+                        issue_type.check_planning_role(project_id, role_id, domain, msg, type)
+
+    #For Penalty Type of Quality issue logs
+    #Get the last warning log before create penalty log
+    last_warning_log = env['quality.issue.log'].search([('project_id', '=', project_id.id), ('employee_id', '=', employee_id.id), ('log_type', '=', 'warning'), ('quality_issue_type', '=', issue_type.id)], order='id desc', limit=1)
+
+    # Create a penalty log if:
+    # - Warnings are not required before penalties, or
+    # - A warning exists and it is older than 3 days
+    if not quality_category.warning_before_penalty or (last_warning_log and last_warning_log.logged_date + dateutil.relativedelta.relativedelta(days=3) &lt;= today):
+        domain = [('project_id', '=', project_id.id), ('logged_date', '>=', seven_days_before)]
+        msg = 'Not Enough Session Test Created for Project : {}'.format(project_id.name)
+        type = 'penalty'
+
+        #Timesheets to consider: timesheets logged for Developer and Configurator only
+        timesheet_ids = project_id.timesheet_ids.filtered(lambda timesheet: timesheet.task_id.role_id.id in role_ids.ids)
+        #Calculate consumed quantity on the project for tasks with role conf, dev only
+        consumed_qty = int(sum(timesheet_ids.mapped('unit_amount')))
+
+        #We only consider the necessity of making tests if number of produced hours is higher than 100h
+        if consumed_qty >= 100:
+            session_test_id = env['session.test'].search([('project_id', '=', project_id.id), ('status', 'in', ['closed', 'signed'])])
+
+            #If there is no test sessions  or if there is less than 2 tests every 100 hours
+            if not session_test_id or (2 * int(consumed_qty / 100)) > len(session_test_id):
+                # Create a warning log for each role concerned by this quality issue
+                for role_id in quality_category.role_ids:
+                    issue_type.check_planning_role(project_id, role_id, domain, msg, type)
+            </field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+        </record>
+
+                <!--   Issue Type Session Test   -->
+        <record id="quality_issue_type_task_test" model="quality.issue.type">
+            <field name="name">Not enough test sessions executed</field>
+            <field name="action_performer">create_schedule_action</field>
+            <field name="quality_category" ref="cap_project_test.quality_category_tests"/>
+            <field name="ir_model_id" ref="cap_project_test.model_session_test"/>
+            <field name="score_impact">30</field>
+            <field name="state">in_progress</field>
+            <field name="ir_cron_id" ref="cap_project_test.ir_cron_session_test"/>
+        </record>
+
+        <!--       ===========================================================      -->
+        <!--   Schedule Action For Task Test   -->
+        <record forcecreate="True" id="ir_cron_task_test" model="ir.cron">
+            <field name="name">Not Enough tests created</field>
+            <field name="model_id" ref="cap_project_test.model_test_test"/>
+            <field name="state">code</field>
+            <field name="code">
+#Variables
+cron_id = env.ref('cap_project_test.ir_cron_task_test')
+issue_type = env['quality.issue.type'].search([('ir_cron_id', '=', cron_id.id)])
+quality_category = issue_type.quality_category
+today = datetime.date.today()
+seven_days_before = today + dateutil.relativedelta.relativedelta(days=-7)
+role_ids = env['planning.role'].search(['|', ('is_configurator', '=', True), ('is_developer', '=', True)])
+
+#Projects to consider : with status "Pre Live", not "on hold" and not "Test excluded"
+project_ids  = env['project.project'].search([('exclude_for_tests', '=', False), ('project_status_id.code', '=', 'pre_live'), ('on_hold_reason', '=', False), ('create_date', '>', '2024-01-01')])
+
+#Loop on filtered projects to check
+for project_id in project_ids:
+    # Get the Employee from all the employees
+    employee_id = issue_type.get_employee(project_id, quality_category.role_ids)
+
+    #For Warning Type of Quality issue logs
+    if quality_category.warning_before_penalty:
+        #Get the last penalty log before create warning log
+        last_penalty_log = env['quality.issue.log'].search([('project_id', '=', project_id.id), ('employee_id', '=', employee_id.id), ('log_type', '=', 'penalty'), ('quality_issue_type', '=', issue_type.id)], order='id desc', limit=1)
+
+        # Create a warning only if:
+        # - No penalty log exists yet, or
+        # - The last penalty log is older than 4 days
+        if not last_penalty_log or (last_penalty_log and last_penalty_log.logged_date + dateutil.relativedelta.relativedelta(days=4) &lt;= today):
+            first_day_of_the_month = today.replace(day=1)
+            domain = [('project_id', '=', project_id.id), ('logged_date', '>=', first_day_of_the_month)]
+            msg = "WARNING: \nNot Enough Task Tests Created for Project : {}, A minimum of 10 Custom Task Tests are required per 100 consumed hours. If the required Task tests are not created, a Penalty quality issue will be raised.".format(project_id.name)
+            type = 'warning'
+
+            #Timesheets to consider: timesheets logged for Developer and Configurator only
+            timesheet_ids = project_id.timesheet_ids.filtered(lambda timesheet: timesheet.task_id.role_id.id in role_ids.ids)
+            #Calculate consumed quantity on the project for tasks with role conf, dev only
+            consumed_qty = int(sum(timesheet_ids.mapped('unit_amount')))
+
+            #We only consider the necessity of making tests if number of produced hours is higher than 100h
+            if consumed_qty >= 100:
+                #Count number of tests currently written on the project
+                task_test_id = env['test.test'].search([('project_id', '=', project_id.id), ('template_test_id', '=', False)])
+                # Required number of tests = 10 tests per 100 consumed hours
+                if not task_test_id or (10 * int(consumed_qty / 100)) > len(task_test_id):
+                    # Create a warning log for each role concerned by this quality issue
+                    for role_id in quality_category.role_ids:
+                        issue_type.check_planning_role(project_id, role_id, domain, msg, type)
+
+    #For Penalty Type of Quality issue logs
+    #Get the last warning log before create penalty log
+    last_warning_log = env['quality.issue.log'].search([('project_id', '=', project_id.id), ('employee_id', '=', employee_id.id), ('log_type', '=', 'warning'), ('quality_issue_type', '=', issue_type.id)], order='id desc', limit=1)
+
+    # Create a penalty log if:
+    # - Warnings are not required before penalties, or
+    # - A warning exists and it is older than 3 days
+    if not quality_category.warning_before_penalty or (last_warning_log and last_warning_log.logged_date + dateutil.relativedelta.relativedelta(days=3) &lt;= today):
+        domain = [('project_id', '=', project_id.id), ('logged_date', '>=', seven_days_before)]
+        msg = 'Not Enough Task Tests Created for Project : {}'.format(project_id.name)
+        type = 'penalty'
+
+        #Timesheets to consider: timesheets logged for Developer and Configurator only
+        timesheet_ids = project_id.timesheet_ids.filtered(lambda timesheet: timesheet.task_id.role_id.id in role_ids.ids)
+        #Calculate consumed quantity on the project for tasks with role conf, dev only
+        consumed_qty = int(sum(timesheet_ids.mapped('unit_amount')))
+
+        #We only consider the necessity of making tests if number of produced hours is higher than 100h
+        if consumed_qty >= 100:
+           #Count number of tests currently written on the project
+            task_test_id = env['test.test'].search([('project_id', '=', project_id.id), ('template_test_id', '=', False)])
+            # Required number of tests = 10 tests per 100 consumed hours
+            if not task_test_id or (10 * int(consumed_qty / 100)) > len(task_test_id):
+                # Create a penalty log for each role concerned by this quality issue
+                for role_id in quality_category.role_ids:
+                    issue_type.check_planning_role(project_id, role_id, domain, msg, type)
+            </field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+        </record>
+
+        <!--   Issue Type Task Test   -->
+        <record id="quality_issue_type_session_test" model="quality.issue.type">
+            <field name="name">Not Enough tests created</field>
+            <field name="action_performer">create_schedule_action</field>
+            <field name="quality_category" ref="cap_project_test.quality_category_tests"/>
+            <field name="ir_model_id" ref="cap_project_test.model_test_test"/>
+            <field name="score_impact">30</field>
+            <field name="state">in_progress</field>
+            <field name="ir_cron_id" ref="cap_project_test.ir_cron_task_test"/>
+        </record>
+
+        <!--       ===========================================================      -->
+
+        <!--   Schedule Action For Feedback not handled   -->
+        <record id="ir_cron_feedback_not_handled" model="ir.cron">
+            <field name="name">Feedback not handled</field>
+            <field name="model_id" ref="cap_project_feedback.model_project_feedback"/>
+            <field name="state">code</field>
+            <field name="code">
+#variables
+cron_id = env.ref('cap_project_test.ir_cron_feedback_not_handled')
+issue_type = env['quality.issue.type'].search([('ir_cron_id', '=', cron_id.id)])
+quality_category = issue_type.quality_category
+today = datetime.date.today()
+seven_days_before = today + dateutil.relativedelta.relativedelta(days=-7)
+
+#Projects to consider : Not "feedback excluded", In "prelive" status, not "on hold"
+project_ids = env['project.project'].search([('project_status_id.code', '=', 'pre_live'), ('on_hold_reason', '=', False), ('exclude_for_feedback', '=', False)])
+
+#Loop on projects to check
+for project_id in project_ids:
+    #count number of feedbacks with a status in "new" for more than 7 days
+    project_feedback_ids = model.search([('create_date', '&lt;=', seven_days_before), ('project_id', '=', project_id.id), ('status', '=','new')])
+    #If one or more feedback items remain unresolved, a quality issue will be raised.
+    if len(project_feedback_ids) >= 1:
+        # Get the Employee from all the employees
+        employee_id = issue_type.get_employee(project_id, quality_category.role_ids)
+
+        #For Warning Type of Quality issue logs
+        if quality_category.warning_before_penalty:
+            #Get the last penalty log before create warning log
+            last_penalty_log = env['quality.issue.log'].search([('project_id', '=', project_id.id), ('employee_id', '=', employee_id.id), ('log_type', '=', 'penalty'), ('quality_issue_type', '=', issue_type.id)], order='id desc', limit=1)
+            # Create a warning only if:
+            # - No penalty log exists yet, or
+            # - The last penalty log is older than 4 days
+            if not last_penalty_log or (last_penalty_log and last_penalty_log.logged_date + dateutil.relativedelta.relativedelta(days=4) &lt;= today):
+                first_day_of_the_month = today.replace(day=1)
+                domain = [('logged_date', '>=', first_day_of_the_month), ('project_id', '=', project_id.id), ('create_date', '>', '2024-01-01')]
+                msg = "WARNING: \nFor project: {}, one or more feedback items have not yet been addressed. If these feedback items remain unhandled, a Penalty quality issue will be raised.".format(project_id.name)
+                type = 'warning'
+                # Create a warning log for each role concerned by this quality issue
+                for role_id in quality_category.role_ids:
+                    issue_type.check_planning_role(project_id, role_id, domain, msg, type, False, False)
+
+        #For Penalty Type of Quality issue logs
+        #Get the last warning log before create penalty log
+        last_warning_log = env['quality.issue.log'].search([('project_id', '=', project_id.id), ('employee_id', '=', employee_id.id), ('log_type', '=', 'warning'), ('quality_issue_type', '=', issue_type.id)], order='id desc', limit=1)
+        # Create a penalty log if:
+        # - Warnings are not required before penalties, or
+        # - A warning exists and it is older than 3 days
+        if not quality_category.warning_before_penalty or (last_warning_log and last_warning_log.logged_date + dateutil.relativedelta.relativedelta(days=3) &lt;= today):
+            domain = [('logged_date', '>=', seven_days_before), ('project_id', '=', project_id.id), ('create_date', '>', '2024-01-01')]
+            msg = "For project: {}, one or more feedback items are still pending and have not been handled.".format(project_id.name)
+            type = 'penalty'
+            # Create a penalty log for each role concerned by this quality issue
+            for role_id in quality_category.role_ids:
+                issue_type.check_planning_role(project_id, role_id, domain, msg, type, False, False)
+            </field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+        </record>
+
+        <!--   Issue Type Feedback Not Handled -->
+        <record id="quality_issue_type_feedback_not_handled" model="quality.issue.type">
+            <field name="name">Feedback not handled</field>
+            <field name="action_performer">create_schedule_action</field>
+            <field name="quality_category" ref="cap_project_test.quality_category_feedback"/>
+            <field name="ir_model_id" ref="cap_project_feedback.model_project_feedback"/>
+            <field name="score_impact">10</field>
+            <field name="state">in_progress</field>
+            <field name="ir_cron_id" ref="ir_cron_feedback_not_handled"/>
+        </record>
+
+
+        <!--   Schedule Action For Not Enough feedback   -->
+        <record forcecreate="True" id="ir_cron_not_enough_feedback" model="ir.cron">
+            <field name="name">Not Enough Feedback</field>
+            <field name="model_id" ref="cap_project_test.model_project_feedback"/>
+            <field name="state">code</field>
+            <field name="code">
+#Variables
+cron_id = env.ref('cap_project_test.ir_cron_not_enough_feedback')
+issue_type = env['quality.issue.type'].search([('ir_cron_id', '=', cron_id.id)])
+quality_category = issue_type.quality_category
+today = datetime.date.today()
+seven_days_before = today + dateutil.relativedelta.relativedelta(days=-7)
+role_ids = env['planning.role'].search(['|', ('is_configurator', '=', True), ('is_developer', '=', True)])
+
+#Projects to consider : Not "feedback excluded", In "prelive" status, not "on hold"
+project_ids = env['project.project'].search([('exclude_for_feedback', '=', False), ('project_status_id.code', '=', 'pre_live'), ('on_hold_reason', '=', False), ('create_date', '>', '2024-01-01')])
+
+#Loop on projects to check
+for project_id in project_ids:
+    # Get the Employee from all the employees
+    employee_id = issue_type.get_employee(project_id, quality_category.role_ids)
+    #For Warning Type of Quality issue logs
+    if quality_category.warning_before_penalty:
+        #Get the last penalty log before create warning log
+        last_penalty_log = env['quality.issue.log'].search([('project_id', '=', project_id.id), ('employee_id', '=', employee_id.id), ('log_type', '=', 'penalty'), ('quality_issue_type', '=', issue_type.id)], order='id desc', limit=1)
+
+        # Create a warning only if:
+        # - No penalty log exists yet, or
+        # - The last penalty log is older than 4 days
+        if not last_penalty_log or (last_penalty_log and last_penalty_log.logged_date + dateutil.relativedelta.relativedelta(days=4) &lt;= today):
+            first_day_of_the_month = today.replace(day=1)
+            domain = [('project_id', '=', project_id.id), ('logged_date', '>=', first_day_of_the_month)]
+            msg = "WARNING: \nNot Enough Feedback Created for Project : {}, A minimum of 1 Feedback is required per 100 consumed hours. If the required Feedbacks are not created, a Penalty quality issue will be raised.".format(project_id.name)
+            type = 'warning'
+
+            #Timesheets to consider: timesheets logged for Developer and Configurator only
+            timesheet_ids = project_id.timesheet_ids.filtered(lambda timesheet: timesheet.task_id.role_id.id in role_ids.ids)
+            #Calculate consumed quantity on the project for tasks with role conf, dev only
+            consumed_qty = int(sum(timesheet_ids.mapped('unit_amount')))
+
+            # Required number of Feedbacks = 1 Feedback per 100 consumed hours
+            if consumed_qty >= 100:
+                #count number of feedbacks on the project
+                feedback_ids = env['project.feedback'].search([('project_id', '=', project_id.id)])
+                if not feedback_ids or int(consumed_qty / 100) > len(feedback_ids):
+                    # Create a warning log for each role concerned by this quality issue
+                    for role_id in quality_category.role_ids:
+                        issue_type.check_planning_role(project_id, role_id, domain, msg, type)
+
+    #For Penalty Type of Quality issue logs
+    #Get the last warning log before create penalty log
+    last_warning_log = env['quality.issue.log'].search([('project_id', '=', project_id.id), ('employee_id', '=', employee_id.id), ('log_type', '=', 'warning'), ('quality_issue_type', '=', issue_type.id)], order='id desc', limit=1)
+
+    # Create a penalty log if:
+    # - Warnings are not required before penalties, or
+    # - A warning exists and it is older than 3 days
+    if not quality_category.warning_before_penalty or (last_warning_log and last_warning_log.logged_date + dateutil.relativedelta.relativedelta(days=3) &lt;= today):
+        domain = [('project_id', '=', project_id.id), ('logged_date', '>=', seven_days_before)]
+        msg = 'Not Enough Feedback Created for Project : {}'.format(project_id.name)
+        type = 'penalty'
+
+        #Timesheets to consider: timesheets logged for Developer and Configurator only
+        timesheet_ids = project_id.timesheet_ids.filtered(lambda timesheet: timesheet.task_id.role_id.id in role_ids.ids)
+        #Calculate consumed quantity on the project for tasks with role conf, dev only
+        consumed_qty = int(sum(timesheet_ids.mapped('unit_amount')))
+
+        # Required number of tests = 10 Feedbacks per 100 consumed hours
+        if consumed_qty >= 100:
+            #count number of feedbacks on the project
+            feedback_ids = env['project.feedback'].search([('project_id', '=', project_id.id)])
+            if not feedback_ids or int(consumed_qty / 100) > len(feedback_ids):
+                # Create a penalty log for each role concerned by this quality issue
+                for role_id in quality_category.role_ids:
+                    issue_type.check_planning_role(project_id, role_id, domain, msg, type)
+            </field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+        </record>
+
+        <!--   Issue Type Task Test   -->
+        <record id="quality_issue_type_not_enough_feedback" model="quality.issue.type">
+            <field name="name">Not Enough Feedback</field>
+            <field name="action_performer">create_schedule_action</field>
+            <field name="quality_category" ref="cap_project_test.quality_category_feedback"/>
+            <field name="ir_model_id" ref="cap_project_test.model_project_feedback"/>
+            <field name="score_impact">10</field>
+            <field name="state">in_progress</field>
+            <field name="ir_cron_id" ref="cap_project_test.ir_cron_not_enough_feedback"/>
+        </record>
+
+    </data>
+</odoo>

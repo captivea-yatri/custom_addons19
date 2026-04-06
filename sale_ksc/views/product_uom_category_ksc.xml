@@ -1,0 +1,39 @@
+<odoo>
+    <record id="view_uom_category_list_ksc" model="ir.ui.view">
+        <field name="name">product.uom.category.ksc.list</field>
+        <field name="model">product.uom.category.ksc</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_uom_category_form_ksc" model="ir.ui.view">
+        <field name="name">product.uom.category.ksc.form</field>
+        <field name="model">product.uom.category.ksc</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="name"/>
+                    <field name="uom_ids">
+                        <list editable="bottom">
+                            <field name="name"/>
+                        </list>
+                    </field>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_product_uom_category_ksc" model="ir.actions.act_window">
+        <field name="name">UOM Category</field>
+        <field name="res_model">product.uom.category.ksc</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_product_uom_category_ksc"
+              parent="menu_my_sales_category"
+              name="UOM Categories"
+              action="action_product_uom_category_ksc"/>
+</odoo>

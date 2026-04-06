@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="0">
+
+
+        <record model="ir.rule" id="action_rule_user">
+            <field name="name">Action Rule : Own actions</field>
+            <field name="model_id" ref="model_action_action"/>
+            <field name="groups"
+               eval="[(4, ref('cap_actions.group_action_user'))]"/>
+			<field name="domain_force">['|',('user_id', '=', user.id), ('template_id.validation_ids.user_id', 'in', [user.id])]
+            </field>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="False"/>
+			<field name="perm_unlink" eval="False"/>
+        </record>
+		
+		 <record model="ir.rule" id="action_rule_viewer">
+            <field name="name">Action Rule : actions viewer</field>
+            <field name="model_id" ref="model_action_action"/>
+            <field name="groups"
+               eval="[(4, ref('cap_actions.group_action_viewer'))]"/>
+			<field name="domain_force">[(1, '=', 1)]
+            </field>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="False"/>
+			<field name="perm_create" eval="False"/>
+			<field name="perm_unlink" eval="False"/>
+        </record>
+		
+		<record model="ir.rule" id="action_rule">
+            <field name="name">Action Rule : all actions</field>
+            <field name="model_id" ref="model_action_action"/>
+            <field name="groups"
+               eval="[(4, ref('cap_actions.group_action_admin'))]"/>
+			<field name="domain_force">[(1, '=', 1)]
+            </field>
+			<field name="perm_read" eval="True"/>
+			<field name="perm_write" eval="True"/>
+			<field name="perm_create" eval="True"/>
+			<field name="perm_unlink" eval="True"/>
+        </record>
+    </data>
+</odoo>

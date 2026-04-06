@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="project_inherit_view" model="ir.ui.view">
+            <field name="name">project.inherit.view</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.edit_project"/>
+            <field name="priority">22</field>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_project_workshop']" position="before">
+                    <button name="action_session_test_object"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-regular fa-check">
+                        <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_text">Session</span>
+                            <span class="o_stat_text">Test</span>
+                        </div>
+                    </button>
+                </xpath>
+                <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+                    <button name="action_test_object"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-flask icon">
+                        <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_text">Task</span>
+                            <span class="o_stat_text">Test</span>
+                        </div>
+                    </button>
+                    <button name="action_execution_test_object"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-check-square-o icon">
+                        <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_text">Execution</span>
+                            <span class="o_stat_text">Test</span>
+                        </div>
+                    </button>
+
+                    <button class="oe_stat_button" name="action_view_meta_project_req" type="object"
+                            icon="fa-list">
+                        <div class="o_stat_info o_field_widget">
+                            <span class="o_stat_text">
+                                Meta Project
+                            </span>
+                            <span class="o_stat_text">
+                                Requirement
+                            </span>
+                        </div>
+                    </button>
+
+                    <button class="oe_stat_button ps-2" name="project_update_all_action" type="object"
+                            groups="project.group_project_user">
+                        <div class="w-100">
+                            <field name="last_update_color" invisible="1"/>
+                            <field name="last_update_status" readonly="1" widget="status_with_color"
+                                   options="{'color_field': 'last_update_color'}"/>
+                        </div>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

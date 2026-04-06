@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="meta_template_requirement_tree_view" model="ir.ui.view">
+        <field name="name">meta.template.requirement.tree</field>
+        <field name="model">meta.template.requirement</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="calculation_formula"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="meta_template_requirement_form_view" model="ir.ui.view">
+        <field name="name">meta.template.requirement.form</field>
+        <field name="model">meta.template.requirement</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name" required="True"/>
+                        <field name="calculation_formula" required="True"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="meta_template_requirement_action" model="ir.actions.act_window">
+        <field name="name">Meta Template Requirement</field>
+        <field name="res_model">meta.template.requirement</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem name="Meta Template Requirement"
+              parent="template_requirement_main_menu"
+              id="meta_template_requirement_menu"
+              action="meta_template_requirement_action"/>
+</odoo>

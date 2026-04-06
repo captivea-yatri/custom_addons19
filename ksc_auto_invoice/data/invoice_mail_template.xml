@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value eval="[('name', '=', 'email_template_edi_invoice'), ('module', '=', 'account')]" />
+            </function>
+            <value eval="{'noupdate': False}" />
+        </function>
+
+        <record id="account.email_template_edi_invoice" model="mail.template">
+            <field name="email_from">{{ (object.company_id.email or object.invoice_user_id.email) }}</field>
+        </record>
+
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value eval="[('name', '=', 'email_template_edi_invoice'), ('module', '=', 'account')]" />
+            </function>
+            <value eval="{'noupdate': True}" />
+        </function>
+    </data>
+</odoo>

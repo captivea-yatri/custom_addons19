@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!--        this template print the Product_name, Barcode and Image of the products.-->
+
+        <template id="product_label_report.report_simple_label_image_and_barcode">
+            <div style="width: 50%; display: inline-table; height:9rem;">
+                <table class="table table-bordered mb-0" style="border: 2px solid black;">
+                    <tr>
+                        <td class="table-active text-left" style="height: 2rem;">
+                            <h6>
+                                <t t-esc="product.display_name"/>
+                            </h6>
+                        </td>
+                        <td t-if="product.image_128" rowspan="2">
+                            <img t-attf-src="data:image/*;base64,{{product.image_128}}"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-center align-middle" style="height: 2rem">
+                            <t t-if="product.barcode">
+                                <img alt="Barcode" t-if="len(product.barcode) == 13"
+                                     t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('EAN13', product.barcode, 600, 50)"
+                                     style="width:100%;height::4rem;"/>
+                                <img alt="Barcode" t-elif="len(product.barcode) == 8"
+                                     t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('EAN8', product.barcode, 600, 50)"
+                                     style="width:100%;height::4rem;"/>
+                                <img alt="Barcode" t-else=""
+                                     t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', product.barcode, 600, 50)"
+                                     style="width:100%;height::2rem;"/>
+                                <span t-field="product.barcode"/>
+                            </t>
+                            <t t-else="">
+                                <span class="text-muted">No barcode available</span>
+                            </t>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </template>
+
+        <!--        It defines the model, report type, name, file, and print report name.-->
+        <record id="report_product_template_label" model="ir.actions.report">
+            <field name="name">Product Label With Barcode</field>
+            <field name="model">product.template</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">product_label_report.report_producttemplatelabel_image_and_barcode</field>
+            <field name="report_file">product_label_report.report_producttemplatelabel_image_and_barcode</field>
+            <field name="print_report_name">'Products Labels - %s' % (object.name)</field>
+            <field name="binding_model_id" ref="sale.model_product_template"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <!--        This template call the product_label_report.report_simple_label_image_and_barcode-->
+        <!--        and print all the variants of the products.-->
+        <template id="product_label_report.report_producttemplatelabel_image_and_barcode">
+            <t t-call="web.basic_layout">
+                <div class="page">
+                    <t t-foreach="docs" t-as="template">
+                        <t t-foreach="template.product_variant_ids" t-as="product">
+                            <t t-call="product_label_report.report_simple_label_image_and_barcode">
+                                <t t-set="product" t-value="product"/>
+                            </t>
+                        </t>
+                    </t>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>

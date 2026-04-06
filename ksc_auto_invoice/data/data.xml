@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+       <!--========================================Schedular for generate invoice timesheet=================================-->
+        <record id="automatically_invoice_crone_job" model="ir.cron">
+            <field name="name">Automatically Invoice[12]</field>
+            <field name="model_id" ref="model_sale_order"/>
+            <field name="state">code</field>
+            <field name="code">model.timesheet_invoice_auto_create()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+<!--            <field name="nextcall" eval="(DateTime.now()  + timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S')"/>-->
+        </record>
+
+        <record id="generate_invoice_group_riss" model="ir.cron">
+            <field name="name">INVOICE RISS GROUP [12]</field>
+            <field name="model_id" ref="model_project_project"/>
+            <field name="state">code</field>
+            <field name="code">model.generate_invoice_rss_group()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">months</field>
+<!--            <field name="nextcall" eval="(DateTime.now()  + timedelta(days=1)).strftime('%Y-%m-%d %H:%M:%S')"/>-->
+        </record>
+    </data>
+</odoo>

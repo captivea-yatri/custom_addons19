@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_res_company_time_credit_form_inherit" model="ir.ui.view">
+        <field name="name">res.company.time.credit.form.inherit</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form[1]/sheet[1]/notebook[1]" position="inside">
+				<page name="res_company_time_credit_config" string="Time Credit Config" >
+                    <group>
+                        <field name="revenue_enquiry_user_id" options="{'no_create': True}"/>
+                        <field name="closing_so_user_id" options="{'no_create': True}"/>
+                        <label for="number_of_months_after_credit_time_expires"
+                               string="Months after credit time expires"/>
+                        <div style="align-items: center;">
+                            <field name="number_of_months_after_credit_time_expires"/>
+                            <span>Months</span>
+                        </div>
+                    </group>
+                    <br/>
+                    <br/>
+                    <group>
+                        <field name="res_company_time_credit_config_ids" string="Time Credit Config">
+                            <list string="Time Credit Config" editable="bottom">
+                                <field name="company_id" column_invisible="True"/>
+                                <field name="revenue_income_account" options="{'no_create': True}"/>
+                                <field name="revenue_account" options="{'no_create': True}"/>
+                                <field name="journal_id" options="{'no_create': True}"/>
+                            </list>
+                        </field>
+                    </group>
+				</page>
+			</xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+hr.access_hr_employee_user,hr.employee user,hr.model_hr_employee,hr.group_hr_user,1,0,0,0
+hr.access_hr_departure_wizard,access.hr.departure.wizard,hr.model_hr_departure_wizard,hr.group_hr_user,0,0,0,0
+
+access_hr_employee_access_employee,hr.employee access employee,hr.model_hr_employee,cap_hr_employee_extended.access_employee_group,1,1,1,1
+access_hr_departure_wizard_access_employee,hr.departure.wizard access employee,hr.model_hr_departure_wizard,cap_hr_employee_extended.access_employee_group,1,1,1,0

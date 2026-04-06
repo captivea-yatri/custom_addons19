@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="sale_order_inherit_view_id_001_id" model="ir.ui.view">
+        <field name="name">sale.order.inherit.view</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='display_maintenance_support_terms']" position="after">
+                <field name="use_offer" invisible="1"/>
+                <field name="business_unit_id" invisible="not use_offer" required="use_offer and (not create_date or create_date > '2025-12-03')" readonly="state in ['sale','cancel']" options="{'no_create': True}"/>
+                <field name="business_localisation_id" invisible="not use_offer" required="use_offer and (not create_date or create_date > '2025-12-03')" readonly="state in ['sale','cancel']" options="{'no_create': True}"/>
+                <field name="filtered_offer_ids" invisible="1"/>
+                <field name="filtered_pricelist_ids" invisible="1"/>
+                <field name="offer_id" domain="[('id', 'in', filtered_offer_ids)]" invisible="not use_offer" required="use_offer and (not create_date or create_date > '2025-12-03')" readonly="state in ['sale','cancel']" options="{'no_create': True}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="sale_order_inherit_view_quotation_temp" model="ir.ui.view">
+        <field name="name">sale.order.inherit.view</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale_management.sale_order_form_quote"/>
+        <field name="arch" type="xml">
+<!--            <xpath expr="//field[@name='sale_order_template_id']" position="attributes">-->
+<!--                <attribute name="domain">[('offer_ids', 'in', offer_id),'|', ('company_id', '=', False), ('company_id', '=', company_id)]</attribute>-->
+<!--            </xpath>-->
+        </field>
+    </record>
+</odoo>

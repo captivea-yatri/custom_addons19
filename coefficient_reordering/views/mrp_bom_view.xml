@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="mrp_bom_form_view_line_reordering_rule">
+            <field name="name">mrp.bom.line.reordering_rule</field>
+            <field name="model">mrp.bom</field>
+            <field name="inherit_id" ref="mrp.mrp_bom_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/notebook/page[@name='components']/field[@name='bom_line_ids']/list/field[@name='operation_id']"
+                       position="after">
+                    <field name="reordering_rules"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

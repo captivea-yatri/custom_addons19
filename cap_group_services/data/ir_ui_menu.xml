@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+  
+  <record id="group_service_menu" model="ir.ui.menu" >
+    <field name="action" ref="group_service"/>
+    <field name="active" eval="True"/>
+    <field name="group_ids" eval="[(6, 0, [])]"/>
+    <field name="name">Group Services</field>
+    <field name="parent_id" ref="base.menu_users"/>
+    <field name="sequence">9</field>
+    <field name="web_icon" eval="False"/>
+  </record>
+  
+</odoo>

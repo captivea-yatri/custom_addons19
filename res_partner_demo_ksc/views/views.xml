@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- LIST (TREE) VIEW -->
+    <record id="demo_list_view" model="ir.ui.view">
+        <field name="name">demo.list.view</field>
+        <field name="model">demo</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="email"/>
+                <field name="street1"/>
+                <field name="street2"/>
+                <field name="city"/>
+                <field name="state"/>
+                <field name="zip_code"/>
+                <field name="country"/>
+                <field name="dob"/>
+                <field name="age"/>
+                <field name="weight"/>
+                <field name="description"/>
+                <field name="gender"/>
+                <field name="details"/>
+                <field name="js_spectacles"/>
+                <field name="photo"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- SEARCH VIEW -->
+    <record id="demo_search_view" model="ir.ui.view">
+        <field name="name">demo.search.view</field>
+        <field name="model">demo</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="city"/>
+                <field name="state"/>
+                <field name="country"/>
+                <field name="zip_code"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- FORM VIEW -->
+    <record id="demo_form_view" model="ir.ui.view">
+        <field name="name">demo.form.view</field>
+        <field name="model">demo</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                <field name="name"/>
+                <field name="email"/>
+                <field name="street1"/>
+                <field name="street2"/>
+                <field name="city"/>
+                <field name="state"/>
+                <field name="zip_code"/>
+                <field name="country"/>
+                <field name="dob"/>
+                <field name="age"/>
+                <field name="weight"/>
+                <field name="description"/>
+                <field name="gender"/>
+                <field name="details"/>
+                <field name="js_spectacles"/>
+                <field name="photo"/>
+                </group>
+            </form>
+        </field>
+    </record>
+    <!-- ACTION -->
+    <record id="demo_action" model="ir.actions.act_window">
+        <field name="name">Demo</field>
+        <field name="res_model">demo</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- MENUS -->
+    <menuitem id="menu_demo_root" name="Contacts"/>
+    <menuitem id="menu_demo_child" name="Customers" parent="menu_demo_root" action="demo_action"/>
+
+</odoo>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="render_alt_lang_view_form_inherit" model="ir.ui.view">
+        <field name="name">render.atl.lang.view.form.inherit</field>
+        <field name="model">res.lang</field>
+        <field name="inherit_id" ref="base.res_lang_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='active']" position="after">
+                <field name="alt_language"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

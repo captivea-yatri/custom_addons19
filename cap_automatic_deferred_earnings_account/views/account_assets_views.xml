@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="view_account_asset_deferred_earning_form">
+        <field name="name">view.account.asset.deferred.earning.form</field>
+        <field name="model">account.asset</field>
+<!--        <field name="priority">99</field>-->
+        <field name="inherit_id" ref="account_asset.view_account_asset_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <field name="is_reconciled" invisible="1"/>
+                <field name="asset_type" invisible="1"/>
+                <button type="object" name="auto_reconcile_deferred_revenue_expense" string="Reconcile"
+                        groups="account.group_account_invoice"
+                        invisible="state != 'close' or is_reconciled == True or asset_type == 'purchase'"/>
+            </xpath>
+            <xpath expr="//notebook/page/group/group//field[@name='account_depreciation_expense_id']"
+                   position="attributes">
+                <attribute name="help">Account used to recognize the revenue</attribute>
+                <attribute name="domain">[]</attribute>
+                <attribute name="context">{}</attribute>
+            </xpath>
+            <xpath expr="//notebook/page/group/group//field[@name='account_depreciation_id']" position="attributes">
+                <attribute name="help">Account used to record the deferred income</attribute>
+                <attribute name="domain">[]</attribute>
+                <attribute name="context">{}</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

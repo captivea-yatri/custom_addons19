@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+<!--        TODO: check in database (company related)-->
+        <template id="report_invoice_document" inherit_id="account.report_invoice_document">
+            <xpath expr="//div[@id='qrcode']" position="after">
+                <p t-if="o.partner_bank_id and o.move_type in ('out_invoice') and o.company_id.id in [3, 15, 16]"
+                   id="company_bank_detail">
+                    <b>Banque &amp;nbsp;:</b>
+                    <span t-field="o.partner_bank_id.bank_id.name"/>
+                    <br/>
+                    <b>BIC &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;:
+                    </b>
+                    <span t-field="o.partner_bank_id.bank_bic"/>
+                    <br/>
+                    <b>IBAN &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;:</b>
+                    <span t-field="o.partner_bank_id.acc_number"/>
+                    <br/>
+                    <b>Devise &amp;nbsp;&amp;nbsp;:</b>
+                    <span t-field="o.partner_bank_id.currency_id.name"/>
+                </p>
+            </xpath>
+            <xpath expr="//div[@name='comment']" position="replace">
+                <p t-if="o.narration and o.company_id.id not in [9, 12]" name="comment">
+                    <span t-field="o.narration"/>
+                </p>
+                <p t-elif="o.company_id.id == 9">
+                    <div t-if="not is_html_empty(o.narration)" name="comment">
+                        <span t-field="o.narration"/>
+                    </div>
+                </p>
+            </xpath>
+            <xpath expr="//p[@name='payment_communication']" position="before">
+                <p t-if="o.narration and o.company_id.id == 12" name="comment">
+                    <span t-field="o.narration"/>
+                </p>
+            </xpath>
+        </template>
+    </data>
+</odoo>
+<!-- and o.company_id.id in (3)-->

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="hr_payslip_view_form_inherit">
+        <field name="name">hr.payslip.inherit.form.inherit</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_payslip_done']" position="after">
+                <field name="has_reconciled_entries" invisible="1"/>
+                <button string="Pay" name="action_payslip_paid" type="object"
+                        invisible="state not in ['done','paid'] or has_reconciled_entries == True"/>
+            </xpath>
+            <xpath expr="//form" position="attributes">
+                <attribute name="duplicate">1</attribute>
+            </xpath>
+            <xpath expr="//form/sheet/div[@name='button_box']/button[1]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//form/sheet/div[@name='button_box']/button[2]" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//form/sheet/div[@name='button_box']/button[2]" position="after">
+                <div name="button_box" class="oe_button_box">
+                    <button name="open_journal_entries" class="oe_stat_button" icon="fa-bars" type="object"
+                            string="Journal Entries"
+                            invisible="is_set_account != True or state not in ['done', 'paid']">
+                    </button>
+
+                    <button name="open_journal_items" class="oe_stat_button" icon="fa-pencil-square-o" type="object"
+                            string="Journal Items"
+                            invisible="is_set_account != True or state not in ['done', 'paid']">
+                    </button>
+                    <field name="is_set_account" invisible="1"/>
+                </div>
+            </xpath>
+            <xpath expr="//field[@name='employee_id']" position="attributes">
+                <attribute name="domain">[("active", "=", True)]</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

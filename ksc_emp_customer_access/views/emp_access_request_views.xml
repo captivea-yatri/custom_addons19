@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="emp_access_view_tree" model="ir.ui.view">
+        <field name="name">emp.access.request.view.tree</field>
+        <field name="model">emp.access.request</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="partner_id"/>
+                <field name="employee_id"/>
+                <field name="access_request_date" string="Date"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="emp_access_search_view" model="ir.ui.view">
+        <field name="name">emp.access.request.view.search</field>
+        <field name="model">emp.access.request</field>
+        <field name="arch" type="xml">
+            <search string="Emp Access Request">
+                <field name="partner_id" />
+                <field name="employee_id" />
+                <filter string="To Approve" name="state" domain="[('state', '=', 'Requested'), ('manager_user_id', '=', uid)]"/>
+
+                    <filter string="Customer" name="partner_id" context="{'group_by': 'partner_id'}"/>
+                    <filter string="Employee" name="employee_id" context="{'group_by': 'employee_id'}"/>
+                    <filter string="Manager" name="manager_user_id" context="{'group_by': 'manager_user_id'}"/>
+                    <filter string="State" name="state" context="{'group_by': 'state'}"/>
+
+            </search>
+        </field>
+    </record>
+
+    <record id="emp_access_view_form" model="ir.ui.view">
+        <field name="name">emp.access.request.view.form</field>
+        <field name="model">emp.access.request</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget='statusbar' readonly="1"/>
+                    <field name="is_access" invisible="1"/>
+                    <button string="Approve" class="oe_highlight" type="object" name="button_approved"
+                            invisible="state not in ('Requested', 'Renewal') or not is_access"/>
+                    <button string="Reject" class="oe_highlight" type="object" name="button_rejected"
+                            invisible="state not in ('Requested', 'Renewal') or not is_access"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+<!--                                   domain="[('status', 'in', ['customer', 'old_customer']), ('is_company', '=', True)]"-->
+
+                            <field name="partner_id" required="1" options="{'no_create': True}"
+                                   domain="[('customer_rank', '>', 0), ('is_company', '=', True)]"
+                                   readonly="state == 'Approved'"/>
+                            <field name="employee_id" required="1" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="manager_user_id" readonly="1"/>
+                            <field name="access_request_date" string="Date Approved"
+                                   invisible="state not in 'Approved'" readonly="1"/>
+                            <field name="access_request_date" string="Date Rejected"
+                                   invisible="state not in 'Rejected'" readonly="1"/>
+                            <field name="access_request_date" string="Date Renewal"
+                                   invisible="state not in 'Renewal'" readonly="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Integrated Access Request" name="integrated_access_request_ids">
+                            <field name="integrated_access_request_ids">
+                                <list create="0" delete="0" editable="bottom">
+                                    <field name="integrated_option" string="Option" readonly="1"/>
+                                    <field name="name" readonly="1"/>
+                                    <field name="state" string="State" readonly="1"/>
+                                    <field name="description" string="Description" readonly="1"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="my_rec_access_action" model="ir.actions.act_window">
+        <field name="name">Access Request</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">emp.access.request</field>
+        <field name="domain">['|', ('employee_id.user_id', '=', uid), ('employee_id.parent_id.user_id', '=', uid)]
+        </field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="all_rec_access_action" model="ir.actions.act_window">
+        <field name="name">All Access Request</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">emp.access.request</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+<!--              groups="base.group_system,access_rights_management.group_access_request"-->
+    <menuitem id="emp_access_main_menu" name="Access Request" sequence="30"
+    groups="base.group_user"
+              web_icon="ksc_emp_customer_access,static/description/icon.png"/>
+    <menuitem id="access_req_menu" name="Access Request" parent="emp_access_main_menu"/>
+    <menuitem id="my_req_menu" name="My Access Request" parent="access_req_menu" action="my_rec_access_action"/>
+     groups="base.group_system,access_rights_management.role_vp_of_quality_and_knowledge,access_rights_management.role_ceo"
+    <menuitem id="all_req_menu" name="All Access Request" parent="access_req_menu"
+              groups="base.group_user"
+              action="all_rec_access_action"/>
+</odoo>

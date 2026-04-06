@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="cap_project_test_inherited_cap_quality_issue_log_tree_view_quality_issue_log" model="ir.ui.view">
+        <field name="name">quality.issue.log.tree.view</field>
+        <field name="model">quality.issue.log</field>
+        <field name="inherit_id" ref="cap_quality_issue_log.tree_view_quality_issue_log"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='role_id']" position="after">
+                <field name="feedback_id" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="cap_project_test_inherited_cap_quality_issue_log_form_view_quality_issue_log" model="ir.ui.view">
+        <field name="name">quality.issue.log.form.view</field>
+        <field name="model">quality.issue.log</field>
+        <field name="inherit_id" ref="cap_quality_issue_log.form_view_quality_issue_log"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='project_id']" position="after">
+                <field name="feedback_id" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,117 @@
+<odoo>
+    <!-- Pivot View Inherit -->
+    <record id="hr_employee_extended_view_pivot_inherit" model="ir.ui.view">
+        <field name="name">hr.employee.view.pivot.inherit</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.hr_employee_view_pivot"/>
+        <field name="arch" type="xml">
+            <xpath expr="//pivot/field[@name='id']" position="after">
+                <field name="odoo_experience" type="measure"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Employee Form View -->
+    <record id="hr_employee_extended_view" model="ir.ui.view">
+        <field name="name">hr.employee.extended.form</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+
+            <!-- Add real_employee field before employee_type (Payroll page) -->
+            <xpath expr="//page[@name='payroll_information']//group[@name='contract']/field[@name='employee_type']" position="before">
+                <field name="real_employee"/>
+            </xpath>
+
+            <!-- Add Experience group after Application Settings -->
+            <xpath expr="//page[@name='hr_settings']//group[@name='application_group']" position="after">
+                <group name="experience_for_cap" string="Experience">
+                    <label for="odoo_experience_before_captivea"/>
+                    <div>
+                        <field name="odoo_experience_before_captivea" class="oe_inline"/>
+                        <span> Months</span>
+                    </div>
+                    <label for="experience_at_captivea"/>
+                    <div>
+                        <field name="experience_at_captivea" readonly="1" class="oe_inline"/>
+                        <span> Months</span>
+                    </div>
+                    <label for="odoo_experience"/>
+                    <div>
+                        <field name="odoo_experience" string="Total Odoo Experience" readonly="1" class="oe_inline"/>
+                        <span> Months</span>
+                    </div>
+                </group>
+            </xpath>
+
+            <!-- Change button and page groups to custom access group -->
+            <xpath expr="//button[@name='%(hr.plan_wizard_action)d']" position="attributes">
+                <attribute name="groups">cap_hr_employee_extended.access_employee_group</attribute>
+            </xpath>
+            <xpath expr="//page[@name='personal_information']" position="attributes">
+                <attribute name="groups">cap_hr_employee_extended.access_employee_group</attribute>
+            </xpath>
+            <xpath expr="//page[@name='hr_settings']" position="attributes">
+                <attribute name="groups">cap_hr_employee_extended.access_employee_group</attribute>
+            </xpath>
+            <xpath expr="//form/chatter" position="attributes">
+                <attribute name="groups">cap_hr_employee_extended.access_employee_group</attribute>
+            </xpath>
+            <xpath expr="//field[@name='category_ids']" position="attributes">
+                <attribute name="groups">cap_hr_employee_extended.access_employee_group</attribute>
+            </xpath>
+            <xpath expr="//group[@name='managers']" position="attributes">
+                <attribute name="groups">cap_hr_employee_extended.access_employee_group</attribute>
+            </xpath>
+
+            <!-- Restrict fields by custom access group -->
+            <xpath expr="//field[@name='name']" position="replace">
+                <field name="name" groups="!cap_hr_employee_extended.access_employee_group" readonly="1"/>
+                <field name="name" groups="cap_hr_employee_extended.access_employee_group" readonly="0"/>
+            </xpath>
+            <xpath expr="//field[@name='job_title']" position="replace">
+                <field name="job_title" groups="!cap_hr_employee_extended.access_employee_group" readonly="1"/>
+                <field name="job_title" groups="cap_hr_employee_extended.access_employee_group" readonly="0"/>
+            </xpath>
+            <xpath expr="//field[@name='mobile_phone']" position="replace">
+                <field name="mobile_phone" widget="phone" groups="!cap_hr_employee_extended.access_employee_group" readonly="1"/>
+                <field name="mobile_phone" widget="phone" groups="cap_hr_employee_extended.access_employee_group" readonly="0"/>
+            </xpath>
+            <xpath expr="//field[@name='work_phone']" position="replace">
+                <field name="work_phone" widget="phone" groups="!cap_hr_employee_extended.access_employee_group" readonly="1"/>
+                <field name="work_phone" widget="phone" groups="cap_hr_employee_extended.access_employee_group" readonly="0"/>
+            </xpath>
+            <xpath expr="//field[@name='work_email']" position="replace">
+                <field name="work_email" widget="email" groups="!cap_hr_employee_extended.access_employee_group" readonly="1"/>
+                <field name="work_email" widget="email" groups="cap_hr_employee_extended.access_employee_group" readonly="0"/>
+            </xpath>
+
+            <!-- Restrict more fields by custom access group -->
+            <xpath expr="//group/field[@name='company_id']" position="replace">
+                <field name="company_id" groups="!cap_hr_employee_extended.access_employee_group" readonly="1"/>
+                <field name="company_id" groups="cap_hr_employee_extended.access_employee_group" readonly="0"/>
+            </xpath>
+            <xpath expr="//field[@name='department_id']" position="replace">
+                <field name="department_id" groups="!cap_hr_employee_extended.access_employee_group" readonly="1"/>
+                <field name="department_id" groups="cap_hr_employee_extended.access_employee_group" readonly="0"/>
+            </xpath>
+            <xpath expr="//field[@name='parent_id']" position="replace">
+                <field name="parent_id" groups="!cap_hr_employee_extended.access_employee_group" readonly="1"/>
+                <field name="parent_id" groups="cap_hr_employee_extended.access_employee_group" readonly="0"/>
+            </xpath>
+            <xpath expr="//field[@name='job_id']" position="replace">
+                <field name="job_id" groups="!cap_hr_employee_extended.access_employee_group" readonly="1"/>
+                <field name="job_id" groups="cap_hr_employee_extended.access_employee_group" readonly="0"/>
+            </xpath>
+            <xpath expr="//field[@name='address_id']" position="replace">
+                <field name="address_id" groups="!cap_hr_employee_extended.access_employee_group" readonly="1"/>
+                <field name="address_id" groups="cap_hr_employee_extended.access_employee_group" readonly="0"/>
+            </xpath>
+            <xpath expr="//field[@name='work_location_id']" position="replace">
+                <field name="work_location_id" groups="!cap_hr_employee_extended.access_employee_group" readonly="1"/>
+                <field name="work_location_id" groups="cap_hr_employee_extended.access_employee_group" readonly="0"/>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

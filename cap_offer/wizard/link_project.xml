@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="link_po_so_inherit_offer_view_form" model="ir.ui.view">
+        <field name="name">link.so.project.wizard.sale.view</field>
+        <field name="model">link.so.project.wizard</field>
+        <field name="inherit_id" ref="ksc_sale_project_extended.link_po_so_view_form"/>
+        <field name="arch" type="xml">
+            <field name="project_id" position="after">
+                <field name="project_ids" invisible="1"/>
+            </field>
+            <xpath expr="//form/group/field[@name='project_id']" position="attributes">
+                <attribute name="domain">[('id', 'in', project_ids)]</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

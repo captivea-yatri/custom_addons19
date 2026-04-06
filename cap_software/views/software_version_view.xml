@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="software_version_tree_view" model="ir.ui.view">
+            <field name="name">software.version.tree.view</field>
+            <field name="model">software.version</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                    <field name="software_id"/>
+                    <field name="version"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="software_version_form_view" model="ir.ui.view">
+            <field name="name">software.version.form.view</field>
+            <field name="model">software.version</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet style="align:center;">
+                        <div class="oe_title">
+                            <h1 class="d-flex flex-row">
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
+                        <br/>
+                        <group>
+                            <group>
+                                <field name="software_id"/>
+                            </group>
+                            <group>
+                                <field name="version"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="software_version_search_view" model="ir.ui.view">
+            <field name="name">software.version.search.view</field>
+            <field name="model">software.version</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="software_id"/>
+                    <field name="version"/>
+                    <filter string="Name" name="name" domain="[('name', '!=', False)]"/>
+                    <filter string="Software" name="software_id" domain="[('software_id.name', '!=', False)]"/>
+                    <filter string="Version" name="version" domain="[('version', '!=', False)]"/>
+
+                        <filter string="Name" name="name" context="{'group_by':'name'}"/>
+                        <filter string="Software" name="software_id" context="{'group_by':'software_id'}"/>
+                        <filter string="Version" name="version" context="{'group_by':'version'}"/>
+
+                </search>
+            </field>
+        </record>
+
+        <record id="action_software_version" model="ir.actions.act_window">
+            <field name="name">Software Version</field>
+            <field name="res_model">software.version</field>
+            <field name="view_mode">list,form,search</field>
+        </record>
+
+        <menuitem id="software_version_sub_menu" action="action_software_version" name="Software Version"
+                  parent="project.menu_project_config"/>
+    </data>
+</odoo>

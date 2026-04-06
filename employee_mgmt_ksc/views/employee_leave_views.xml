@@ -1,0 +1,59 @@
+<odoo>
+    <!-- Tree View -->
+    <record id="view_employee_leave_list" model="ir.ui.view">
+        <field name="name">employee.leave.ksc.list</field>
+        <field name="model">employee.leave.ksc</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="employee_id"/>
+                <field name="department_id"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="status"/>
+                <field name="leave_description"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_employee_leave_form" model="ir.ui.view">
+        <field name="name">employee.leave.ksc.form</field>
+        <field name="model">employee.leave.ksc</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="employee_id"/>
+                        <field name="department_id"/>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                        <field name="status"/>
+                        <field name="leave_description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_employee_leave_search" model="ir.ui.view">
+        <field name="name">employee.leave.ksc.search</field>
+        <field name="model">employee.leave.ksc</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="employee_id"/>
+                <field name="department_id"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_employee_leave" model="ir.actions.act_window">
+        <field name="name">Leaves</field>
+        <field name="res_model">employee.leave.ksc</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_employee_leave" name="Leaves" parent="menu_hr_root_custom" action="action_employee_leave"/>
+</odoo>

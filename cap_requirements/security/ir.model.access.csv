@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_template_requirement,access_template_requirement,model_template_requirement,,1,1,1,1
+access_project_requirement,access_project_requirement,model_project_requirement,,1,1,1,1
+access_project_requirement_wizard,access_project_requirement_wizard,model_project_requirement_wizard,,1,1,1,1
+access_meta_template_requirement,access_meta_template_requirement,model_meta_template_requirement,,1,1,1,1
+access_project_domain_history,access_project_domain_history,model_project_domain_history,,1,1,1,1
+access_project_planning,project.planning.all,model_project_planning_wizard,base.group_user,1,1,1,1
+access_meta_project_requirement,access_meta_project_requirement,model_meta_project_requirement,base.group_user,1,1,1,1

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.actions.server" id="action_create_dr_from_sale_order_time_credit">
+            <field name="name">Create Time Credit</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="binding_model_id" ref="sale.model_sale_order"/>
+            <field name="binding_view_types">form</field>
+            <field name="state">code</field>
+            <field name="group_ids" eval="[(4, ref('cap_automatic_deferred_earnings_account.group_create_deferred_revenue_time_credit'))]"/>
+            <field name="code">
+for rec in records:
+    rec.create_time_credit()
+            </field>
+        </record>
+
+        <record id="ir_cron_data_create_dr_custom_time_credit" model="ir.cron">
+            <field name="name">Create Time Credit for sale order with state is need to be created</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="state">code</field>
+            <field name="code">model.create_need_to_be_created_time_credit()</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name='interval_number'>1</field>
+            <field name='interval_type'>days</field>
+        </record>
+
+        <record id="ir_cron_data_auto_close_dr_time_credit" model="ir.cron">
+            <field name="name">Automatic Close Time Credit</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="state">code</field>
+            <field name="code">model.automatically_close_time_credit()</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name='interval_number'>4</field>
+            <field name='interval_type'>hours</field>
+        </record>
+
+        <record id="ir_cron_data_sale_order_close_after_manual_reconcile" model="ir.cron">
+            <field name="name">sale order time credit reconciled and close</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="state">code</field>
+            <field name="code">model.sale_order_close_after_manual_reconcile()</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name='interval_number'>3</field>
+            <field name='interval_type'>days</field>
+        </record>
+    </data>
+</odoo>

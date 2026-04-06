@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_template_test,template_test_menu,model_template_test,,1,1,1,1
+access_test,test_menu,model_test_test,,1,1,1,1
+access_session_test,session_test_menu,model_session_test,,1,1,1,1
+access_execution_test,execution_test_menu,model_execution_test,,1,1,1,1
+access_task_validation_status,task_validation_status,model_task_validation_status,,1,1,1,1

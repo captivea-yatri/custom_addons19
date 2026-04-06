@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.module.category" id="can_access_employee">
+        <field name="name">can access employee detail</field>
+        <field name="description">Employee Can Access The Details</field>
+        <field name="parent_id" eval="False"/>
+        <field name="sequence">10</field>
+    </record>
+
+    <record model="ir.module.category" id="access_employee_detail">
+        <field name="name">Access Employee Detail</field>
+        <field name="parent_id" ref="can_access_employee"/>
+    </record>
+
+    <record id="access_employee_group" model="res.groups">
+        <field name="name">Access Employee</field>
+        <field name="user_ids" eval="[Command.link(ref('base.user_root')), Command.link(ref('base.user_admin'))]"/>
+    </record>
+</odoo>

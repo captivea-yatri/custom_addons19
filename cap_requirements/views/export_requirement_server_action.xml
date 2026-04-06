@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!--============================= <Server Action for export Requirement==========================>-->
+        <record id="export_project_rquirement_xls_card" model="ir.actions.server">
+            <field name="name">Export Project Requirement</field>
+            <field name="model_id" ref="cap_requirements.model_project_requirement"/>
+            <field name="binding_model_id" ref="cap_requirements.model_project_requirement"/>
+            <field name="state">code</field>
+            <field name="code">action = records.export_project_requirment()</field>
+        </record>
+    </data>
+</odoo>

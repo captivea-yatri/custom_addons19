@@ -1,0 +1,16 @@
+<odoo>
+    <menuitem id="menu_my_sales_root" name="My Sales" sequence="10"/>
+
+    <!-- Category -->
+    <menuitem id="menu_my_sales_category"
+              name="Category"
+              parent="menu_my_sales_root"
+              sequence="20"/>
+
+    <!-- Sales -->
+    <menuitem id="menu_my_sales_sales"
+              name="Sales"
+              parent="menu_my_sales_root"
+              sequence="30"/>
+
+</odoo>

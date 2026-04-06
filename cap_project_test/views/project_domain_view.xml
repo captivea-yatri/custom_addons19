@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="project_domain_inherit_view" model="ir.ui.view">
+            <field name="name">project.domain.inherit.view</field>
+            <field name="model">project.domain</field>
+            <field name="inherit_id" ref="cap_domain.project_domain_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+                    <button name="action_list_task"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-tasks">
+                        <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_text">Task</span>
+                        </div>
+                    </button>
+                    <button name="action_domain_test_object"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-flask icon">
+                        <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_text">Task</span>
+                            <span class="o_stat_text">Test</span>
+                        </div>
+                    </button>
+                    <button name="action_domain_execution_test_object"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-check-square-o icon">
+                        <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_text">Execution</span>
+                            <span class="o_stat_text">Test</span>
+                        </div>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+
+<!--        <record id="default_domain_inherited_tree_view" model="ir.ui.view">-->
+<!--            <field name="name">project.domain.inherited.tree.view</field>-->
+<!--            <field name="model">default.domain</field>-->
+<!--            <field name="inherit_id" ref="cap_domain.default_domain_tree_view"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <xpath expr="//field[@name='name']" position="after">-->
+<!--                    <field name="session_test_id" invisible="1"/>-->
+<!--                </xpath>-->
+<!--            </field>-->
+<!--        </record>-->
+    </data>
+</odoo>

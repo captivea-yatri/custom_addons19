@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+
+<!--    todo: comnetout domain and groups one "access_rights_management" module migrate -->
+
+    <record id="contact_view_access_user" model="ir.rule">
+        <field name="name">emp_access_konsultoo_contacts_user</field>
+        <field name="model_id" ref="model_res_partner"/>
+        <!--        <field name="groups" eval="[(4, ref('access_rights_management.role_operation_on_boarder')),-->
+<!--        (4, ref('access_rights_management.role_operation')), (4, ref('access_rights_management.role_team_manager')),-->
+<!--        (4, ref('access_rights_management.role_team_director'))]"/>-->
+        <field name="groups" eval="[4,ref('base.group_user')]"/>
+<!--        <field name="domain_force">['|','|', '|', '|', '|', '|', '|', '|', '|', '|', ('id', '=', 2),-->
+<!--            ('id', 'in', user.env["res.company"].search([]).filtered(lambda rec:rec.partner_id).partner_id.ids),-->
+<!--            ('parent_id.accessible_user_ids', '=', user.id), ('is_partner', '=', True), ('parent_id.is_partner', '=',-->
+<!--            True), ('accessible_user_ids', '=', user.id), ('id', '=', user.partner_id.id), ('id', 'in',-->
+<!--            user.env["res.users"].search(['|', ('active', '=', True), ('active', '=', False)]).filtered(lambda rec:-->
+<!--            rec.has_group('base.group_user')).partner_id.ids),('id', 'in',-->
+<!--            user.env["res.users"].search(['|', ('active', '=', True), ('active', '=', False)]).filtered(lambda rec:-->
+<!--            rec.has_group('base.group_user')).partner_id.parent_id.child_ids.ids),-->
+<!--            ('id', 'in', user.env["hr.job"].search([]).filtered(lambda rec: rec.address_id-->
+<!--            != False).address_id.ids), '&amp;', ('parent_id',-->
+<!--            '=', False), ('status', 'in', ['customer', 'old_customer'])]-->
+<!--        </field>-->
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <record id="contact_create_access_user" model="ir.rule">
+        <field name="name">emp_access_konsultoo_contacts_user(create)</field>
+        <field name="model_id" ref="model_res_partner"/>
+<!--        <field name="groups" eval="[(4, ref('access_rights_management.role_operation_on_boarder')),-->
+<!--        (4, ref('access_rights_management.role_operation')), (4, ref('access_rights_management.role_team_manager')),-->
+<!--        (4, ref('access_rights_management.role_team_director'))]"/>-->
+        <field name="groups" eval="[4,ref('base.group_user')]"/>
+<!--        <field name="domain_force">[('parent_id', '!=', False),('parent_id.accessible_user_ids', '=', user.id)]-->
+<!--        </field>-->
+        <field name="perm_read" eval="False"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <record id="contact_view_only_access_user" model="ir.rule">
+        <field name="name">emp_access_konsultoo_contacts_user(read)</field>
+        <field name="model_id" ref="model_res_partner"/>
+<!--        <field name="groups" eval="[(4, ref('access_rights_management.role_operation_on_boarder')),-->
+<!--        (4, ref('access_rights_management.role_operation')), (4, ref('access_rights_management.role_team_manager')),-->
+<!--        (4, ref('access_rights_management.role_team_director'))]"/>-->
+        <field name="groups" eval="[4,ref('base.group_user')]"/>
+<!--        <field name="domain_force">['|',('parent_id.accessible_user_ids', '=', user.id), ('accessible_user_ids', '=',-->
+<!--            user.id)]-->
+<!--        </field>-->
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <record id="contact_view_only_access_user_for_hr" model="ir.rule">
+        <field name="name">emp_access_konsultoo_contacts_user(team HR)</field>
+        <field name="model_id" ref="model_res_partner"/>
+<!--        <field name="groups" eval="[(4, ref('access_rights_management.role_hr')),-->
+<!--        (4, ref('access_rights_management.role_hr_responsible'))]"/>-->
+        <field name="groups" eval="[4,ref('base.group_user')]"/>
+<!--        <field name="domain_force">['|', ('parent_id.accessible_user_ids', '=', user.id),-->
+<!--            ('accessible_user_ids', '=', user.id)]-->
+<!--        </field>-->
+        <field name="perm_read" eval="False"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <record id="contact_view_access_admin" model="ir.rule">
+        <field name="name">emp_access_konsultoo_contacts_admin</field>
+        <field name="model_id" ref="model_res_partner"/>
+        <field name="groups" eval="[4, ref('base.group_user')]"/>
+<!--        <field name="domain_force">[(1, '=', 1)]</field>-->
+    </record>
+
+    <record id="emp_sale_view_access_user" model="ir.rule">
+        <field name="name">emp_access_konsultoo_sale_order_user</field>
+        <field name="model_id" ref="sale.model_sale_order"/>
+<!--        <field name="groups" eval="[(4, ref('access_rights_management.role_operation_on_boarder')),-->
+<!--        (4, ref('access_rights_management.role_operation')), (4, ref('access_rights_management.role_team_manager')),-->
+<!--        (4, ref('access_rights_management.role_team_director'))]"/>-->
+        <field name="groups" eval="[4,ref('base.group_user')]"/>
+<!--        <field name="domain_force">['|', ('partner_id.accessible_user_ids', '=', user.id),-->
+<!--            ('partner_id.parent_id.accessible_user_ids', '=', user.id)]-->
+<!--        </field>-->
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+<!--    <record id="emp_sale_view_access_admin" model="ir.rule">-->
+<!--        <field name="name">emp_access_konsultoo_sale_order_admin</field>-->
+<!--        <field name="model_id" ref="sale.model_sale_order"/>-->
+<!--        <field name="groups" eval="[(4, ref('base.group_user'))]"/>-->
+<!--        <field name="domain_force">[(1, '=', 1)]-->
+<!--        </field>-->
+<!--    </record>-->
+
+    <record id="emp_project_task_view_access_user" model="ir.rule">
+        <field name="name">emp_access_konsultoo_project_task_user</field>
+        <field name="model_id" ref="project.model_project_task"/>
+<!--        <field name="groups" eval="[(4, ref('access_rights_management.role_operation_on_boarder')),-->
+<!--        (4, ref('access_rights_management.role_operation')), (4, ref('access_rights_management.role_team_manager')),-->
+<!--        (4, ref('access_rights_management.role_team_director')), (4, ref('access_rights_management.role_recruiter')),-->
+<!--        (4, ref('access_rights_management.role_webmaster')), (4, ref('access_rights_management.role_infographiste')),-->
+<!--        (4, ref('access_rights_management.role_community_manager')), (4, ref('access_rights_management.role_email_manager'))]"/>-->
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+<!--        <field name="domain_force">['|', '|',('partner_id.accessible_user_ids', '=', user.id),-->
+<!--            ('partner_id.parent_id.accessible_user_ids', '=', user.id),'&amp;',('user_ids','=',user.id),('project_id','=',False)]-->
+<!--        </field>-->
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <record id="emp_project_task_read_access_user" model="ir.rule">
+        <field name="name">emp_access_konsultoo_project_task_read_user</field>
+        <field name="model_id" ref="project.model_project_task"/>
+<!--        <field name="groups" eval="[(4, ref('access_rights_management.role_hr')),-->
+<!--        (4, ref('access_rights_management.role_hr_responsible'))]"/>-->
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+<!--        <field name="domain_force">['|', ('partner_id.accessible_user_ids', '=', user.id),-->
+<!--            ('partner_id.parent_id.accessible_user_ids', '=', user.id)]-->
+<!--        </field>-->
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <record id="emp_project_task_edit_access_user" model="ir.rule">
+        <field name="name">emp_access_konsultoo_project_task_edit_user</field>
+        <field name="model_id" ref="project.model_project_task"/>
+<!--        <field name="groups" eval="[(4, ref('access_rights_management.role_hr')),-->
+<!--        (4, ref('access_rights_management.role_hr_responsible'))]"/>-->
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+<!--        <field name="domain_force">['|', ('partner_id.accessible_user_ids', '=', user.id),-->
+<!--            ('partner_id.parent_id.accessible_user_ids', '=', user.id)]-->
+<!--        </field>-->
+        <field name="perm_read" eval="False"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+<!--    <record id="emp_project_task_view_access_admin" model="ir.rule">-->
+<!--        <field name="name">emp_access_konsultoo_project_admin</field>-->
+<!--        <field name="model_id" ref="project.model_project_task"/>-->
+<!--        <field name="groups" eval="[(4, ref('base.group_user'))]"/>-->
+<!--        <field name="domain_force">[(1, '=', 1)]-->
+<!--        </field>-->
+<!--    </record>-->
+
+    <record id="emp_project_view_access_user" model="ir.rule">
+        <field name="name">emp_access_konsultoo_project_user</field>
+        <field name="model_id" ref="project.model_project_project"/>
+<!--        <field name="groups" eval="[(4, ref('access_rights_management.role_operation_on_boarder')),-->
+<!--        (4, ref('access_rights_management.role_operation')), (4, ref('access_rights_management.role_team_manager')),-->
+<!--        (4, ref('access_rights_management.role_team_director')), (4, ref('access_rights_management.role_recruiter')),-->
+<!--        (4, ref('access_rights_management.role_webmaster')), (4, ref('access_rights_management.role_infographiste')),-->
+<!--        (4, ref('access_rights_management.role_community_manager')), (4, ref('access_rights_management.role_email_manager'))]"/>-->
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+<!--        <field name="domain_force">['|', ('partner_id.accessible_user_ids', '=', user.id),-->
+<!--            ('partner_id.parent_id.accessible_user_ids', '=', user.id)]-->
+<!--        </field>-->
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+<!--    <record id="emp_project_view_access_admin" model="ir.rule">-->
+<!--        <field name="name">emp_access_konsultoo_project_admin</field>-->
+<!--        <field name="model_id" ref="project.model_project_project"/>-->
+<!--        <field name="groups" eval="[(4, ref('base.group_user'))]"/>-->
+<!--        <field name="domain_force">[(1, '=', 1)]-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    <record id="emp_invoice_view_access_admin" model="ir.rule">-->
+<!--        <field name="name">emp_access_konsultoo_invoice_admin</field>-->
+<!--        <field name="model_id" ref="account.model_account_move"/>-->
+<!--        <field name="groups" eval="[(4, ref('base.group_user')), (4, ref('account.group_account_user')),-->
+<!--                (4, ref('account.group_account_manager'))]"/>-->
+<!--        <field name="domain_force">[(1, '=', 1)]-->
+<!--        </field>-->
+<!--    </record>-->
+
+    <record id="emp_timesheet_view_access_user" model="ir.rule">
+        <field name="name">emp_access_konsultoo_timesheet_user</field>
+        <field name="model_id" ref="analytic.model_account_analytic_line"/>
+<!--        <field name="groups" eval="[(4, ref('access_rights_management.role_operation_on_boarder')),-->
+<!--        (4, ref('access_rights_management.role_operation')), (4, ref('access_rights_management.role_team_manager')),-->
+<!--        (4, ref('access_rights_management.role_team_director')), (4, ref('access_rights_management.role_recruiter')),-->
+<!--        (4, ref('access_rights_management.role_webmaster')), (4, ref('access_rights_management.role_infographiste')),-->
+<!--        (4, ref('access_rights_management.role_community_manager')), (4, ref('access_rights_management.role_email_manager')),-->
+<!--        (4, ref('access_rights_management.role_marketing_manager')), (4, ref('access_rights_management.role_customer_referencer')),-->
+<!--        (4, ref('access_rights_management.role_hr')), (4, ref('access_rights_management.role_hr_responsible'))]"/>-->
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+<!--        <field name="domain_force">['|', '|', '|', '|', ('project_id.user_id', '=', user.id),-->
+<!--            ('employee_id.user_id', '=', user.id), ('employee_id.parent_user_id', '=', user.id),-->
+<!--            ('partner_id.accessible_user_ids', '=', user.id),-->
+<!--            ('partner_id.parent_id.accessible_user_ids', '=', user.id)]-->
+<!--        </field>-->
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <record id="emp_timesheet_create_edit_access_user" model="ir.rule">
+        <field name="name">emp_access_konsultoo_timesheet_user(edit)</field>
+        <field name="model_id" ref="analytic.model_account_analytic_line"/>
+<!--        <field name="groups" eval="[(4, ref('access_rights_management.role_operation_on_boarder')),-->
+<!--        (4, ref('access_rights_management.role_operation')), (4, ref('access_rights_management.role_team_manager')),-->
+<!--        (4, ref('access_rights_management.role_team_director')), (4, ref('access_rights_management.role_infographiste')),-->
+<!--        (4, ref('access_rights_management.role_vp_of_marketing')), (4, ref('access_rights_management.role_email_manager')),-->
+<!--        (4, ref('access_rights_management.role_community_manager')), (4, ref('access_rights_management.role_drh')),-->
+<!--        (4, ref('access_rights_management.role_recruiter')), (4, ref('access_rights_management.role_webmaster')),-->
+<!--        (4, ref('access_rights_management.role_marketing_manager')), (4, ref('access_rights_management.role_customer_referencer')),-->
+<!--        (4, ref('access_rights_management.role_hr')), (4, ref('access_rights_management.role_hr_responsible'))]"/>-->
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+<!--        <field name="domain_force">['|', '|', ('project_id.user_id', '=', user.id),-->
+<!--            ('employee_id.user_id', '=', user.id), ('employee_id.parent_user_id', '=', user.id)]-->
+<!--        </field>-->
+        <field name="perm_read" eval="False"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+
+<!--    <record id="emp_timesheet_view_access_admin" model="ir.rule">-->
+<!--        <field name="name">emp_access_konsultoo_timesheet_admin</field>-->
+<!--        <field name="model_id" ref="analytic.model_account_analytic_line"/>-->
+<!--        <field name="groups" eval="[(4, ref('base.group_user'))]"/>-->
+<!--        <field name="domain_force">[(1, '=', 1)]-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    <record id="emp_access_project_progress_report" model="ir.rule">-->
+<!--        <field name="name">Project Progress Report(access request)</field>-->
+<!--        <field name="model_id" ref="cap_project_progress_report.model_project_progress"/>-->
+<!--&lt;!&ndash;        <field name="groups" eval="[(4, ref('access_rights_management.role_operation_on_boarder')),&ndash;&gt;-->
+<!--&lt;!&ndash;        (4, ref('access_rights_management.role_operation')), (4, ref('access_rights_management.role_team_manager')),&ndash;&gt;-->
+<!--&lt;!&ndash;        (4, ref('access_rights_management.role_team_director')), (4, ref('access_rights_management.role_recruiter')),&ndash;&gt;-->
+<!--&lt;!&ndash;        (4, ref('access_rights_management.role_webmaster')), (4, ref('access_rights_management.role_infographiste')),&ndash;&gt;-->
+<!--&lt;!&ndash;        (4, ref('access_rights_management.role_community_manager')), (4, ref('access_rights_management.role_email_manager'))]"/>&ndash;&gt;-->
+<!--        <field name="groups" eval="[(4, ref('base.group_user'))]"/>-->
+<!--&lt;!&ndash;        <field name="domain_force">['|', ('project_id.partner_id.accessible_user_ids', '=', user.id),&ndash;&gt;-->
+<!--&lt;!&ndash;            ('project_id.partner_id.parent_id.accessible_user_ids', '=', user.id)]&ndash;&gt;-->
+<!--&lt;!&ndash;        </field>&ndash;&gt;-->
+<!--        <field name="perm_read" eval="True"/>-->
+<!--        <field name="perm_write" eval="True"/>-->
+<!--        <field name="perm_create" eval="True"/>-->
+<!--        <field name="perm_unlink" eval="True"/>-->
+<!--    </record>-->
+
+    <record id="access_analytic_account_based_on_access_request" model="ir.rule">
+        <field name="name">Analytic Accounts(access request)</field>
+        <field name="model_id" ref="analytic.model_account_analytic_account"/>
+<!--        <field name="groups" eval="[(4, ref('access_rights_management.role_operation_on_boarder')),-->
+<!--        (4, ref('access_rights_management.role_operation')), (4, ref('access_rights_management.role_team_manager')),-->
+<!--        (4, ref('access_rights_management.role_team_director'))]"/>-->
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+<!--        <field name="domain_force">-->
+<!--            ['|', '|', ('partner_id', '=', False), '&amp;', ('partner_id.parent_id', '=', False), '|', '|',-->
+<!--            ('partner_id',-->
+<!--            'in', user.env["res.company"].search([]).filtered(lambda rec:rec.partner_id).partner_id.ids),-->
+<!--            ('partner_id.status', 'in', ['customer', 'old_customer']), ('partner_id.accessible_user_ids', '=', user.id),-->
+<!--            '&amp;', '&amp;', ('partner_id.parent_id', '!=', False),-->
+<!--            ('partner_id.parent_id.status', 'in', ['customer', 'old_customer']),-->
+<!--            ('partner_id.parent_id.accessible_user_ids', '=', user.id)]-->
+<!--        </field>-->
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <record id="access_journal_item_based_on_access_request" model="ir.rule">
+        <field name="name">Journal Item</field>
+        <field name="model_id" ref="account.model_account_move_line"/>
+<!--        <field name="groups" eval="[(4, ref('access_rights_management.role_operation')),-->
+<!--        (4, ref('access_rights_management.role_operation_on_boarder')), (4, ref('access_rights_management.role_team_director'))]"/>-->
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+<!--        <field name="domain_force">[(0, '=', 1)]-->
+<!--        </field>-->
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+
+<!--    <record id="access_go_live_change_request" model="ir.rule">-->
+<!--        <field name="name">Go live change request</field>-->
+<!--        <field name="model_id" ref="ksc_project_go_live_maintainer.model_glive_change_request"/>-->
+<!--&lt;!&ndash;        <field name="groups" eval="[(4, ref('access_rights_management.role_operation')),&ndash;&gt;-->
+<!--&lt;!&ndash;        (4, ref('access_rights_management.role_operation_on_boarder')), (4, ref('access_rights_management.role_team_manager'))]"/>&ndash;&gt;-->
+<!--        <field name="groups" eval="[(4, ref('base.group_user'))]"/>-->
+<!--&lt;!&ndash;        <field name="domain_force">['|', ('project_id.partner_id.accessible_user_ids', '=', user.id),&ndash;&gt;-->
+<!--&lt;!&ndash;            ('project_id.partner_id.parent_id.accessible_user_ids', '=', user.id)]&ndash;&gt;-->
+<!--&lt;!&ndash;        </field>&ndash;&gt;-->
+<!--        <field name="perm_read" eval="True"/>-->
+<!--        <field name="perm_write" eval="True"/>-->
+<!--        <field name="perm_create" eval="True"/>-->
+<!--        <field name="perm_unlink" eval="False"/>-->
+<!--    </record>-->
+
+<!-- ############################################################################################################### -->
+<!--    override by us-->
+    <record id="hr_expense.ir_rule_hr_expense_employee" model="ir.rule">
+<!--        <field name="domain_force">['&amp;', ('employee_id.user_id', '=', user.id), ('ana_account_partner_ids', '=',-->
+<!--            False)]-->
+<!--        </field>-->
+    </record>
+
+    <record id="hr_expense.ir_rule_hr_expense_approver" model="ir.rule">
+<!--        <field name="domain_force">[('ana_account_partner_ids', '=', False), '|', '|', '|', '|',-->
+<!--            ('employee_id.user_id', '=', user.id),-->
+<!--            ('employee_id.department_id.manager_id.user_id', '=', user.id),-->
+<!--            ('employee_id.parent_id.user_id', '=', user.id),-->
+<!--            ('employee_id.expense_manager_id', '=', user.id),-->
+<!--            ('sheet_id.user_id', '=', user.id)]-->
+<!--        </field>-->
+    </record>
+
+
+<!--    <record id="hr_expense.ir_rule_hr_expense_sheet_employee_not_draft" model="ir.rule">-->
+<!--        <field name="domain_force">[('expense_line_ids.ana_account_partner_ids', '=', False), ('employee_id.user_id',-->
+<!--            '=', user.id), ('state','!=', 'draft')]-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    <record id="hr_expense.ir_rule_hr_expense_sheet_employee" model="ir.rule">-->
+<!--        <field name="domain_force">[('expense_line_ids.ana_account_partner_ids', '=', False), ('employee_id.user_id',-->
+<!--            '=', user.id), ('state','=', 'draft')]-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    <record id="hr_expense.ir_rule_hr_expense_sheet_approver" model="ir.rule">-->
+<!--        <field name="domain_force">[('expense_line_ids.ana_account_partner_ids', '=', False), '|', '|', '|', '|',-->
+<!--            ('employee_id.user_id', '=', user.id),-->
+<!--            ('employee_id.department_id.manager_id.user_id', '=', user.id),-->
+<!--            ('employee_id.parent_id.user_id', '=', user.id),-->
+<!--            ('employee_id.expense_manager_id', '=', user.id),-->
+<!--            ('user_id', '=', user.id)]-->
+<!--        </field>-->
+<!--    </record>-->
+
+<!--    <record id="access_project_feedback_team_operation" model="ir.rule">-->
+<!--        <field name="name">Feedback(Team Access based)</field>-->
+<!--        <field name="model_id" ref="cap_project_feedback.model_project_feedback"/>-->
+<!--&lt;!&ndash;        <field name="groups" eval="[(4, ref('access_rights_management.role_operation_on_boarder')),&ndash;&gt;-->
+<!--&lt;!&ndash;        (4, ref('access_rights_management.role_operation')), (4, ref('access_rights_management.role_team_manager')),&ndash;&gt;-->
+<!--&lt;!&ndash;        (4, ref('access_rights_management.role_team_director')), (4, ref('access_rights_management.role_recruiter')),&ndash;&gt;-->
+<!--&lt;!&ndash;        (4, ref('access_rights_management.role_webmaster')), (4, ref('access_rights_management.role_infographiste')),&ndash;&gt;-->
+<!--&lt;!&ndash;        (4, ref('access_rights_management.role_community_manager')), (4, ref('access_rights_management.role_email_manager'))]"/>&ndash;&gt;-->
+<!--        <field name="groups" eval="[(4, ref('base.group_user'))]"/>-->
+<!--&lt;!&ndash;        <field name="domain_force">[('project_id.company_id', 'in', company_ids), '|', ('project_id.partner_id.accessible_user_ids',&ndash;&gt;-->
+<!--&lt;!&ndash;            '=', user.id), ('project_id.partner_id.parent_id.accessible_user_ids', '=', user.id)]&ndash;&gt;-->
+<!--&lt;!&ndash;        </field>&ndash;&gt;-->
+<!--        <field name="perm_read" eval="True"/>-->
+<!--        <field name="perm_write" eval="True"/>-->
+<!--        <field name="perm_create" eval="True"/>-->
+<!--        <field name="perm_unlink" eval="True"/>-->
+<!--    </record>-->
+
+<!--    <record id="access_session_test_operation" model="ir.rule">-->
+<!--        <field name="name">Session Test(Team Access based)</field>-->
+<!--        <field name="model_id" ref="cap_project_test.model_session_test"/>-->
+<!--&lt;!&ndash;        <field name="groups" eval="[(4, ref('access_rights_management.role_operation_on_boarder')),&ndash;&gt;-->
+<!--&lt;!&ndash;        (4, ref('access_rights_management.role_operation')), (4, ref('access_rights_management.role_team_manager')),&ndash;&gt;-->
+<!--&lt;!&ndash;        (4, ref('access_rights_management.role_team_director')), (4, ref('access_rights_management.role_recruiter')),&ndash;&gt;-->
+<!--&lt;!&ndash;        (4, ref('access_rights_management.role_webmaster')), (4, ref('access_rights_management.role_infographiste')),&ndash;&gt;-->
+<!--&lt;!&ndash;        (4, ref('access_rights_management.role_community_manager')), (4, ref('access_rights_management.role_email_manager'))]"/>&ndash;&gt;-->
+<!--        <field name="groups" eval="[(4, ref('base.group_user'))]"/>-->
+<!--&lt;!&ndash;        <field name="domain_force">[('project_id.company_id', 'in', company_ids), '|', ('project_id.partner_id.accessible_user_ids', '=', user.id),&ndash;&gt;-->
+<!--&lt;!&ndash;            ('project_id.partner_id.parent_id.accessible_user_ids', '=', user.id)]&ndash;&gt;-->
+<!--&lt;!&ndash;        </field>&ndash;&gt;-->
+<!--        <field name="perm_read" eval="True"/>-->
+<!--        <field name="perm_write" eval="True"/>-->
+<!--        <field name="perm_create" eval="True"/>-->
+<!--        <field name="perm_unlink" eval="True"/>-->
+<!--    </record>-->
+
+    <record model="ir.rule" id="resource_calendar_leaves_rule_for_all">
+        <field name="name">resource.calendar.leaves: All</field>
+        <field name="model_id" ref="resource.model_resource_calendar_leaves"/>
+<!--        <field name="groups" eval="[(4, ref('access_rights_management.role_team_manager')),-->
+<!--        (4, ref('access_rights_management.role_team_director'))]"/>-->
+        <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+<!--        <field name="domain_force">[(1, '=', 1)]</field>-->
+        <field name="perm_read" eval="False"/>
+		<field name="perm_write" eval="True"/>
+		<field name="perm_create" eval="True"/>
+		<field name="perm_unlink" eval="True"/>
+    </record>
+
+
+<!-- ############################################################################################################### -->
+<!--    archived by us-->
+    <record id="base.res_partner_rule" model="ir.rule">
+        <field name="active" eval="False"/>
+    </record>
+
+<!--    TODO : check in v18-->
+<!--    <record id="base.res_partner_rule_private_employee" model="ir.rule">-->
+<!--        <field name="active" eval="False"/>-->
+<!--    </record>-->
+
+<!--    <record id="base.res_partner_rule_private_group" model="ir.rule">-->
+<!--        <field name="active" eval="False"/>-->
+<!--    </record>-->
+
+    <record id="sale.sale_order_personal_rule" model="ir.rule">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="sale.sale_order_see_all" model="ir.rule">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="project.project_project_manager_rule" model="ir.rule">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="project.project_public_members_rule" model="ir.rule">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="hr_timesheet.timesheet_line_rule_user" model="ir.rule">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="hr_timesheet.timesheet_line_rule_approver" model="ir.rule">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="hr_timesheet.timesheet_line_rule_manager" model="ir.rule">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="timesheet_grid.timesheet_line_rule_user_update-unlink" model="ir.rule">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="account.account_analytic_line_rule_billing_user" model="ir.rule">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="account.account_move_see_all" model="ir.rule">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="account.account_move_rule_group_readonly" model="ir.rule">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="account.account_move_rule_group_invoice" model="ir.rule">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="sale.account_invoice_rule_see_personal" model="ir.rule">
+        <field name="active" eval="False"/>
+    </record>
+
+    <record id="sale.account_invoice_rule_see_all" model="ir.rule">
+        <field name="active" eval="False"/>
+    </record>
+
+</odoo>

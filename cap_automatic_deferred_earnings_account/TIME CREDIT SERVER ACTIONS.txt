@@ -1,0 +1,118 @@
+This text file contains server action to transfer data from deferred revenue to time credit in version 16
+This file is referenced to module "cap_automatic_deferred_earnings_account" of odoo v16 by captivea india
+
+* Instructions
+=> make sure that every sale order with automatic deferred earning account is linked with only single deferred revenue before executing below server actions [check SO3367 & SO463]
+Delete entry of 1 deferred revenue which is linked with archived project for sale order : SO3367
+Nothing to do for sale order : SO463
+
+=> also make sure that scheduled actions of deferred revenue (Compute Revenue Line(Add month line by project - Monthly on the 5th)) and time credit is de-activated before executing below server actions so that new journal entries won't get created on deferred revenue during back-up
+
+=> add Many2one field in 'time.credit' object which is related to 'account.asset' object through studio and give it technical name 'x_studio_deferred_revenue_id'
+
+=> below server actions must be applied in a sequence as per their respective serial numbers
+
+======================================================================================================================================================================
+[Model : "account.asset"] 
+
+Filter to be applied :- IS automatic deferred earning is true
+
+[1] back-up deferred revenue to time credit
+
+for rec in records:
+  if rec.is_automatic_deferred_earnings_account:
+	  env['time.credit'].create({'name': rec.name,
+		                     'company_id': rec.company_id.id,
+		                     'currency_id':rec.currency_id.id,
+		                     'active':rec.active,
+		                     'sale_order_id':rec.sale_order_id.id,
+		                     'journal_id':rec.journal_id.id,
+		                     'account_time_credit_id':rec.account_asset_id.id,
+		                     'depreciation_move_ids': [(4, move.id) for move in rec.depreciation_move_ids],
+		                     'account_depreciation_id':rec.account_depreciation_id.id,
+		                     'account_depreciation_expense_id':rec.account_depreciation_expense_id.id,
+		                     'original_value':rec.original_value,
+		                     'project_id':rec.x_studio_project_id.id,
+		                     'is_automatic_deferred_earnings_account':rec.is_automatic_deferred_earnings_account,
+		                     'salvage_value':rec.salvage_value,
+		                     'value_left_of_the_previous_fiscal_period':rec.value_left_of_the_previous_fiscal_period,
+		                     'state':rec.state,
+		                     'total_depreciable_value':rec.total_depreciable_value,
+		                     'depreciation_entries_count':rec.depreciation_entries_count,
+		                     'total_depreciation_entries_count':rec.total_depreciation_entries_count,
+		                     'already_depreciated_amount_import':rec.already_depreciated_amount_import,
+		                     'last_day_of_previous_month':rec.last_day_of_previous_month,
+		                     'is_reconciled':rec.is_reconciled,
+		                     'x_studio_deferred_revenue_id':rec.id,
+	  })
+                            
+======================================================================================================================================================================
+[Model : "account.move"]
+
+filter :- Create Custom filter :- posted and Asset >> automatic deferred earning is set   
+
+[2] def revenue unlink journal item and data transfer to time credit
+
+
+for record in records:
+  if record.asset_id.is_automatic_deferred_earnings_account == True:
+    record.write({'asset_id': [(3, asset, 0) for asset in record.asset_id.depreciation_move_ids.ids]})
+    env.cr.execute("""UPDATE account_move
+                       SET  depreciation_value_time_credit = %s
+                       WHERE id = %s
+                    """, (record.depreciation_value, record.id)) 
+                   
+======================================================================================================================================================================
+[Model : "time.credit"]
+[3] time credit update book value
+
+for rec in records:
+  rec._compute_value_residual()
+  
+======================================================================================================================================================================  
+[Model : "account.asset"]
+
+Filter to be applied :- IS automatic deferred earning is true
+
+[4]back up chatter history to time credit
+
+for rec in records:
+  if rec.is_automatic_deferred_earnings_account:
+	  messages_ids = env['mail.message'].search([('model', '=', 'account.asset'), ('res_id', '=', rec.id)])
+	  attachment_ids = env['ir.attachment'].search([('res_model', '=', 'account.asset'),('res_id', '=', rec.id)])
+	  message_follower_ids = env['mail.followers'].search([('res_model', '=', 'account.asset'), ('res_id', '=', rec.id),('partner_id', '!=', 3)])
+	  
+	  if messages_ids:
+	    for msg in messages_ids:
+	      msg_vals = {  'model': 'time.credit',
+		            'res_id': env['time.credit'].search([('x_studio_deferred_revenue_id','=',rec.id)]).id,
+		            }
+		  
+	      msg.write(msg_vals)
+	  if attachment_ids:
+	    for attch in attachment_ids:
+	      atch_vals = {'res_model': 'time.credit',
+		            'res_id': env['time.credit'].search([('x_studio_deferred_revenue_id','=',rec.id)]).id,
+		            }
+	      attch.write(atch_vals)
+	  if message_follower_ids:
+	    for follower in message_follower_ids:
+	      follower_vals = {'res_model': 'time.credit',
+		            'res_id': env['time.credit'].search([('x_studio_deferred_revenue_id','=',rec.id)]).id,
+		            }
+	      follower.write(follower_vals)
+      
+======================================================================================================================================================================  
+[Model : "account.asset"]      
+
+Filter to be applied :- IS automatic deferred earning is true
+
+[5]old data unlink from account asset
+
+for record in records:
+  if record.is_automatic_deferred_earnings_account == True:
+    if record.state != 'draft':
+      record.set_to_draft()
+    record.unlink()
+    
+======================================================================================================================================================================

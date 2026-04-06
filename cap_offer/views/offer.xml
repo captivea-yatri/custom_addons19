@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="offer_tree_view" model="ir.ui.view">
+        <field name="name">offer.offer</field>
+        <field name="model">offer.offer</field>
+        <field name="arch" type="xml">
+            <list  editable="top">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="restrict_time"/>
+                <field name="combined_offer_ids" widget="many2many_tags"/>
+                <field name="business_unit_ids" widget="many2many_tags"/>
+                <field name="business_localisation_ids" widget="many2many_tags"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="offer_offer_form_view" model="ir.ui.view">
+        <field name="name">offer.offer</field>
+        <field name="model">offer.offer</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="restrict_time"/>
+                        </group>
+                        <group>
+                            <field name="combined_offer_ids" widget="many2many_tags"/>
+                            <field name="business_unit_ids" widget="many2many_tags"/>
+                            <field name="business_localisation_ids" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="offer_offer_search_view" model="ir.ui.view">
+            <field name="name">offer.offer.search.view</field>
+            <field name="model">offer.offer</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="combined_offer_ids"/>
+                    <field name="business_unit_ids" widget="many2many_tags"/>
+                    <field name="business_localisation_ids" widget="many2many_tags"/>
+                    <filter name="restrict_true" string="Restricted True"
+                            domain="[[&quot;restrict_time&quot;,&quot;=&quot;,True]]"/>
+                    <filter name="restrict_false" string="Restricted False"
+                            domain="[[&quot;restrict_time&quot;,&quot;=&quot;,False]]"/>
+                </search>
+            </field>
+    </record>
+
+    <record id="action_of_offer" model="ir.actions.act_window">
+        <field name="name">Offer</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">offer.offer</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_offer_id" parent="sale.menu_sales_config"
+              action="action_of_offer" name="Offer"/>
+</odoo>

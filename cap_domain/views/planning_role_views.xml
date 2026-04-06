@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="planning_role_inherited_tree_view" model="ir.ui.view">
+        <field name="name">planning.role.tree</field>
+        <field name="model">planning.role</field>
+        <field name="inherit_id" ref="planning.planning_role_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='resource_ids']" position="after">
+                <field name="is_project_manager"/>
+                <field name="is_business_analyst"/>
+                <field name="is_configurator"/>
+                <field name="is_developer"/>
+                <field name="is_architect"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="planning_role_inherited_form_view" model="ir.ui.view">
+        <field name="name">planning.role.form</field>
+        <field name="model">planning.role</field>
+        <field name="inherit_id" ref="planning.planning_role_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='resource_ids']" position="after">
+                <field name="is_project_manager"/>
+                <field name="is_business_analyst"/>
+                <field name="is_configurator"/>
+                <field name="is_developer"/>
+                <field name="is_architect"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="crm_lead_inherit_view" model="ir.ui.view">
+        <field name="name">crm.lead.inherit.view</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+        <field name="priority">99</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='lost_reason_id']" position="after">
+                <field name="interested_domain_ids" domain="[('used_on_opportunities','=', True)]"
+                       widget="many2many_checkboxes" string="Interested Domain"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

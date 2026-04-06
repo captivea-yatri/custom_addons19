@@ -1,0 +1,37 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* cap_partner
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-11-13 16:09+0000\n"
+"PO-Revision-Date: 2019-11-13 16:09+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: cap_partner
+#: model_terms:ir.ui.view,arch_db:cap_partner.cap_view_partner_form_01
+msgid "(has left company)"
+msgstr "(ne fait plus partie de la société)"
+
+#. module: cap_partner
+#: model:ir.model,name:cap_partner.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: cap_partner
+#: model:ir.model.fields,field_description:cap_partner.field_res_partner__cap_has_left_company
+#: model:ir.model.fields,field_description:cap_partner.field_res_users__cap_has_left_company
+msgid "Has left company"
+msgstr "Ne fait plus partie de la société"
+
+#. module: cap_partner
+#: model_terms:ir.ui.view,arch_db:cap_partner.report_saleorder_document_inherit_cap_appraisal
+msgid "<strong>Salesperson</strong>"
+msgstr "<strong>Personne de contact</strong>"

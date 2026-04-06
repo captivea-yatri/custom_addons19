@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="ksc_view_move_form_inherit" model="ir.ui.view">
+            <field name="name">ksc.view.move.form.inherit</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header/button[@name='button_draft']" position="after">
+<!--                    TODO: make it visible if only same company inv/bill available to compansate for child of contact scenario-->
+                    <button name="button_compensate" string="Compensate" type="object"
+                            invisible="is_inv_bill_found == False or move_type not in ['in_invoice', 'out_invoice'] or state in ['draft','cancel'] or payment_state in ['in_payment','paid']"/>
+                    <field name="is_inv_bill_found" invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<odoo>
+    <data noupdate="0">
+<!--           Scheduled action which will change status of request to Renewal after 1 year-->
+        <record id="ir_cron_data_emp_access" model="ir.cron">
+            <field name="name">Employee Request Access</field>
+            <field name="model_id" ref="model_emp_access_request"/>
+            <field name="state">code</field>
+            <field name="code">model._emp_access_request_check()</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name='interval_number'>1</field>
+            <field name='interval_type'>months</field>
+        </record>
+
+        <!--           Scheduled action which will change status of Renewal to Rejected after 10 days-->
+        <record id="ir_cron_data_requests_renewal" model="ir.cron">
+            <field name="name">Reject Access Requests</field>
+            <field name="model_id" ref="model_emp_access_request"/>
+            <field name="state">code</field>
+            <field name="code">
+ten_days_ago = datetime.date.today() + dateutil.relativedelta.relativedelta(days=-10)
+renewal_records = model.search([('state', '=', 'Renewal'), ('access_request_date', '&lt;=', ten_days_ago)], limit=100)
+for record in renewal_records:
+    record.button_rejected()
+            </field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name='interval_number'>1</field>
+            <field name='interval_type'>days</field>
+        </record>
+
+            <!--           Server action for mass validate access requests-->
+<!--        <record id="mass_validate_access_requests" model="ir.actions.server">-->
+<!--            <field name="name">Validate Access Requests(Requested, Renewal state)</field>-->
+<!--            <field name="model_id" ref="ksc_emp_customer_access.model_emp_access_request"/>-->
+<!--            <field name="binding_model_id" ref="ksc_emp_customer_access.model_emp_access_request"/>-->
+<!--            <field name="state">code</field>-->
+<!--            <field name="code">-->
+<!--for rec in records.filtered(lambda req: req.state in ['Requested', 'Renewal']):-->
+<!--    if env.user.has_group('base.group_system') :-->
+<!--                rec.button_approved()-->
+<!--&lt;!&ndash;                or env.user.has_group('access_rights_management.role_ceo') or env.user.has_group('access_rights_management.role_vp_of_quality_and_knowledge'):&ndash;&gt;-->
+
+<!--    elif rec.manager_user_id in rec.sudo().partner_id.accessible_user_ids:-->
+<!--        rec.button_approved()-->
+<!--            </field>-->
+<!--        </record>-->
+
+        <!--           Server action for reject access requests-->
+<!--        <record id="mass_reject_access_requests" model="ir.actions.server">-->
+<!--            <field name="name">Reject Access Requests(even if approved state)</field>-->
+<!--            <field name="model_id" ref="ksc_emp_customer_access.model_emp_access_request"/>-->
+<!--            <field name="binding_model_id" ref="ksc_emp_customer_access.model_emp_access_request"/>-->
+<!--&lt;!&ndash;            <field name="groups_id" eval="[(4, ref('base.group_system')), (4, ref('access_rights_management.role_ceo')), (4, ref('access_rights_management.role_vp_of_quality_and_knowledge'))]"/>&ndash;&gt;-->
+<!--            <field name="groups" eval="[(4, ref('base.group_system'))]"/>-->
+<!--            <field name="state">code</field>-->
+<!--            <field name="code">-->
+<!--for rec in records:-->
+<!--    if env.user.has_group('base.group_system'):-->
+<!--                rec.button_rejected()-->
+<!--&lt;!&ndash;                or env.user.has_group('access_rights_management.role_ceo') or env.user.has_group('access_rights_management.role_vp_of_quality_and_knowledge'):&ndash;&gt;-->
+
+<!--            </field>-->
+<!--        </record>-->
+    </data>
+</odoo>

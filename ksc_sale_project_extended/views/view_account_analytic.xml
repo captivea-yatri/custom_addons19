@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="timesheet_view_tree_tag_ids_inherited_1" model="ir.ui.view">
+            <field name="name">account.analytic.line.tree.tags_all</field>
+            <field name="model">account.analytic.line</field>
+            <field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//list//field[@name='task_id']" position="after">
+                    <field name="tag_ids" widget="many2many_tags"/>
+                    <field name="unit_price_from_so_line" optional="hide"/>
+                </xpath>
+            </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,67 @@
+<odoo>
+    <data>
+        <record id="edit_project_inherit" model="ir.ui.view">
+            <field name="name">project.project.form.inherit</field>
+            <field name="model">project.project</field>
+            <field name="priority">17</field>
+            <field name="inherit_id" ref="project.edit_project"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button class="oe_stat_button" name="action_get_project_progress_report"
+                            type="object" icon="fa-check-square-o">
+                        <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_value">
+                                Project
+                            </span>
+                            <span class="o_stat_text">
+                                Progress
+                            </span>
+                        </div>
+                    </button>
+                </xpath>
+                <xpath expr="//field[@name='alias_contact']" position="after">
+                    <field name="signatory_portal_report_partner_ids" invisible="1"/>
+                    <field name="cc_progress_report_internal_partner_partner_ids" invisible="1"/>
+                    <field name="code" invisible="1"/>
+                    <field name="signatory_progress_report_partner_id"
+                           options="{'no_create': True, 'no_create_edit': True}"
+                           required="code not in ['dead','internal','internal_p2p3']"
+                           domain="[('id', 'in', signatory_portal_report_partner_ids)]"/>
+                    <field name="cc_progress_report_partner_ids"
+                           options="{'no_create': True, 'no_create_edit': True}" widget="many2many_tags" domain="[('id', 'in', cc_progress_report_internal_partner_partner_ids)]"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="readonly_project_task_inherit_new" model="ir.ui.view">
+            <field name="name">project.project.form.task.inherit</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="ksc_project_extended.edit_project_task_inherit"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='report_frequency_in_days_readonly']" position="after">
+                  <div class="o_setting_box">
+                    <div class="o_setting_right_pane">
+                      <span class="col-lg-3">Next Expected Project Progress Report Date: <b><field name="next_expected_project_progress_report_date"/></b></span>
+                    </div>
+                  </div>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="edit_project_task_inherit_new" model="ir.ui.view">
+            <field name="name">project.project.form.task.inherit</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="ksc_project_extended.edit_project_task_inherit"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='report_frequency_in_days_editable']" position="after">
+                  <div class="o_setting_box">
+                    <div class="o_setting_right_pane">
+                      <span class="col-lg-3">Next Expected Project Progress Report Date: <b><field name="next_expected_project_progress_report_date"/></b></span>
+                    </div>
+                  </div>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

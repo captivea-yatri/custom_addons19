@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="integrated_access_request_tree_view" model="ir.ui.view">
+        <field name="name">integrated_access_request_tree_view</field>
+        <field name="model">integrated.access.request</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="integrated_option"/>
+                <field name="state"/>
+                <field name="description"/>
+                <field name="emp_access_req_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="integrated_access_request_form_view" model="ir.ui.view">
+        <field name="name">integrated_access_request_form_view</field>
+        <field name="model">integrated.access.request</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="integrated_option"/>
+                            <field name="name"/>
+                            <field name="state"/>
+                        </group>
+                        <group>
+                            <field name="description"/>
+                            <field name="emp_access_req_id"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="integrated_access_request_action" model="ir.actions.act_window">
+        <field name="name">Integrated Access Request</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">integrated.access.request</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="employee_inherit_view" model="ir.ui.view">
+        <field name="name">employee.inherit.view</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='resume']" position="inside">
+                <group>
+                    <field name="functional_knowledge_score"/>
+                    <field name="global_knowledge_score"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="employee_inherit_view_01" model="ir.ui.view">
+        <field name="name">employee.inherit.view.skill</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr_skills.hr_employee_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='resume']/div/div[1]" position="attributes">
+                <attribute name="class">o_hr_skills_editable o_hr_skills_group o_group_resume col-lg-6 d-flex flex-column</attribute>
+            </xpath>
+            <xpath expr="//page[@name='resume']/div/div[2]" position="attributes">
+                <attribute name="class">o_hr_skills_editable o_hr_skills_group o_group_skills col-lg-6 d-flex flex-column</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

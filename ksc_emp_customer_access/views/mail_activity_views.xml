@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="action_mail_activity_my_team" model="ir.actions.act_window">
+        <field name="name">Activities of my team</field>
+        <field name="res_model">mail.activity</field>
+        <field name="domain">['|', ('user_id', '=', uid), ('user_id.parent_ids', '=', uid)]</field>
+        <field name="context">{'search_default_assigned':1, 'search_default_activities_overdue':1}</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem
+      id="menu_activities_of_my_team"
+      name="Activities of my team"
+      action="action_mail_activity_my_team"
+      parent="calendar.mail_menu_calendar"/>
+
+<!--    For display archived and active activities on leads-->
+    <record id="crm.crm_lead_action_my_activities" model="ir.actions.act_window">
+        <field name="domain">[('activity_ids','!=',False), '|', ('active', '=', True), ('active', '=', False)]</field>
+    </record>
+</odoo>

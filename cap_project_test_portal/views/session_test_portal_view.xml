@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <template id="portal_my_home" inherit_id="portal.portal_my_home">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <div id="portal_client_category" position="inside">
+                <t t-call="portal.portal_docs_entry">
+                    <t t-set="icon" t-value="'/cap_project_test_portal/static/src/img/book-education.svg'"/>
+                    <t t-set="title">Session Test</t>
+                    <t t-set="url" t-value="'/my/project_tests'"/>
+                    <t t-set="text">Follow, Project or Session Test</t>
+                    <t t-set="placeholder_count" t-value="'session_count'"/>
+                </t>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="session_test_embed" name="Session Test View Embed">
+        <t t-call="web.layout">
+            <t t-set="head_session_test">
+                <script type="text/javascript">
+                    odoo.__session_info__ =<t t-out="json.dumps(session_info)"/>;
+                    odoo.loadMenusPromise = Promise.resolve();
+                </script>
+                <base target="_parent"/>
+                <t t-call-assets="project.webclient"/>
+            </t>
+            <t t-set="head" t-value="(head_session_test or '') + (head or '')"/>
+            <t t-set="body_classname" t-value="'o_web_client o_session_test'"/>
+        </t>
+    </template>
+
+    <template id="portal_my_project_tests" name="My Projects">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Projects</t>
+            </t>
+            <t t-if="not projects">
+                <div class="alert alert-warning mt8" role="alert">
+                    There are no projects.
+                </div>
+            </t>
+
+            <t t-if="projects" t-call="portal.portal_table">
+                <tbody>
+                    <tr t-foreach="projects" t-as="project">
+                        <td>
+                            <a t-attf-href="/my/project_tests/#{project.id}?{{ keep_query() }}">
+                                <span t-field="project.name"/>
+                            </a>
+                        </td>
+                        <td class="text-end">
+                            <t t-set="sessions"
+                               t-value="project.env['session.test'].search_count([('project_id', '=', project.id)])"/>
+                            <t t-out="sessions"/>
+                            Sessions
+                        </td>
+                    </tr>
+                </tbody>
+            </t>
+        </t>
+    </template>
+
+    <template id="project_test_session_sharing_portal" name="Session Test View">
+        <t t-call="portal.frontend_layout">
+            <!-- To add the class on div#wrapwrap to remove the overflow -->
+            <t t-set="pageName" t-value="'o_session_sharing_container'"/>
+            <t t-set="no_footer" t-value="true"/>
+            <t t-call="cap_project_test_portal.session_test_sharing"/>
+        </t>
+    </template>
+
+    <template id="session_test_sharing" name="Session Test Sharing View">
+        <!--    We need to forward the request lang to ensure that the lang set on the portal match the lang delivered -->
+        <iframe class="flex-grow-1" frameborder="0" width="1920px" height="740px"
+                t-attf-src="/{{ request.context['lang'] }}/my/sessions/{{ str(project_id) }}/session_sharing"/>
+    </template>
+
+    <!-- template for launch session  -->
+
+    <template id="project_test_session_launch_sharing_portal" name="Session Test View">
+        <t t-call="portal.frontend_layout">
+            <!-- To add the class on div#wrapwrap to remove the overflow -->
+            <t t-set="pageName" t-value="'o_session_sharing_container'"/>
+            <t t-set="no_footer" t-value="true"/>
+            <t t-set="o_portal_fullwidth_alert" groups="base.group_user">
+                <t t-call="portal.portal_back_in_edit_mode">
+                    <t t-set="backend_url"
+                       t-value="'/web#id=%s&amp;menu_id=cap_project_test.session_test_sub_menu&amp;action=cap_project_test.action_session_test&amp;model=session.test&amp;view_type=form' % (session_id) "/>
+                </t>
+            </t>
+            <iframe class="flex-grow-1" frameborder="0" width="1920px" height="740px"
+                    t-attf-src="/{{ request.context['lang'] }}/my/sessions_launch/{{ str(session_id) }}/session_sharing">
+            </iframe>
+        </t>
+    </template>
+
+</odoo>

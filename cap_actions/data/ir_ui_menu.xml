@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+  <record id="action_menu" model="ir.ui.menu" >
+    <field name="action" eval="False"/>
+    <field name="active" eval="True"/>
+    <field name="group_ids" eval="[(6, 0, [ref('cap_actions.group_action_user'), ref('cap_actions.group_action_viewer'), ref('cap_actions.group_action_admin')])]"/>
+    <field name="name">Action</field>
+    <field name="parent_id" eval="False"/>
+    <field name="sequence">10</field>
+    <field name="web_icon">fa fa-bolt,#0079BF,#BC4242</field>
+  </record>
+  <record id="action_menu_action" model="ir.ui.menu" >
+    <field name="action" ref="action_action"/>
+    <field name="active" eval="True"/>
+    <field name="group_ids" eval="[(6, 0, [ref('cap_actions.group_action_user'), ref('cap_actions.group_action_viewer'), ref('cap_actions.group_action_admin')])]"/>
+    <field name="name">Action</field>
+    <field name="parent_id" ref="action_menu"/>
+    <field name="sequence">1</field>
+    <field name="web_icon" eval="False"/>
+  </record>
+  <record id="action_menu_configuration" model="ir.ui.menu" >
+    <field name="action" ref="base.action_open_website"/>
+    <field name="active" eval="True"/>
+    <field name="group_ids" eval="[(6, 0, [ref('cap_actions.group_action_admin')])]"/>
+    <field name="name">Configuration</field>
+    <field name="parent_id" ref="action_menu"/>
+    <field name="sequence">2</field>
+    <field name="web_icon" eval="False"/>
+  </record>
+  <record id="action_menu_meta_template" model="ir.ui.menu" >
+    <field name="action" ref="action_meta_template_action"/>
+    <field name="active" eval="True"/>
+    <field name="group_ids" eval="[(6, 0, [ref('cap_actions.group_action_admin')])]"/>
+    <field name="name">Meta Template Action</field>
+    <field name="parent_id" ref="action_menu_configuration"/>
+    <field name="sequence">1</field>
+    <field name="web_icon" eval="False"/>
+  </record>
+  <record id="action_menu_template" model="ir.ui.menu">
+    <field name="action" ref="action_template_action"/>
+    <field name="active" eval="True"/>
+    <field name="group_ids" eval="[(6, 0, [ref('cap_actions.group_action_admin')])]"/>
+    <field name="name">Template Action</field>
+    <field name="parent_id" ref="action_menu_configuration"/>
+    <field name="sequence">2</field>
+    <field name="web_icon" eval="False"/>
+  </record>
+  <record id="action_menu_template_template" model="ir.ui.menu">
+    <field name="action" ref="action_template_template_action"/>
+    <field name="active" eval="True"/>
+    <field name="group_ids" eval="[(6, 0, [ref('cap_actions.group_action_admin')])]"/>
+    <field name="name">Template Template Action</field>
+    <field name="parent_id" ref="action_menu_configuration"/>
+    <field name="sequence">2</field>
+    <field name="web_icon" eval="False"/>
+  </record>
+</odoo>

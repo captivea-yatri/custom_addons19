@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="gamification_badge_form_inherit_view_id" model="ir.ui.view">
+            <field name="name">gamification.badge.form.inherit.view.id</field>
+            <field name="model">gamification.badge</field>
+            <field name="inherit_id" ref="gamification.badge_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form[1]/sheet[1]/group[2]" position="after">
+                    <group name="bonus_management_group" string="Bonus Management">
+                        <field name="quest_bonus"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

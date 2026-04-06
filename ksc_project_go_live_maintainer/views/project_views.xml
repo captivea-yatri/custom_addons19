@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="action_view_project_glive_change_request" model="ir.actions.act_window">
+        <field name="name">Go Live Change Request</field>
+        <field name="res_model">glive.change.request</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('project_id', '=', active_id)]</field>
+        <field name="context">{'default_project_id': active_id}</field>
+    </record>
+
+    <record model="ir.ui.view" id="project_project_view_form">
+        <field name="name">project.project.view.form</field>
+        <field name="model">project.project</field>
+        <field name="priority">19</field>
+        <field name="inherit_id" ref="project.edit_project"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/div[1]/button[2]" position="after">
+                <button class="oe_stat_button" type="action"
+                        name="%(ksc_project_go_live_maintainer.action_view_project_glive_change_request)d"
+                        string="Go-Live Change Req" icon="fa-tasks">
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>

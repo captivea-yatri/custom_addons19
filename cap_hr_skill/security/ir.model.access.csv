@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_domain_skill,hr_domain_skill_menu,model_hr_domain_skill,,1,1,1,1
+access_hr_skill_validator,hr_skill_validator_menu,model_hr_skill_validator,,1,1,1,1
+access_hr_skill_validation_request,hr_skill_validation_request_menu,model_hr_skill_validation_request,base.group_user,1,1,1,1

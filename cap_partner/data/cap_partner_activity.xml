@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="ir_cron_manage_customer_status" model="ir.cron">
+            <field name="name">Manage Customer's Status</field>
+            <field name="model_id" ref="analytic.model_account_analytic_line"/>
+            <field name="state">code</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="code">
+
+today = datetime.date.today()
+one_twenty_days_befor = today + dateutil.relativedelta.relativedelta(days=-120)
+one_year_befor = today + dateutil.relativedelta.relativedelta(days=-365)
+
+# Fetch relevant partner_ids, projects, and sale orders
+company_partner_ids = env["res.company"].search([('partner_id', '!=', False)]).mapped('partner_id')
+project_ids = env['project.project'].search([
+    ('partner_id', 'not in', company_partner_ids.ids),
+    '|',
+    ('partner_id', '!=', False),
+    ('active', '=', False)
+])
+
+partner_ids = project_ids.mapped('partner_id')
+active_project_ids = project_ids.filtered(lambda rec: rec.active)
+
+for partner_id in partner_ids:
+    parent_id = partner_id._get_parent_id()  # Get parent partner
+    customer_since_date = parent_id.customer_since_date or None
+    child_ids = parent_id.all_child_ids.ids
+
+    # Ensure child_ids is not None and a valid list
+    child_ids = child_ids if child_ids else []
+
+    # Filter sorted projects by partner (safe filtering)
+    sorted_project_ids = project_ids.filtered(lambda rec: rec.partner_id == parent_id or rec.partner_id.id in child_ids).sorted('create_date')
+    # Check for empty filtered result and handle accordingly
+    if sorted_project_ids:
+        last_project_create_date = sorted_project_ids[-1].create_date.date()
+    else:
+        last_project_create_date = None
+
+    # Fetch timesheet records with a safe check
+    timesheet_ids = env['account.analytic.line'].search([
+        ('name', '!=', 'Closing of the SO'),
+        ('project_id.active', '!=', False),
+        ('task_id.active', '!=', False),
+        ('date', '>', one_year_befor),
+        '|',
+        ('partner_id', '=', parent_id.id),
+        ('partner_id', 'in', child_ids)
+    ], order='date')
+
+    # Check for timesheet records
+    if timesheet_ids:
+        last_timesheet_date = timesheet_ids[-1].date
+    else:
+        last_timesheet_date = None
+
+    sale_order_ids = env['sale.order'].search([('partner_id', 'child_of', parent_id.id)])
+    confirmed_so_ids = sale_order_ids.filtered(lambda so: so.state in ['sale', 'done']).sorted('date_order', reverse=True)
+
+    if timesheet_ids and last_timesheet_date and last_project_create_date:
+        if last_timesheet_date &lt; one_twenty_days_befor and last_project_create_date &lt; one_twenty_days_befor:
+            parent_id.with_context(update_status=True)._set_customer_status_child('customer', customer_since_date, None, 'Inactive', False)
+        elif parent_id.status != 'customer' or parent_id.x_studio_sales_status not in ['Active Pay as you go', 'Active Payment in Advance'] or parent_id.no_customer_since != False:
+            if confirmed_so_ids:
+                based_on_timesheet_product = confirmed_so_ids[0].order_line.filtered(lambda line: line.product_id.service_policy == 'delivered_timesheet')
+                sales_status = 'Active Pay as you go' if based_on_timesheet_product else 'Active Payment in Advance'
+                parent_id.with_context(update_status=True)._set_customer_status_child('customer', customer_since_date, None, sales_status, False)
+    else:
+        active_sorted_project_ids = active_project_ids.filtered(lambda rec: rec.partner_id == parent_id or rec.partner_id.id in child_ids).sorted('create_date')
+        if not active_sorted_project_ids:
+            if not confirmed_so_ids:
+                parent_id.with_context(update_status=True)._set_customer_status_child('not_customer', customer_since_date, None, False, False)
+            if confirmed_so_ids and confirmed_so_ids[0].date_order.date() &lt; one_year_befor:
+                parent_id.with_context(update_status=True)._set_customer_status_child('old_customer', customer_since_date, None, 'Inactive', False)
+        else:
+            last_project_create_date = active_sorted_project_ids[-1].create_date.date() if active_sorted_project_ids else None
+            last_sale_order_date = confirmed_so_ids[0].date_order.date() if confirmed_so_ids else None
+            if last_sale_order_date:
+                if last_sale_order_date and last_sale_order_date &lt; one_year_befor and last_project_create_date and last_project_create_date &lt; one_year_befor:
+                    parent_id.with_context(update_status=True)._set_customer_status_child('old_customer', customer_since_date, None, 'Inactive', False)
+                elif last_sale_order_date and last_sale_order_date &lt; one_twenty_days_befor and last_project_create_date and last_project_create_date &lt; one_twenty_days_befor:
+                    parent_id.with_context(update_status=True)._set_customer_status_child('customer', customer_since_date, None, 'Inactive', False)
+                else:
+                    if confirmed_so_ids:
+                        based_on_timesheet_product = confirmed_so_ids[0].order_line.filtered(lambda line: line.product_id.service_policy == 'delivered_timesheet')
+                        sales_status = 'Active Pay as you go' if based_on_timesheet_product else 'Active Payment in Advance'
+                        parent_id.with_context(update_status=True)._set_customer_status_child('customer', customer_since_date, None, sales_status, False)
+            else:
+                if last_project_create_date and last_project_create_date &lt; one_year_befor:
+                    parent_id.with_context(update_status=True)._set_customer_status_child('old_customer', customer_since_date, None, 'Inactive', False)
+                elif last_project_create_date and last_project_create_date &lt; one_twenty_days_befor:
+                    parent_id.with_context(update_status=True)._set_customer_status_child('customer', customer_since_date, None, 'Inactive', False)
+                else:
+                    if confirmed_so_ids:
+                        based_on_timesheet_product = confirmed_so_ids[0].order_line.filtered(lambda line: line.product_id.service_policy == 'delivered_timesheet')
+                        sales_status = 'Active Pay as you go' if based_on_timesheet_product else 'Active Payment in Advance'
+                        parent_id.with_context(update_status=True)._set_customer_status_child('customer', customer_since_date, None, sales_status, False)
+            </field>
+        </record>
+    </data>
+</odoo>

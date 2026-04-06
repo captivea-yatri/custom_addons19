@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_employee_form_internal_project_quota" model="ir.ui.view">
+        <field name="name">view.employee.form.internal.project.quota</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position='inside'>
+                <page string="Internal Project Quotas" name="internal_project_quotas"
+                      groups="ksc_project_extended.access_internal_project_quota">
+                    <field name="internal_project_quota_ids">
+                        <list editable="bottom">
+                            <field name="project_id" string="Project" required="1"/>
+                            <field name="hours_per_month" string="hours per month" required="1"/>
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

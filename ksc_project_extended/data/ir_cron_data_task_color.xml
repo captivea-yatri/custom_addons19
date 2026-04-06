@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+    <!--######################################## Scheduled Action ###################################################-->
+        <record id="ir_cron_send_email_to_salesperson" model="ir.cron">
+            <field name="name">Send Mail To Salesperson</field>
+            <field name="model_id" ref="project.model_project_project"/>
+            <field name="state">code</field>
+            <field name="code">model.send_mail()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="ir_cron_execute_color_compute_for_due_invoice" model="ir.cron">
+            <field name="name">Execute Task Color Compute for Due Invoice</field>
+            <field name="model_id" ref="account.model_account_move"/>
+            <field name="state">code</field>
+            <field name="code">
+date_after_5_days = datetime.date.today() + datetime.timedelta(days=5)
+company_ids = env['res.company'].search([])
+for company_id in company_ids:
+    number_of_days_authorized_in_late = datetime.date.today() - datetime.timedelta(days=company_id.number_of_days_authorized_in_late + 1)
+    invoice_ids = model.sudo().search([('move_type', '=', 'out_invoice'), ('state', '=', 'posted'), ('payment_state', '!=', 'paid'),
+    ('invoice_date_due', '&lt;=', date_after_5_days), ('invoice_date_due', '>=', number_of_days_authorized_in_late)])
+    partner_ids = invoice_ids.mapped('partner_id') + invoice_ids.mapped('partner_id').mapped('parent_id')
+    project_ids = env['project.project'].sudo().search([('partner_id', 'child_of', partner_ids.ids)])
+    project_ids.compute_project_color_remaining_hours()
+            </field>
+            <field name="interval_number">4</field>
+            <field name="interval_type">hours</field>
+            <field name="active" eval="False" />
+            <field name="user_id" ref="base.user_root"/>
+        </record>
+
+        <!--############################### Server Action For Below Automated Action ################################-->
+        <record id="ir_server_project_blocking_allowance_days" model="ir.actions.server">
+            <field name="name">Project blocking allowance days based on company</field>
+            <field name="model_id" ref="ksc_project_extended.model_res_company"/>
+            <field name="state">code</field>
+            <field name="code">
+today = datetime.date.today()
+company_partners = []
+for company_id in env['res.company'].search([('partner_id', '!=', False)]):
+    company_partners.append(company_id.partner_id.id)
+for rec in records:
+    project_ids = env['project.project'].search([('company_id', '=', rec.id), ('partner_id', 'not in', company_partners), ('active', '=', True)])
+    for project_id in project_ids:
+        parent_id = project_id.partner_id.mapped('parent_id') or project_id.partner_id
+        invoice_ids = parent_id.invoice_ids + parent_id.mapped('child_ids').invoice_ids
+        not_paid_invoice_ids = invoice_ids.filtered(lambda move: move.state == 'posted' and move.move_type == 'out_invoice' and
+                                 move.payment_state in ['not_paid', 'partial'] and move.invoice_date_due != False and
+                                 move.company_id.id == rec.id and move.invoice_date_due &lt; today)
+        if not_paid_invoice_ids:
+            project_id.compute_project_color_remaining_hours()
+            for task_id in project_id.task_ids:
+                task_id.compute_task_color()
+partner_ids = env['res.partner'].search([('is_company', '=', True), ('x_studio_customer_of', '=', rec.id)])
+for partner_id in partner_ids:
+    not_paid_invoice_ids = partner_id.invoice_ids.filtered(lambda move: move.state == 'posted' and
+                           move.move_type == 'out_invoice' and move.payment_state in ['not_paid', 'partial'] and
+                           move.invoice_date_due != False and move.company_id.id == partner_id.x_studio_customer_of.id)
+    if not_paid_invoice_ids:
+        partner_id.compute_late_invoice_status()
+            </field>
+        </record>
+
+        <!--######################################## Automated Action ###############################################-->
+        <record id="base_automation_project_blocking_allowance_days" model="base.automation">
+            <field name="name">Project blocking allowance days based on company</field>
+            <field name="model_id" ref="ksc_project_extended.model_res_company"/>
+            <field name="trigger">on_create_or_write</field>
+            <field name="trigger_field_ids" eval="[(4, ref('cap_partner.field_res_company__number_of_days_authorized_in_late'))]"/>
+            <field name="action_server_ids" eval="[(4, ref('ksc_project_extended.ir_server_project_blocking_allowance_days'))]"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <template id="portal_my_projects_inherit_tree_view" name="Project"
+                  customize_show="True" inherit_id="project.portal_my_projects">
+            <xpath expr="//t[@t-if='projects']//td[1]" position="after">
+                <td class="text-end" name="set_icon">
+                    <a t-attf-href="/new/feedback/#{project.id}?{{ keep_query() }}">
+                        <i class="fa fa-comments"/>
+                    </a>
+                </td>
+            </xpath>
+        </template>
+    </data>
+</odoo>

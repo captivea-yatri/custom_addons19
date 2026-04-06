@@ -1,0 +1,36 @@
+<odoo>
+    <record id="view_product_category_list_ksc" model="ir.ui.view">
+        <field name="name">product.category.ksc.list</field>
+        <field name="model">product.category.ksc</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="parent_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_product_category_form_ksc" model="ir.ui.view">
+        <field name="name">product.category.ksc.form</field>
+        <field name="model">product.category.ksc</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="name"/>
+                    <field name="parent_id"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_product_category_ksc" model="ir.actions.act_window">
+        <field name="name">Product Category</field>
+        <field name="res_model">product.category.ksc</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_product_category_ksc"
+              name="Product Category"
+              parent="menu_my_sales_category"
+              action="action_product_category_ksc"/>
+</odoo>

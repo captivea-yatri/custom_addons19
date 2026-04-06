@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_tree_meta_project_requirement" model="ir.ui.view">
+        <field name="name">meta.project.requirement.tree</field>
+        <field name="model">meta.project.requirement</field>
+        <field name="arch" type="xml">
+            <list create="false" delete="false">
+                <field name="name"/>
+                <field name="calculation_formula"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_form_meta_project_requirement" model="ir.ui.view">
+        <field name="name">meta.project.requirement.form</field>
+        <field name="model">meta.project.requirement</field>
+        <field name="arch" type="xml">
+            <form create="false" delete="false">
+                <sheet>
+                    <div name="button_box" class="oe_button_box">
+                        <button class="oe_stat_button" name="action_view_project_requirement" type="object"
+                                icon="fa-list">
+                            <div class="o_stat_info o_field_widget">
+                                <span class="o_stat_text">
+                                    Project
+                                </span>
+                                <span class="o_stat_text">
+                                    Requirements
+                                </span>
+                            </div>
+                        </button>
+                    </div>
+                    <group>
+                        <field name="name" required="True"/>
+                        <field name="calculation_formula" required="True"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_view_meta_project_requirement" model="ir.actions.act_window">
+        <field name="name">Meta Project Requirement</field>
+        <field name="res_model">meta.project.requirement</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+<!--    embedded action-->
+
+    <record id="project_embedded_action_meta_project_requirements" model="ir.embedded.actions">
+        <field name="parent_res_model">project.project</field>
+        <field name="sequence">100</field>
+        <field name="name">Meta Project Requirements</field>
+        <field name="parent_action_id" ref="project.act_project_project_2_project_task_all"/>
+        <field name="python_method">action_view_meta_project_req</field>
+        <field name="context">{"from_embedded_action": true}</field>
+    </record>
+
+    <menuitem name="Meta Project Requirement"
+              parent="template_requirement_main_menu"
+              id="meta_project_requirement_menu"
+              action="action_view_meta_project_requirement"/>
+</odoo>

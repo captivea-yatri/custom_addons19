@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="project_from_view_inherit_view_id_001" model="ir.ui.view">
+        <field name="name">project.project.inherit.view</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='software_version_id']" position="after">
+                <field name="filtered_offer_ids" invisible="1"/>
+                <field name="offer_id" domain="[('id','in',filtered_offer_ids)]" groups="access_rights_management.role_president,access_rights_management.role_ceo,access_rights_management.role_team_director" options="{'no_create': True}"/>
+                <field name="offer_id" domain="[('id','in',filtered_offer_ids)]" readonly="1" groups="!access_rights_management.role_president,!access_rights_management.role_ceo,!access_rights_management.role_team_director" options="{'no_create': True}"/>
+                <field name="filtered_default_domain_ids" widget="many2many_tags" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

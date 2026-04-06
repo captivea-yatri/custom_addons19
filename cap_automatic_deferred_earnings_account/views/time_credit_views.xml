@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="view_time_credit_form">
+        <field name="name">time.credit.form</field>
+        <field name="model">time.credit</field>
+        <field name="arch" type="xml">
+            <form string="Asset" create="false">
+                <field name="company_id" invisible="1"/>
+                <field name="currency_id" invisible="1"/>
+                <field name="account_time_credit_id" invisible="1"/>
+                <field name="state" invisible="1"/>
+                <field name="total_depreciation_entries_count" invisible="1"/>
+                <header>
+                    <button name="set_to_draft" string="Set to Draft" type="object"
+                            invisible="state != 'open'" class="oe_highlight" data-hotkey="q"/>
+                    <button name="set_to_running" string="Set to Running" type="object"
+                            invisible="state != 'close'" class="oe_highlight" data-hotkey="q"/>
+                    <button name="validate" string="Confirm"
+                            invisible="state != 'draft'"
+                            type="object" class="oe_highlight" data-hotkey="q"/>
+                    <button type="object" name="auto_reconcile_deferred_revenue_expense" string="Reconcile"
+                            groups="account.group_account_invoice"
+                            invisible="state != 'close' or is_reconciled == True or is_automatic_deferred_earnings_account == True"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,open"/>
+                    <field name="is_automatic_deferred_earnings_account" invisible="1"/>
+                    <field name="is_reconciled" invisible="1"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" name="open_credit_entries" type="object" icon="fa-bars">
+                            <field string="Posted Credit Entries" name="depreciation_entries_count" widget="statinfo"/>
+                        </button>
+                    </div>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger" invisible="active"/>
+                    <div class="oe_title">
+                        <label for="name" name="model_name_label" string="Credit name"/>
+                        <h1>
+                            <field name="name" placeholder="e.g. Laptop iBook" required="1"/>
+                        </h1>
+                    </div>
+                    <notebook colspan="4">
+                        <page string="Credit" name="main_page">
+                            <group>
+                                <field name="active" invisible="1"/>
+                                <group string="Credit Values"
+                                       name="credit_values">
+                                    <field name="original_value" widget="monetary"
+                                           options="{'currency_field': 'currency_id'}"
+                                           readonly="state != 'draft'"/>
+                                    <field name="project_id"/>
+                                </group>
+                                <group string="Current Values"
+                                       name="current_values">
+                                    <field name="salvage_value" widget="monetary"
+                                           options="{'currency_field': 'currency_id'}"/>
+                                    <field name="value_left_of_the_previous_fiscal_period" widget="monetary"/>
+                                    <label for="book_value"/>
+                                    <span>
+                                        <field name="book_value" class="oe_inline" widget="monetary" required="1"
+                                               options="{'currency_field': 'currency_id'}"/>
+                                        <span   invisible="salvage_value == 0">
+                                            (incl.
+                                            <field name="value_residual" nolabel="1" force_save="1" widget="monetary"
+                                                   options="{'currency_field': 'currency_id'}"/>
+                                            depreciable)
+                                        </span>
+                                    </span>
+                                </group>
+                                <group string="Accounting">
+                                    <field name="company_id" options="{'no_create': True}"
+                                           groups="base.group_multi_company"/>
+                                    <field name="account_depreciation_id"
+                                           domain="[('company_ids', 'parent_of',[company_id]),('account_type', 'in', ('asset_fixed','asset_non_current','asset_current')),]"
+                                           string="Deferred Revenue Account" groups="base.group_multi_company"/>
+                                    <field name="account_depreciation_expense_id"
+                                           domain="[('company_ids', 'parent_of',[company_id]),('account_type', 'in', ('expense_depreciation','expense')),]"
+                                           string="Revenue Account" groups="base.group_multi_company"/>
+                                    <field name="journal_id" required="1"/>
+                                    <field name="analytic_distribution" groups="analytic.group_analytic_accounting"
+                                           options="{'account_field': 'account_depreciation_expense_id', 'business_domain': 'general'}"
+                                           widget="analytic_distribution"
+                                           readonly="0"/>
+                                </group>
+                                <group string="Value at Import" invisible="1">
+                                    <field name="already_depreciated_amount_import"
+                                           string="Already Depreciated Amount" invisible="1"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Depreciation Board" name="depreciation_board"
+                              invisible="total_depreciation_entries_count == 0">
+                            <field name="depreciation_move_ids" mode="list" options="{'reload_whole_on_button': true}">
+                                <list string="Depreciation Lines" decoration-info="state == 'draft'" create="0"
+                                      default_order="date asc, id asc" editable="top">
+                                    <field name="currency_id" column_invisible="True" readonly="state in ['cancel', 'posted']"/>
+                                    <field name="date" string="Depreciation Date" readonly="state in ['cancel', 'posted']"/>
+                                    <field name="ref" />
+                                    <field name="reversal_move_ids" widget="deprec_lines_reversed" nolabel="1"/>
+                                    <field name="depreciation_value_time_credit" widget="monetary" string="Depreciation"
+                                           options="{'currency_field': 'currency_id'}"
+                                           readonly="state == 'posted'"/>
+                                    <field name="time_credit_depreciated_value" readonly="1" force_save="1"
+                                           options="{'currency_field': 'currency_id'}"/>
+                                    <field name="time_credit_remaining_value" readonly="1" widget="monetary"
+                                           force_save="1" options="{'currency_field': 'currency_id'}"/>
+                                    <field name="name" readonly="1" string="Journal Entry" widget="open_move_widget"/>
+                                    <field name="state" column_invisible="True"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_time_credit_tree" model="ir.ui.view">
+        <field name="name">time.credit.tree</field>
+        <field name="model">time.credit</field>
+        <field name="arch" type="xml">
+            <list string="Credits" decoration-info="(state == 'draft')"
+                  decoration-muted="(state in ['close', 'cancelled'])"
+                  decoration-warning="(state == 'close' and value_residual != 0)" sample="1" create="false">
+                <field name="name"/>
+                <field name="original_value"/>
+                <field name="book_value"/>
+                <field name="value_residual" widget="monetary"/>
+                <field name="account_time_credit_id" optional="hide"/>
+                <field name="account_depreciation_id" optional="hide"/>
+                <field name="account_depreciation_expense_id" optional="hide"/>
+                <field name="currency_id" groups="base.group_multi_currency" optional="hide"/>
+                <field name="company_id" groups="base.group_multi_company" optional="hide"/>
+                <field name="company_id" groups="!base.group_multi_company" column_invisible="True"/>
+                <field name="state"/>
+                <field name="last_day_of_previous_month"/>
+                <field name="value_left_of_the_previous_fiscal_period" widget="monetary"/>
+                <field name="activity_exception_decoration" widget="activity_exception"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="cap_view_time_credit_search" model="ir.ui.view">
+        <field name="name">cap_view_time_credit_search</field>
+        <field name="model">time.credit</field>
+        <field name="arch" type="xml">
+            <search string="Credit Time">
+                <field name="name" string="Asset"/>
+                <filter string="Current" name="current" domain="[('state','in', ('draft','open'))]" help="Assets in draft and open states"/>
+                <filter string="Closed" name="closed" domain="[('state','=', 'close')]" help="Assets in closed state"/>
+                <filter string="Draft" name="draft" domain="[('state','=', 'draft')]" help="Assets in draft state"/>
+                <separator/>
+                <filter name="archived" string="Archived" domain="[('active', '=', False)]"/>
+                <group>
+                    <filter string="Status" name="state" domain="[]" context="{'group_by':'state', 'group_expand':False}"/>
+                    <filter string="Journal" name="journal_id" domain="[]" context="{'group_by':'journal_id', 'group_expand':False}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_time_credit" model="ir.actions.act_window">
+        <field name="name">Time Credit</field>
+        <field name="res_model">time.credit</field>
+        <field name="view_mode">list,form,search</field>
+    </record>
+
+    <menuitem parent="account.menu_finance_entries" id="menu_action_tie_credit" action="action_time_credit"/>
+</odoo>

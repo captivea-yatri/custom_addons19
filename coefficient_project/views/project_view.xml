@@ -1,0 +1,77 @@
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="project_task_type_default">
+            <field name="name">project.task.type.default</field>
+            <field name="model">project.task.type</field>
+            <field name="inherit_id" ref="project.task_type_edit"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='fold']" position="after">
+                    <field name="is_default"/>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record model="ir.ui.view" id="project_project_default_stages">
+            <field name="name">project.project.default.stages</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.edit_project"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='group_tasks_managment']" position="after">
+                    <group>
+                        <field name="type_id"/>
+                        <field name="template_id"/>
+                        <button name="go_use_default_stages" type="object" string="Default Swim Lanes" class="btn btn-primary"/>
+
+
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="project_project_simplified_default_stages">
+            <field name="name">project.project.simplified.default.stages</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.project_project_view_form_simplified"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']/.." position="after">
+                    <group>
+                        <field name="use_default_stages" class="oe_inline"/>
+                        <field name="type_id"/>
+                        <field name="template_id"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="co_efficient_project_search_view">
+            <field name="name">coefficient.search</field>
+            <field name="inherit_id" ref="project.view_project_project_filter"/>
+            <field name="model">project.project</field>
+            <field name="arch" type="xml">
+                <search>
+                    <filter name="template_projects" string="Project Templates" domain="[('type_id.name','=','Template')]"/>
+                </search>
+            </field>
+        </record>
+
+        <!--
+        <record id="action_use_default_tasks" model="ir.actions.server">
+                <field name="name">Default Stages</field>
+                <field name="model_id" ref="project.model_project_project"/>
+                <field name="state">code</field>
+                <field name="condition">True</field>
+                <field name="code">if object: action = model.browse(context.get('active_ids')).go_use_default_stages()</field>
+        </record>
+        <record id="default_tasks_action_binding" model="ir.values">
+                <field name="name">project.default.stages</field>
+                <field name="model">project.project</field>
+                <field name="key" >action</field>
+                <field name="key2">client_action_multi</field>
+                <field name="value" eval="'ir.actions.server,%d'%action_use_default_tasks"/>
+        </record>
+        -->
+
+    </data>
+</odoo>

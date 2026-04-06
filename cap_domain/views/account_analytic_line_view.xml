@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="timesheet_inherited_view_form_domain_and_phase" model="ir.ui.view">
+        <field name="name">timesheet.inherited.view.form.domain.phase</field>
+        <field name="model">account.analytic.line</field>
+        <field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_form"/>
+        <field name="priority">2</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='task_id']" position="after">
+                <field name="project_domain_id" options="{'no_open': True}"/>
+                <field name="default_phase_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="timesheet_view_search_domain_phase" model="ir.ui.view">
+        <field name="name">account.analytic.line.search.inherit.domain.phase</field>
+        <field name="model">account.analytic.line</field>
+        <field name="inherit_id" ref="timesheet_grid.timesheet_view_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='month']" position="before">
+                <filter string="Task Domain" name="project_domain_id" domain="[('project_domain_id', '!=', False)]"/>
+                <filter string="Task Phase" name="default_phase_id" domain="[('default_phase_id', '!=', False)]"/>
+            </xpath>
+            <xpath expr="//filter[@name='groupby_department']" position="after">
+                <filter string="Task Domain" name="project_domain_id" domain="[]"
+                        context="{'group_by': 'project_domain_id'}"/>
+                <filter string="Task Phase" name="default_phase_id" domain="[]"
+                        context="{'group_by': 'default_phase_id'}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

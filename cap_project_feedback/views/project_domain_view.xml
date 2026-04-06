@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="project_domain_form_view_inherit_cap_project_feedback" model="ir.ui.view">
+            <field name="name">project.domain.form.view</field>
+            <field name="model">project.domain</field>
+            <field name="inherit_id" ref="cap_requirements.project_domain_form_view_inherit_cap_project_requirement"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+                    <button name="access_feedback_record" type="object" class="oe_stat_button" icon="fa-bullseye">
+                        <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_text">Feedback</span>
+                        </div>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

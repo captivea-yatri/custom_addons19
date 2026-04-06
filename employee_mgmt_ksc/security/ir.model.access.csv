@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_employee_department,access_employee_department,model_employee_department_ksc,,1,1,1,1
+access_employee_shift,access_employee_shift,model_employee_department_shift_ksc,,1,1,1,1
+access_employee,access_employee,model_employee_ksc,,1,1,1,1
+access_employee_leave,access_employee_leave,model_employee_leave_ksc,,1,0,1,0

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="auto_internal_transaction_configuration_tree_view" model="ir.ui.view">
+            <field name="name">auto.internal.transaction.configuration.tree</field>
+            <field name="model">auto.internal.transaction.configuration</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="partner_id"/>
+                    <field name="company_id"/>
+                    <field name="journal_id"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="auto_internal_transaction_configuration_form_view" model="ir.ui.view">
+            <field name="name">auto.internal.transaction.configuration.form</field>
+            <field name="model">auto.internal.transaction.configuration</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="partner_id" options="{'no_quick_create': True, 'no_create_edit': True}"
+                                       required="1"/>
+                                <field name="company_id" options="{'no_quick_create': True, 'no_create_edit': True}"
+                                       required="1"/>
+                            </group>
+                            <group>
+                                <field name="journal_id" options="{'no_quick_create': True, 'no_create_edit': True}"
+                                       required="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="auto_internal_transaction_configuration_action" model="ir.actions.act_window">
+            <field name="name">Auto Internal Transaction Configuration</field>
+            <field name="res_model">auto.internal.transaction.configuration</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <menuitem action="auto_internal_transaction_configuration_action"
+                  id="auto_internal_transaction_configuration_menu"
+                  parent="account.menu_analytic_accounting"
+                  sequence="8"
+                  groups="account.group_account_basic"/>
+    </data>
+</odoo>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--    <record id="ksc_inherit_hr_payslip_run_view_form" model="ir.ui.view">-->
+<!--        <field name="name">ksc.hr.payslip.run.form</field>-->
+<!--        <field name="model">hr.payslip.run</field>-->
+<!--        <field name="inherit_id" ref="hr_payroll.hr_payslip_run_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//button[@name='action_validate']" position="replace">-->
+<!--                <button name="action_validate" type="object" string="create and post entry"-->
+<!--                        invisible="state not in 'verify'"-->
+<!--                        class="oe_highlight" context="{'payslip_generate_pdf': True}"-->
+<!--                        confirm="Are you sure you want to proceed ?"/>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+
+  <record id="ksc_inherit_hr_payslip_run_form" model="ir.ui.view">
+    <field name="name">ksc.hr.payslip.run.form.override</field>
+    <field name="model">hr.payslip.run</field>
+    <field name="inherit_id" ref="hr_payroll.hr_payslip_run_form"/>
+    <field name="arch" type="xml">
+
+        <!-- Add Register Payment after Draft button -->
+        <xpath expr="//button[@name='button_draft']" position="after" optional="true">
+            <button string="Register Payment" name="register_payment" type="object" class="oe_highlight"
+                    invisible="state != 'close'"/>
+        </xpath>
+
+        <!-- Add Confirm after Draft button -->
+        <xpath expr="//button[@name='button_draft']" position="after" optional="true">
+            <button string="Confirm" name="action_confirm" type="object"
+                    invisible="payslip_count &lt; 1 or state != 'draft'"/>
+        </xpath>
+
+        <!-- Journal Entry button -->
+        <div class="oe_button_box" name="button_box">
+            <button name="open_journal_entry" class="oe_stat_button" icon="fa-bars" type="object"
+                    help="Generated Payslips"
+                    invisible="state not in ['close','paid']">
+                <div class="o_field_widget o_stat_info">
+                    <span class="o_stat_text">Journal Entry</span>
+                </div>
+            </button>
+        </div>
+
+        <!-- Journal Items button -->
+        <div class="oe_button_box" name="button_box">
+            <button name="open_journal_items" class="oe_stat_button" icon="fa-pencil-square-o" type="object"
+                    invisible="state not in ['close','paid']">
+                <div class="o_field_widget o_stat_info">
+                    <span class="o_stat_text">Journal Items</span>
+                </div>
+            </button>
+        </div>
+
+    </field>
+</record>
+
+
+<!--    <record id="ksc_inherit_hr_payslip_run_form_inherit" model="ir.ui.view">-->
+<!--        <field name="name">ksc.hr.payslip.run.form</field>-->
+<!--        <field name="model">hr.payslip.run</field>-->
+<!--        <field name="inherit_id" ref="l10n_in_hr_payroll.hr_payslip_run_form_inherit"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//button[@name='create_advice']" position="attributes">-->
+<!--                <attribute name="invisible">1</attribute>-->
+<!--            </xpath>-->
+<!--            <xpath expr="//field[@name='available_advice']" position="attributes">-->
+<!--                <attribute name="invisible">True</attribute>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+</odoo>

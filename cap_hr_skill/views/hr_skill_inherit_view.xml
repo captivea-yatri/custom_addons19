@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_hr_skill_type_custom" model="ir.ui.view">
+        <field name="name">hr.skill.type.form.inherit</field>
+        <field name="model">hr.skill.type</field>
+        <field name="inherit_id" ref="hr_skills.hr_employee_skill_type_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='skill_ids']//list/field[@name='name']" position="after">
+                <field name="points" required="True"/>
+                <field name="type_of_valivation" required="True"/>
+                <field name="domain_skill_id" required="True"/>
+                <field name="survey_id" invisible="type_of_valivation != 'certification'" required="type_of_valivation == 'certification'"/>
+            </xpath>
+            <xpath expr="//h1" position="after">
+                <group>
+                    <field name="is_functional"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

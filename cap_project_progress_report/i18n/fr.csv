@@ -1,0 +1,605 @@
+module,type,name,res_id,src,value,comments
+cap_project_progress_report,model,"ir.actions.act_window,name",cap_project_progress_report.project_progress_action,Project Progress Report,,
+cap_project_progress_report,model_terms,"ir.actions.act_window,help",cap_project_progress_report.project_progress_action,No Project Progress Report found. Let's create one!,,
+cap_project_progress_report,model,"ir.actions.report,name",cap_project_progress_report.action_report_progress_,Project Progress Report Full,,
+cap_project_progress_report,model,"ir.actions.report,print_report_name",cap_project_progress_report.action_report_progress_,('%s' % (object.name)),,
+cap_project_progress_report,model,"ir.actions.report,name",cap_project_progress_report.project_progress_report_no_deadline,Project Progress Report Light,,
+cap_project_progress_report,model,"ir.actions.report,print_report_name",cap_project_progress_report.project_progress_report_no_deadline,('%s' % (object.name)),,
+cap_project_progress_report,model,"ir.embedded.actions,name",cap_project_progress_report.project_embedded_action_project_progress_report,Project Progress Report,,
+cap_project_progress_report,model,"ir.model,name",cap_project_progress_report.model_mail_compose_message,Email composition wizard,Assistant de composition de courriel,
+cap_project_progress_report,model,"ir.model,name",cap_project_progress_report.model_project_domain_history,Project Domain History,,
+cap_project_progress_report,model,"ir.model,name",cap_project_progress_report.model_project_milestone,Project Milestone,Jalon du projet,
+cap_project_progress_report,model,"ir.model,name",cap_project_progress_report.model_project_milestone_history,Project Milestone,Jalon du projet,
+cap_project_progress_report,model,"ir.model,name",cap_project_progress_report.model_project_progress,Project Progress Report,,
+cap_project_progress_report,model,"ir.model,name",cap_project_progress_report.model_project_project,Project,Projet,
+cap_project_progress_report,model,"ir.model,name",cap_project_progress_report.model_project_status,Project Status,,
+cap_project_progress_report,model,"ir.model,name",cap_project_progress_report.model_project_task,Task,Tâche,
+cap_project_progress_report,model,"ir.model,name",cap_project_progress_report.model_project_task_type,Task Stage,Étape de tâche,
+cap_project_progress_report,model,"ir.model,name",cap_project_progress_report.model_sign_request,Signature Request,Demande de signature,
+cap_project_progress_report,model,"ir.model,name",cap_project_progress_report.model_task_history_log,Task History Log,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_domain_history__project_progress_id,Project Progress,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_domain_history__task_progress,Task Progress (%),,
+cap_project_progress_report,model,"ir.model.fields,help",cap_project_progress_report.field_project_domain_history__task_progress,Average progress of all tasks related to this project domain and phase.,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_milestone__project_progress_id,Project Progress Report,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_milestone__start_date,Start Date,Date de début,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_milestone__status,Status,Statut,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_milestone_history__create_date,Created on,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_milestone_history__create_uid,Created by,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_milestone_history__deadline,Deadline,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_milestone_history__display_name,Display Name,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_milestone_history__has_message,Has Message,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_milestone_history__id,ID,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_milestone_history__is_deadline_exceeded,Is Deadline Exceeded,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_milestone_history__is_deadline_future,Is Deadline Future,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_milestone_history__is_reached,Reached,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_milestone_history__message_attachment_count,Attachment Count,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_milestone_history__message_follower_ids,Followers,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_milestone_history__message_has_error,Message Delivery error,,
+cap_project_progress_report,model,"ir.model.fields,help",cap_project_progress_report.field_project_milestone_history__message_has_error,"If checked, some messages have a delivery error.",,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_milestone_history__message_has_error_counter,Number of errors,,
+cap_project_progress_report,model,"ir.model.fields,help",cap_project_progress_report.field_project_milestone_history__message_has_error_counter,Number of messages with delivery error,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_milestone_history__message_has_sms_error,SMS Delivery error,,
+cap_project_progress_report,model,"ir.model.fields,help",cap_project_progress_report.field_project_milestone_history__message_has_sms_error,"If checked, some messages have a delivery error.",,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_milestone_history__message_ids,Messages,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_milestone_history__message_is_follower,Is Follower,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_milestone_history__message_needaction,Action Needed,,
+cap_project_progress_report,model,"ir.model.fields,help",cap_project_progress_report.field_project_milestone_history__message_needaction,"If checked, new messages require your attention.",,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_milestone_history__message_needaction_counter,Number of Actions,,
+cap_project_progress_report,model,"ir.model.fields,help",cap_project_progress_report.field_project_milestone_history__message_needaction_counter,Number of messages requiring action,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_milestone_history__message_partner_ids,Followers (Partners),,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_milestone_history__name,Name,Domaine,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_milestone_history__project_id,Project,Projet,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_milestone_history__project_progress_id,Project Progress Report,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_milestone_history__rating_ids,Ratings,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_milestone_history__reached_date,Reached Date,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_milestone_history__start_date,Start Date,Date de début,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_milestone_history__status,Status,Statut,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_milestone_history__website_message_ids,Website Messages,,
+cap_project_progress_report,model,"ir.model.fields,help",cap_project_progress_report.field_project_milestone_history__website_message_ids,Website communication history,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_milestone_history__write_date,Last Updated on,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_milestone_history__write_uid,Last Updated by,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__activity_calendar_event_id,Next Activity Calendar Event,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__activity_date_deadline,Next Activity Deadline,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__activity_exception_decoration,Activity Exception Decoration,,
+cap_project_progress_report,model,"ir.model.fields,help",cap_project_progress_report.field_project_progress__activity_exception_decoration,Type of the exception activity on record.,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__activity_exception_icon,Icon,,
+cap_project_progress_report,model,"ir.model.fields,help",cap_project_progress_report.field_project_progress__activity_exception_icon,Icon to indicate an exception activity.,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__activity_ids,Activities,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__activity_state,Activity State,,
+cap_project_progress_report,model,"ir.model.fields,help",cap_project_progress_report.field_project_progress__activity_state,"Status based on activities
+Overdue: Due date is already passed
+Today: Activity date is today
+Planned: Future activities.",,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__activity_summary,Next Activity Summary,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__activity_type_icon,Activity Type Icon,,
+cap_project_progress_report,model,"ir.model.fields,help",cap_project_progress_report.field_project_progress__activity_type_icon,Font awesome icon e.g. fa-tasks,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__activity_type_id,Next Activity Type,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__activity_user_id,Responsible User,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__cc_progress_report_internal_partner_partner_ids,Cc Progress Report Internal Partner Partner,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__cc_progress_report_partner_ids,CC Project Progress Report,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__cc_progress_report_user_ids,CC Project Progress Report,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__company_id,Company,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__create_date,Created on,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__create_uid,Created by,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__days,Days,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__demo_meeting_task,Demo Meeting Tasks,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__display_name,Display Name,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__future_task_ids,Future Tasks,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__global_progress,Global Progress,,
+cap_project_progress_report,model,"ir.model.fields,help",cap_project_progress_report.field_project_progress__global_progress,"Delivered progression, how Captivea delivered the hours for the project, maintaining a small gap between this and the Project progress is a good practice to secure the project. The higher the gap, the higher the risk is to have lots of feedbacks",,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__go_live_date,Go Live Date,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__has_message,Has Message,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__hold_task_ids,Task On Hold,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__id,ID,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__last_report,Last Report,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__left_hours,Hours Left In Current Bucket,,
+cap_project_progress_report,model,"ir.model.fields,help",cap_project_progress_report.field_project_progress__left_hours,Total remaining quantity of project's sales order lines,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__link,Link,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__message,Notes,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__message_attachment_count,Attachment Count,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__message_follower_ids,Followers,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__message_has_error,Message Delivery error,,
+cap_project_progress_report,model,"ir.model.fields,help",cap_project_progress_report.field_project_progress__message_has_error,"If checked, some messages have a delivery error.",,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__message_has_error_counter,Number of errors,,
+cap_project_progress_report,model,"ir.model.fields,help",cap_project_progress_report.field_project_progress__message_has_error_counter,Number of messages with delivery error,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__message_has_sms_error,SMS Delivery error,,
+cap_project_progress_report,model,"ir.model.fields,help",cap_project_progress_report.field_project_progress__message_has_sms_error,"If checked, some messages have a delivery error.",,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__message_ids,Messages,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__message_is_follower,Is Follower,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__message_needaction,Action Needed,,
+cap_project_progress_report,model,"ir.model.fields,help",cap_project_progress_report.field_project_progress__message_needaction,"If checked, new messages require your attention.",,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__message_needaction_counter,Number of Actions,,
+cap_project_progress_report,model,"ir.model.fields,help",cap_project_progress_report.field_project_progress__message_needaction_counter,Number of messages requiring action,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__message_partner_ids,Followers (Partners),,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__milestone_history_ids,Milestone History,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__my_activity_date_deadline,My Activity Deadline,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__name,Name,Domaine,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__notes,Notes,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__out_of_scope_included_in_current_phase,Out of Scope Included in Current Phase,,
+cap_project_progress_report,model,"ir.model.fields,help",cap_project_progress_report.field_project_progress__out_of_scope_included_in_current_phase,Sum of out of scope tasks (tasks not planned in the requirement list) We display the sum so the customer keep in mind the whole amount validated,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__past_done_task_history_ids,Past Done Task History,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__phase_id,Phase,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__project_domain_history_ids,Project Domain History,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__project_id,Project,Projet,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__project_progress_template,Project Progress Template,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__project_status_id,Project Status,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__rating_ids,Ratings,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__remaining_hours,Remaining Hours to Go Live,,
+cap_project_progress_report,model,"ir.model.fields,help",cap_project_progress_report.field_project_progress__remaining_hours,Sum of hours to go live for the project(Allocated hours - Hours spent) for not validated task,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__sale_order_line_ids,Sale order Lines,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__sign_request_id,Sign Request,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__sign_request_ids,Sign Request,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__sign_request_item_id,SIGN REQUEST,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__signatory_portal_report_partner_ids,Signatory Portal Report Partner,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__signatory_progress_report_partner_id,Signatory Project Progress Report,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__status,Status,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__validation_progress,Validation Progress,,
+cap_project_progress_report,model,"ir.model.fields,help",cap_project_progress_report.field_project_progress__validation_progress,"Customer feeling of what he was able to test and validate (time of tasks to push in prod, to validate in prod and in prod / total time)",,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__website_message_ids,Website Messages,,
+cap_project_progress_report,model,"ir.model.fields,help",cap_project_progress_report.field_project_progress__website_message_ids,Website communication history,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__write_date,Last Updated on,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_progress__write_uid,Last Updated by,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_project__cc_progress_report_internal_partner_partner_ids,Cc Progress Report Internal Partner Partner,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_project__cc_progress_report_partner_ids,CC Project Progress Report,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_project__cc_progress_report_user_ids,CC Project Progress Report,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_project__next_expected_project_progress_report_date,Next Expected Project Progress Report Date,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_project__project_progress_ids,Project Progress,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_project__signatory_portal_report_partner_ids,Signatory Portal Report Partner,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_project__signatory_progress_report_partner_id,Signatory Project Progress Report,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_status__project_progress_template,Project Progress Template,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_task__select,Select,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_task_type__hold,On Hold,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_task_type__is_permanent_task,Is permanent task,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_task_type__is_validate,Is Validated,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_project_task_type__stage,Stage,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_sign_request__project_progress_id,Project Progress,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_task_history_log__create_date,Created on,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_task_history_log__create_uid,Created by,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_task_history_log__default_domain_ids,Default Domain,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_task_history_log__display_name,Display Name,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_task_history_log__domain,Domain,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_task_history_log__id,ID,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_task_history_log__is_planned,Is Planned?,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_task_history_log__name,Task Name,Nom de la tâche,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_task_history_log__phase_id,Phase,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_task_history_log__progress_report_id,Progress Report,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_task_history_log__project_id,Project,Projet,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_task_history_log__related_task_id,ID,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_task_history_log__sequence,Sequence,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_task_history_log__state,Status,Statut,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_task_history_log__task_id,Task,Tâche,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_task_history_log__write_date,Last Updated on,,
+cap_project_progress_report,model,"ir.model.fields,field_description",cap_project_progress_report.field_task_history_log__write_uid,Last Updated by,,
+cap_project_progress_report,model,"ir.model.fields.selection,name",cap_project_progress_report.selection__project_milestone__status__done,Done,,
+cap_project_progress_report,model,"ir.model.fields.selection,name",cap_project_progress_report.selection__project_milestone__status__feedback,Feedback,Feedbacks,
+cap_project_progress_report,model,"ir.model.fields.selection,name",cap_project_progress_report.selection__project_milestone__status__in_progress,In Progress,En cours,
+cap_project_progress_report,model,"ir.model.fields.selection,name",cap_project_progress_report.selection__project_milestone__status__not_started,Not Started,Non commencé,
+cap_project_progress_report,model,"ir.model.fields.selection,name",cap_project_progress_report.selection__project_milestone_history__status__done,Done,,
+cap_project_progress_report,model,"ir.model.fields.selection,name",cap_project_progress_report.selection__project_milestone_history__status__feedback,Feedback,Feedbacks,
+cap_project_progress_report,model,"ir.model.fields.selection,name",cap_project_progress_report.selection__project_milestone_history__status__in_progress,In Progress,En cours,
+cap_project_progress_report,model,"ir.model.fields.selection,name",cap_project_progress_report.selection__project_milestone_history__status__not_started,Not Started,Non commencé,
+cap_project_progress_report,model,"ir.model.fields.selection,name",cap_project_progress_report.selection__project_progress__project_progress_template__project_progress_no_deadline,Project Progress Report No Deadline,,
+cap_project_progress_report,model,"ir.model.fields.selection,name",cap_project_progress_report.selection__project_progress__project_progress_template__project_progress_with_deadline,Project Progress Report with Deadline,,
+cap_project_progress_report,model,"ir.model.fields.selection,name",cap_project_progress_report.selection__project_progress__status__draft,Draft,,
+cap_project_progress_report,model,"ir.model.fields.selection,name",cap_project_progress_report.selection__project_progress__status__sent,Sent,,
+cap_project_progress_report,model,"ir.model.fields.selection,name",cap_project_progress_report.selection__project_progress__status__signed,Signed,,
+cap_project_progress_report,model,"ir.model.fields.selection,name",cap_project_progress_report.selection__project_status__project_progress_template__project_progress_no_deadline,Project Progress Report No Deadline,,
+cap_project_progress_report,model,"ir.model.fields.selection,name",cap_project_progress_report.selection__project_status__project_progress_template__project_progress_with_deadline,Project Progress Report with Deadline,,
+cap_project_progress_report,model,"ir.model.fields.selection,name",cap_project_progress_report.selection__project_task_type__stage__to_push_in_production,To push in production,,
+cap_project_progress_report,model,"ir.model.fields.selection,name",cap_project_progress_report.selection__project_task_type__stage__to_valid_by_cust_in_production,To Valid by Cust in Production,,
+cap_project_progress_report,model,"ir.model.fields.selection,name",cap_project_progress_report.selection__project_task_type__stage__to_valid_by_cust_in_staging,To Valid by Customer in Staging,,
+cap_project_progress_report,model,"ir.ui.menu,name",cap_project_progress_report.project_progress_menu,Project Progress Report,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.cap_custom_external_layout_standard,Logo,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.cap_custom_external_layout_standard,Company tagline,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.cap_custom_external_layout_standard,<strong>Company address block</strong>,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.cap_custom_external_layout_standard,Contains the company address.,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.cap_custom_external_layout_standard,<strong>Company details block</strong>,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.cap_custom_external_layout_standard,Contains the company details.,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.cap_custom_external_layout_standard,Tax ID,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.cap_custom_external_layout_standard,US12345671,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.cap_custom_external_layout_standard,"<i class=""fa fa-phone"" role=""img"" aria-label=""Phone"" title=""Phone""/>",,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.cap_custom_external_layout_standard,"<i class=""fa fa-at"" role=""img"" aria-label=""Email"" title=""Email""/>",,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.cap_custom_external_layout_standard,"<i class=""fa fa-globe"" role=""img"" aria-label=""Website"" title=""Website""/>",,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.cap_custom_external_layout_standard,"<i class=""fa fa-building-o"" role=""img"" aria-label=""Fiscal number""/>",,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.cap_custom_external_layout_standard,"Page:
+                        <span class=""page""/>
+                        of
+                        <span class=""topage""/>",,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.cap_custom_external_layout_standard_light,Logo,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.cap_custom_external_layout_standard_light,Company tagline,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.cap_custom_external_layout_standard_light,<strong>Company address block</strong>,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.cap_custom_external_layout_standard_light,Contains the company address.,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.cap_custom_external_layout_standard_light,<strong>Company details block</strong>,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.cap_custom_external_layout_standard_light,Contains the company details.,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.cap_custom_external_layout_standard_light,Tax ID,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.cap_custom_external_layout_standard_light,US12345671,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.cap_custom_external_layout_standard_light,"<i class=""fa fa-phone"" role=""img"" aria-label=""Phone"" title=""Phone""/>",,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.cap_custom_external_layout_standard_light,"<i class=""fa fa-at"" role=""img"" aria-label=""Email"" title=""Email""/>",,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.cap_custom_external_layout_standard_light,"<i class=""fa fa-globe"" role=""img"" aria-label=""Website"" title=""Website""/>",,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.cap_custom_external_layout_standard_light,"<i class=""fa fa-building-o"" role=""img"" aria-label=""Fiscal number""/>",,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.cap_custom_external_layout_standard_light,"Page:
+                        <span class=""page""/>
+                        of
+                        <span class=""topage""/>",,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.edit_project_inherit,"<span class=""o_stat_value"">
+                                Project
+                            </span>
+                            <span class=""o_stat_text"">
+                                Progress
+                            </span>",,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.edit_project_task_inherit_new,Next Expected Project Progress Report Date:,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.project_progress_view_form,Send the Project progress Report,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.project_progress_view_form,Calculate,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.project_progress_view_form,"Creates project domain history also calculate global progress, validation progress, out of scope tasks and remaining hours",,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.project_progress_view_form,Total Estimated Time,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.project_progress_view_form,Total Task Estimated Time,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.project_progress_view_form,Total Passed Time,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.project_progress_view_form,Project Domain History,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.project_progress_view_form,Past Done Tasks History,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.project_progress_view_form,Domain,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.project_progress_view_form,Tasks on Hold,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.project_progress_view_form,Remove the Tasks and Add,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.project_progress_view_form,Days to the start date.,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.project_progress_view_form,Validate,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.project_progress_view_form,Tasks Planned for Next Week,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.project_progress_view_form,Meetings To Come,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.project_progress_view_form,Time Tracking,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.project_progress_view_form,Milestone,Jalon,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.project_progress_view_search_view,Draft,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.project_progress_view_search_view,Sent,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.project_progress_view_search_view,Signed,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.project_progress_view_search_view,Status,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.project_progress_view_search_view,Group By,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.project_progress_view_search_view,Project,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.project_progress_view_search_view,Phase,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.readonly_project_task_inherit_new,Next Expected Project Progress Report Date:,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document,1. Project progress,1. Avancement du projet,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document,Signing this document acknowledges that you are informed of the project progress and project decisions reported in this document.,Ce document atteste que vous êtes informé de l'avancement du projet et les décisions de projet rapportées dans ce document.,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document,1.1 Global progress of the,1.1 Indicateurs de,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document,<strong>Global progress (Delivered tasks*time/All tasks time)</strong>,<strong>Avancement global (temps des tâches livrées / temps total)</strong>,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document,<strong>Validation progress (Validated tasks*time/All tasks time)</strong>,<strong>Avancement validé (temps des tâches validées / temps total)</strong>,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document,<strong>Out of scope included in current phase</strong>,<strong>Hors périmètre inclus dans la phase en cours</strong>,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document,<strong>Estimate of remaining tasks for go-live</strong>,<strong>Estimation des tâches restantes pour le Go-Live:</strong>,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document,<strong>Hours left in current bucket</strong>,<strong>Heures restantes dans les carnets de temps:</strong>,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document,<strong>Go live date / End of analysis</strong>,<strong>Date de mise en ligne / Fin de l'analyse:</strong>,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document,"* Delivered tasks = tasks in stage “To valid by customer in staging”, “To push in production”, “To valid by customer in production”, “Done”.
+                        <br/>
+                        * Validated tasks = tasks in stage “To push in production”, “To valid by customer in production”, “Done”.","Tâches livrées = Tâches dans le statut """"A valider par le client en recette"""", """"A mettre en production"""", A valider par le client en production"""", """"Terminé"""".
+                        <br/>
+                        * Tâches validées = Tâches dans le statut """"A mettre en production"""", A valider par le client en production"""", """"Terminé""""."",",
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document,1.2 Progress by domain,1.2 Avancement par domaine,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document,Domain,Domaine,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document,Req estimated time,Temps estimé requis,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document,Task estimated time,Tâche Durée estimée,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document,Task passed time,Temps passé,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document,Status,Statut,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document,Progress,Progrès,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document,2. Work in progress,2. Travaux en cours,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document,2.1 Task done since last report,2.1 Tâches effectuées depuis le dernier rapport,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document,All tasks presented in the demo meeting,Retrouvez ici la liste des tâches présentées en réunion de démo,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document,ID,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document,Task name,Nom de la tâche,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document,Planned/Not planned,Planifiée/Non Planifiée,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document,2.2 Tasks on hold,2.2 Tâches en attente,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document,All tasks on hold that are:,Retrouvez ici toutes les tâches en attente :,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document,Waiting on documents / information,En attente de documents/informations,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document,Waiting on customer validation to continue,En attente de la validation du client pour continuer,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document,"Go-Live date may be postponed if validation or information needed is not given on time
+                <br/>",La date de Go-Live peut être reportée si la validation ou les informations ne sont pas fournies à temps,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document,Task,Tâche,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document,Date planned - start,Date de planification - début,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document,Date planned - end,Date de planification - fin,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document,Estimated time,Temps estimé,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document,2.3 Task planned for next period,2.3 Tâches prévues pour la prochaine période,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document,Start date,Date de début,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document,Remaining time,Temps restant,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document,3. Upcoming meetings,3. Réunions à venir,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document,4. Time tracking,4. Suivi du temps,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document,Global consumption of your credit time,Retrouvez ici la consommation globale de votre carnet de temps,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document,Sale order,Ordre de vente,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document,Hours ordered,Heures commandées,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document,Hours consumed,Heures consommées,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document,Hours remaining,Heures restantes,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document,"<br/>
+                    Consumption of your credit time of last 4 weeks",Nombre d'heures consommées les 4 dernières semaines,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document,Current week,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document,<span>Hours</span>,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document,5. Notes,5. Remarques,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document,4. Notes,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document_id,1. Project progress,1.Avancement du projet,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document_id,Signing this document acknowledges that you are informed of the project progress and project decisions reported in this document.,Ce document atteste que vous êtes informé de l'avancement du projet et les décisions de projet rapportées dans ce document.,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document_id,1.1 Global progress of the,1.1 Indicateurs de,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document_id,<strong>Hours left in current bucket:</strong>,<strong>Heures restantes dans les carnets de temps:</strong>,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document_id,2. Work in progress,2. Travaux en cours,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document_id,2.1 Task done since last report,2.1 Tâches effectuées depuis le dernier rapport,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document_id,All tasks presented in the demo meeting,Retrouvez ici la liste des tâches présentées en réunion de démonstration,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document_id,ID,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document_id,Task name,Nom de la tâche,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document_id,Domain,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document_id,Planned/Not planned,Planifiée/Non Planifiée,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document_id,Status,Statut,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document_id,2.2 Tasks on hold,2.2 Tâche en attente,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document_id,All tasks on hold that are:,Retrouvez ici toutes les tâches en attente :,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document_id,Waiting on documents / information,En attente de documents/informations,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document_id,Waiting on customer validation to continue,En attente de la validation du client pour continuer,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document_id,"Go-Live date may be postponed if validation or information needed is not given on time
+                <br/>",La date de Go-Live peut être reportée si la validation ou les informations ne sont pas fournies à temps,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document_id,Task,Tâche,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document_id,Date planned - start,Date de planification - début,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document_id,Date planned - end,Date de planification - fin,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document_id,Estimated time,Temps estimé,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document_id,2.3 Task planned for next period,2.3 Tâches prévues pour la prochaine période,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document_id,Start date,Date de début,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document_id,Remaining time,Temps restant,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document_id,3. Upcoming meetings,3. Réunions à venir,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document_id,4. Time tracking,4. Suivi du temps,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document_id,Global consumption of your credit time,Retrouvez ici la consommation globale de votre crédit temps,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document_id,Sale order,Commande,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document_id,Hours ordered,Heures commandées,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document_id,Hours consumed,Heures consommées,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document_id,Hours remaining,Heures restantes,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document_id,"<br/>
+                    Consumption of your credit time of last 4 weeks",Nombre d'heures consommées les 4 dernières semaines,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document_id,Current week,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document_id,<span>Hours</span>,,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document_id,5. Notes,5. Remarques,
+cap_project_progress_report,model_terms,"ir.ui.view,arch_db",cap_project_progress_report.report_project_progress_document_id,4. Notes,,
+cap_project_progress_report,model,"mail.template,name",cap_project_progress_report.project_progress_report_custom_mail_template,Project Progress Report : Request Signature,,
+cap_project_progress_report,model,"mail.template,description",cap_project_progress_report.project_progress_report_custom_mail_template,"Edit this template to customize project progress report mail
+        ",,
+cap_project_progress_report,model,"mail.template,subject",cap_project_progress_report.project_progress_report_custom_mail_template,{{ object.sign_request_id.reference }},CAPTIVEA - CR avancement projet -  {{ object.sign_request_id.reference }},
+cap_project_progress_report,model,"mail.template,body_html",cap_project_progress_report.project_progress_report_custom_mail_template,"<header>
+                
+            </header>
+            
+                <div style=""display: none; max-height: 0px; overflow: hidden; color:#fff; font-size:0px; line-height:0px"">
+                    <t>
+                        <p>Hello
+                            <span/>
+                            <t t-esc=""object.sign_request_item_id.partner_id.name""/>,
+                        </p>
+                    </t>
+                    <t t-esc=""object.env.user.name""/>
+                    (
+                    <a t-att-href=""object._get_mail_link(object.create_uid.email, subject)"" style=""color:#428BCA; text-decoration:none;"" target=""_blank"">
+                        <t t-esc=""object.env.user.login""/>
+                    </a>
+                    )
+                    has requested your signature on the document
+                    <span/>
+                    <t t-esc=""object.sign_request_id.reference""/>.
+                </div>
+                <table role=""presentation"" border=""0"" cellpadding=""0"" cellspacing=""0"" style=""padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;"">
+                    <tr>
+                        <td align=""center"">
+                            <table role=""presentation"" border=""0"" cellpadding=""0"" cellspacing=""0"" width=""590"" style=""padding: 24px; background-color: white; color: #454748; border-collapse:separate;"">
+                                <tbody>
+                                    <tr>
+                                        <td align=""center"" style=""min-width: 590px;"">
+                                            <table role=""presentation"" border=""0"" cellpadding=""0"" cellspacing=""0"" width=""100%"" style=""background-color: white; padding: 0; border-collapse:separate;"">
+                                                <tr>
+                                                    <td valign=""middle"">
+                                                        <span style=""font-size: 10px;"">Your Signature</span>
+                                                        <br/>
+                                                        <span style=""font-size: 20px; font-weight: bold;"">
+                                                            <t t-esc=""object.sign_request_id.reference""/>
+                                                        </span>
+                                                    </td>
+                                                    <td valign=""middle"" align=""right"">
+                                                        <img style=""padding: 0px; margin: 0px; height: 48px;"" src=""http://localhost:1616/logo.png?company=1"" alt=""Captivea LLC""/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan=""2"" style=""text-align:center;"">
+                                                        <hr width=""100%"" style=""background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin:4px 0px 32px 0px;""/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style=""min-width: 590px;"" data-o-mail-quote-container=""1"">
+                                            <table border=""0"" cellpadding=""0"" style=""background-color: white; padding: 0px; border-collapse:separate;"">
+                                                <tr>
+                                                    <td valign=""top"">
+                                                        <p>Hello
+                                                            <span>
+                                                                <t t-esc=""object.sign_request_item_id.partner_id.name""/>
+                                                            </span>
+                                                            ,
+                                                        </p>
+                                                        <t t-esc=""object.env.user.name""/>
+                                                        (
+                                                        <a t-att-href=""object._get_mail_link(object.create_uid.email, subject)"" style=""color:#428BCA; text-decoration:none;"" target=""_blank"">
+                                                            <t t-esc=""object.env.user.login""/>
+                                                        </a>
+                                                        )
+                                                        has requested your signature on the document
+                                                        <span/>
+                                                        <t t-esc=""object.sign_request_id.reference""/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td valign=""top"">
+                                                        <div style=""margin: 16px 0px 16px 0px; padding: 8px 16px 8px 16px; background-color: #F1F1F1;"">
+                                                            <span>
+                                                                <p>Sign to validate the Project Progress Report :
+                                                                    <span t-esc=""object.name""/>
+                                                                </p>
+                                                            </span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td valign=""top"">
+                                                        <div style=""margin:16px auto; text-align:center;"">
+                                                            <a t-att-href=""object.link"" style=""padding: 8px 16px 8px 16px; border-radius: 3px; background-color:#875A7B; text-align:center; text-decoration:none; color: #FFFFFF;"">
+                                                                Sign document
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td valign=""top"">
+                                                        <div style=""opacity: 0.7;"">
+                                                            <strong>Warning</strong>
+                                                            do not forward this email to other people!
+                                                            <br/>
+                                                            They will be able to access this document and sign it as
+                                                            yourself.
+                                                            <br/>
+                                                            <span>Your IP address and localization are associated to
+                                                                your
+                                                                signature to ensure traceability.
+                                                            </span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <span data-o-mail-quote=""1"">--<br data-o-mail-quote=""1""/>System
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align=""center"" style=""min-width: 590px; padding: 0 8px 0 8px; font-size:11px;"">
+                                            <hr width=""100%"" style=""background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 4px 0px;""/>
+                                            <b>Captivea LLC</b>
+                                            <br/>
+                                            <div style=""color: #999999;"">
+                                                +1 407-993-6074
+                                                |
+                                                <a style=""text-decoration:none; color: #999999;"" href=""mailto:administrative@captivea.com"">
+                                                    administrative@captivea.com
+                                                </a>
+                                                |
+                                                <a style=""text-decoration:none; color: #999999;"" href=""https://www.captivea.com"">https://www.captivea.com
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align=""center"" style=""min-width: 590px;"">
+                            Powered by
+                            <a target=""_blank"" href=""https://www.odoo.com?utm_source=db&amp;utm_medium=email"" style=""color: #875A7B;"">Odoo
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            
+        ","<header data-oe-version=""1.2"">
+                
+            </header>
+            
+                <div style=""display: none; max-height: 0px; overflow: hidden; color:#fff; font-size:0px; line-height:0px"">
+                    <t>
+                        <p style=""border-radius:0px;border-style:none;padding:0px;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;margin:0px 0 12px 0;box-sizing:border-box;"">Hello
+                            
+                            <t t-esc=""object.sign_request_item_id.partner_id.name""/>,
+                        </p>
+                    </t>
+                    <t t-esc=""object.env.user.name""/>
+                    (
+                    )
+                    has requested your signature on the document
+                    
+                    <t t-esc=""object.sign_request_id.reference""/>.
+                </div>
+                <table role=""presentation"" border=""0"" cellpadding=""0"" cellspacing=""0"" style=""border-radius:0px;border-style:none;margin:0px;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;padding:16px 0 0 0;box-sizing:border-box;caption-side:bottom;padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;"" width=""100%"">
+                    <tbody style=""border-radius:0px;padding:0px;margin:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;border-style:none;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px""><tr style=""border-radius:0px;padding:0px;margin:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;border-style:none;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px"">
+                        <td align=""center"" style=""border-radius:0px;padding:0px;margin:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;border-style:none;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px"">
+                            <table role=""presentation"" border=""0"" cellpadding=""0"" cellspacing=""0"" width=""590"" style=""border-radius:0px;border-style:none;margin:0px;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;box-sizing: border-box; caption-side: bottom; padding: 24px; background-color: white; color: #454748; border-collapse: separate; font-family: Verdana, Arial, sans-serif;"">
+                                <tbody style=""border-radius:0px;padding:0px;margin:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;border-style:none;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px"">
+                                    <tr style=""border-radius:0px;padding:0px;margin:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;border-style:none;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px"">
+                                        <td align=""center"" style=""border-radius:0px;padding:0px;margin:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;border-style:none;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;min-width:590px"">
+                                            <table role=""presentation"" border=""0"" cellpadding=""0"" cellspacing=""0"" width=""100%"" style=""border-radius:0px;border-style:none;margin:0px;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;box-sizing: border-box; caption-side: bottom; background-color: white; padding: 0px; border-collapse: separate; color: #454748; font-family: Verdana, Arial, sans-serif;"">
+                                                <tbody style=""border-radius:0px;padding:0px;margin:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;border-style:none;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px""><tr style=""border-radius:0px;padding:0px;margin:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;border-style:none;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px"">
+                                                    <td valign=""middle"" style=""border-radius:0px;padding:0px;margin:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;border-style:none;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px"">
+                                                        <span style=""font-size: 10px;"">Your Signature</span>
+                                                        <br/>
+                                                        <span style=""font-size: 20px; font-weight: bold;"">
+                                                            <t t-esc=""object.sign_request_id.reference""/>
+                                                        </span>
+                                                    </td>
+                                                    <td valign=""middle"" align=""right"" style=""border-radius:0px;padding:0px;margin:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;border-style:none;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px"">
+                                                        <!--[if mso]><img src=""data:image/png;base64,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"" class=""img img-fluid o_we_custom_image"" style=""display: inline-block; box-sizing: border-box; vertical-align: middle; padding: 0px; margin: 0px; height: 48px; width: 128.547px;"" width=""128.547"" height=""48""><![endif]--><!--[if !mso]><!-- --><img src=""data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAAAwCAYAAADZ9HK+AAAAAXNSR0IArs4c6QAAC4JJREFUeF7tmntwVNUdx7+/c+/uZrMbgWCgYCwhbECDhjLro7RYwpsEUcCaceqj44xCnzP9o7UPi1LrtLWtFh91BrSjWDsqqIWoPKpIZGwVcQUCRh5LTGNQBIFsXnf3Ps6vnJtdDRmYTnWTme3e/Sez4d5zzu/3+5zv7xEI3ievPUB5bb1nPDwA8hwCDwAPgDz3QJ6b7ymAB0CeeyDPzfcUwAMgzz2Q5+Z7CuABkOceyHPzPQXwAMhzD+S5+Z4CeADkuQfy3HxPATwA8twDeW7+oCvAymjUV2ZZfuHr0qVFAc30OY7fn/QXF6emNzTYfeOxIRIJaIWFesK2qXRIh5MKRKy+zzBADWVlgWOFhXrf94boOvs7OhyUtdjVDXBWRaO62lOtc6Z4h03T6vL7ORhs1w1jqFB77TFH2pl3gsF2acQ+TNUBTuZ9tXcsGtWbDSOg9kuETsiT7jtt/oQ9/LR93PeNoXZdU5PZd/81lZX+Ifpxn3pePRMuGm/298FA8zloACiHrZ1SWlBk6CPh+OZI4uuIaSQDFglsZ6k9NH/Pvj0Zg5cD4rKqyGXMNF+AdYC6bdt55sr3muMEsHru7WjU97HZcb0gHg/u/b8NEoAgkZJSNpHAv4K2v70HVoQEX0sEcSaHEtO/CfIlSeLbkrhQSDriAC8L4usY8AtG0jbFn2MHDpxY3rsFFJwU4lowXcoSzERxONZO0vRFBPhP24eRhK6vrtm1r6UvQBurxl7DLCYJkM6Ejy3pPHXV3vePZuwb6OCr9QcLANoQifhliOYLiXtAGKc2VlFM/+wgYFVN48HbMka/EB1dqJmhB0G4CYAOcA8zlnU7/ocyN2nNlNJguLvgOYDmfbZU75oSYMFoPvXzTgjWiOkvveucZrMLEgM7ILCUJLYAGAKgUYO4xoHcxsBoAqSUfHNPe/K5urY2Q73zfNW4EQVML4HoEjBSEPw9AXRJpscAFKbtcNcnoIOI5szbfeCtjH2bJk4slpq5A8CX0/YZxOKbbMgttfF4ajCCP2gAqJt6zErUMOhRAOcCLAHqBDjBQAGBiIHV89MAKLXYODFyIQRtI0Kx+p6+3I3QeE7tzvgxdfh+AKiH1A07xsB5BIxguDc+TpLvlgI/dW8aMAZAAZScMz5koAeEJoa8U0C8lgFAOMYsqRXcxKB7em8010PDLWpvlcbON9pnQRNPQyAExj7hGN+Q/oIZcGi1CwDjOBOfICaLiQ3J4oYFew7sU+dW6nb5xePnMfHTAMJ94F0Jje/I2DcYEAy4AqggbJwcGQ4H9QBdBsAm5rchcJeuyzdVHeAwzQahpLYxvkIZvbW6WjeOty0D0c+UogOwGAgQ4yQEfb9m94E1SiYVAKHugucINI9ZJQH6teb4HjD11Cid6UUAZQA+kSTrQlZgR4rIL4W5nQnlBBgscZ2pW6+3tyM5MqyfB0HqhroK4OtyppsFMkia7x0IjACjh4hqS/Si7UfMY2GBwDoGTyUik8H3FBbH706dqLhaAk8oAIjpPlOne9GDzoJAQCZs28oo18oofKVmxd+JMBtgjUCSAY2BFnJ4wVvvxvdlUs1AQzDgAKjbf8Tq/Kog3gp2jWw2hTVz6NCyNlXwqNtQWVmph02TlPSp71UXXDAs4LM3E9FkgI9C0m9I4LcM6My8dlg4ueRrb7QZ/RRAStAdJ5C4f5gVGq3r2gYmRJQiEPGNNbvjm928XUi7mFChAurAWRQubn5tegPsFy+uKBcEJckuAOjh6q54vDtcVfEkGAtB7AOwSrJ5u8bB81k4mwEaAeAjDeKKOY37WzZXVSzOAADgBbB8gQUlNYkOG+a2K/e0nnRrm0mRSWB6BcBQ1z7gEEBfUamAmX+hU+HKuY2N3QMd/EFJAcrpCNESMB5w8y3j5W7Ht7iuqanrTAYqeR2T6pgjBZ4H4AN4qwB+4oCeJXbl+7BjOzMXvNd8sB8AzMAzmuSNTPiWJJpGQABAmwZ56dzGQ0f/VwBq4/GO9ZMnjPY5cqdKXQQcJptrHB0/ItANvXmJ/0Q9+FVNPG72A8ACoKp+pU2tpFnza3a1tKgLcdRO/BxMtyv7GHwXMQ6C8Mc0UK8DfH1tY7zt/weAoLgVxA+mDdoStH0Lp58BAJXr6ydMCPsDci1DyaObp++TwCpB/Mip7DANTN1gPNi19+CdmFLqz6QAlUcJSKrij3qLPfVJEPG9RxL2iptbWpKfBwAX4EJ6Fuo8rKp9XgPQXAJKALQL8Ox5jfF31Nn7AZBS52GwJNAHUrOvqt35fuvaaPk5YVN7A4QJAKc05itSpJ/QWKqUcBEY3SCeGyyOv62UaaAhGJQUcNzsmGITthIgmLlVWPa01tDww0tjMZXbxeNlZf6QbVNJJGJ1Hm0dretiN4GGuC0isIvBSi1KAYwDSDVduy1Tm5Eq7rb7dAHKVycB9DDYIdA+hlxRKJw3p+9qaf+0dfsfUoBSAPXexsrxU1lXNQyr9KBmAb3NC+ExKyl+fPX+/Z39ASDC41LiMaGRQSx7ZAE+CAZLe4yTbTeBSamhKh5Vtf8OiA2AFBBfAkgp2Vq/z/nu7FhzIucBUAGuv2hsiV/o9QxcwoAtwHtZ8u81ga2GRMAnxGIAfh0dDztcdBuIlqUNV5Mbx+2lXKe78wBVFH4ClkuGhlOb29NtILs3n37nEB6GgZSh68mSEU3Jvrfo8yiA2nj9hAlF/oCzHqCp7KYl99POEnU79h7cogq2MyjA/SmhrShKojPp65Hst1N+yyGbi/5GRFdl7Et3N+mOOGMftwqHZ81799ChdLc8YBwMuAK47VplpT/ks+YQ86MMKlF9NYBuBrqEmwfd6uCvfun8wST9n2pO0Hs7+FkitKZrBwHQZCaeCZAJ5n/YpnajL+A8k54DSAYtox5539n66M8LgNuWXlTxAxDuBuEcpQIMfpM0LMq0bGcA4ERakZSM90DjGyARgFSzA4xyIQavpt46QdVGyr4FIIxXyifAP2z1xZ9YGoOqJQbsMygAqNvrDoIKaJYQ+OWpCjmq2p7PNucEQKvBvA6gTaccrarh9zSZrA6UtHVUN4A3RiK6ExKTNMkbQChi4LBmmV9n3f8ICHOUAoD5DhhYcTYAFIhhn7UT7HYHBiAXv1V8aNvyBtj1VRPG+iC3s+oCmBvPMbUZU/fv78x4fnPVuBGOqtyJLlTwQnJd8NzSVzOjWwXApkkVi5jxeJ9BUC/aQKdDtECXXAfCLb3FH9Yzp24NDS/vrG5o4LWVlVpIt75D4OUAhQHe5/jEjAWxA58MWPQHcRLo2qD6eyvx0QhLOjNJYi5AJUwwBWOXgFxnsxhFxJfSKS+A8EarPuRVVSdkHLBpYmmxpIKFp3LvGFYBdGgTaTyRVFunLpHgV4JDz99+tnn61mroqeORpQ6hRAApllhTszf+vlKkDZMjJcKmmx01Cib6qPO48URm6qf2d4c/qcR0EF1OhARr/FS/gQ3VT4pU6swLBdNpo2AmJB1J6zQh1Wi7nAmsAfWB4tLGvmd96cKxY8inLQJjGAsYxHhyoLuBwVKATyFWffCoaFQ7P5EQzpAezfALLjdH2s2xmMS1AN6t1NyHm5qcvn98Ub9S706rrhbHjh4VJ4NBXhKLOQ3p7+XBIEdjMSedXs56aRSERZ2drt0vxmJOZuCSOVcUQGdREVc3NKi10uVH73JrroVW3hwV6t9fa2iQ/Yc1ao0ro1Gt2TBO86s6W3N5zP0bgrIv871u7Wd/XDqbff/Nni+qDoMOwBc9sPd+dj3gAZBdf+bcah4AORey7B7YAyC7/sy51TwAci5k2T2wB0B2/Zlzq3kA5FzIsntgD4Ds+jPnVvMAyLmQZffAHgDZ9WfOreYBkHMhy+6BPQCy68+cW80DIOdClt0DewBk1585t5oHQM6FLLsH9gDIrj9zbjUPgJwLWXYP/B9RlZt8k2doIwAAAABJRU5ErkJggg=="" class=""img img-fluid o_we_custom_image"" style=""border-radius:0px;border-style:none;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;display: inline-block; max-width: 100%; box-sizing: border-box; vertical-align: middle; padding: 0px; margin: 0px; height: 48px; width: 128.562px; mso-hide: all; mso-hide: all; mso-hide: all; mso-hide: all;"" width=""128.562"" height=""48""/><!--<![endif]-->
+                                                    </td>
+                                                </tr>
+                                                <tr style=""border-radius:0px;padding:0px;margin:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;border-style:none;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px"">
+                                                    <td colspan=""2"" style=""border-radius:0px;padding:0px;margin:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;border-style:none;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;text-align:center"">
+                                                        <hr width=""100%"" style=""border-radius:0px;padding:0px;margin:12px0px12px0px;border-left-width:medium;border-bottom-width:medium;border-right-width:medium;border-top-width:medium;border-style:none;box-sizing:border-box;height:1px;opacity:0.25;border-width:medium;color:#454748;background-color:#cccccc;clear:both;display:block;font-size:0px;min-height:1px;line-height:0""/>
+                                                    </td>
+                                                </tr>
+                                            </tbody></table>
+                                        </td>
+                                    </tr>
+                                    <tr style=""border-radius:0px;padding:0px;margin:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;border-style:none;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px"">
+                                        <td style=""border-radius:0px;padding:0px;margin:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;border-style:none;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;min-width:590px"">
+                                            <table border=""0"" cellpadding=""0"" style=""border-radius:0px;border-style:none;margin:0px;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;box-sizing: border-box; caption-side: bottom; background-color: white; padding: 0px; border-collapse: separate; color: #454748; font-family: Verdana, Arial, sans-serif;"">
+                                                <tbody style=""border-radius:0px;padding:0px;margin:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;border-style:none;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px""><tr style=""border-radius:0px;padding:0px;margin:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;border-style:none;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px"">
+                                                    <td valign=""top"" style=""border-radius:0px;padding:0px;margin:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;border-style:none;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px"">
+                                                        <p style=""border-radius:0px;border-style:none;padding:0px;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;margin:0px 0 12px 0;box-sizing:border-box;"">Bonjour&nbsp;
+                                                                <t t-esc=""object.sign_request_item_id.partner_id.name""/>
+                                                            
+                                                            ,</p><p style=""border-radius:0px;border-style:none;padding:0px;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;margin:0px 0 12px 0;box-sizing:border-box;"">Voici le compte rendu de la réunion d'avancement de votre projet.</p><p style=""border-radius:0px;border-style:none;padding:0px;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;margin:0px 0 12px 0;box-sizing:border-box;"">Il reprend toutes les notes et les validations que nous avons vu en séance.</p><p style=""border-radius:0px;border-style:none;padding:0px;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;margin:0px 0 12px 0;box-sizing:border-box;"">Si vous avez des questions sur les éléments vus et validés ensemble, je suis à votre disposition pour y répondre.</p><p style=""border-radius:0px;border-style:none;padding:0px;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;margin:0px 0 12px 0;box-sizing:border-box;""><em>S'il n'y a pas de validation importante, il n'est pas requis de signer ce document, la pièce jointe à ce mail automatique est le rapport qui contient toutes les informations que nous avons vu ensemble.</em></p><p style=""border-radius:0px;border-style:none;padding:0px;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;margin:0px 0 12px 0;box-sizing:border-box;""/>
+                                                    </td>
+                                                </tr>
+                                                <tr style=""border-radius:0px;padding:0px;margin:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;border-style:none;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px"">
+                                                    <td valign=""top"" style=""border-radius:0px;padding:0px;margin:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;border-style:none;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px"">
+                                                        <div style=""margin: 16px 0px 16px 0px; padding: 8px 16px 8px 16px; background-color: #F1F1F1;"">
+                                                            
+                                                                <p style=""border-radius:0px;border-style:none;padding:0px;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;margin:0px 0 12px 0;box-sizing:border-box;"">Si demandé par votre chef de projet, veuillez signer le document pour en accuser la bonne réception :
+                                                                    <span t-esc=""object.sign_request_id.reference""/>
+                                                                </p>
+                                                            
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr style=""border-radius:0px;padding:0px;margin:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;border-style:none;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px"">
+                                                    <td valign=""top"" style=""border-radius:0px;padding:0px;margin:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;border-style:none;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px"">
+                                                        <div style=""margin:16px auto; text-align:center;""><a t-att-href=""object.link"" style=""border-style: none; margin: 0px; border-width: 0px; color: #454748; box-sizing: border-box; padding: 8px 16px; border-radius: 3px; background-color: #875a7b; text-align: center; text-decoration: none;""><font style=""color: #ffffff;"">&nbsp;Signer le document</font></a>
+                                                        <br/></div>
+                                                    </td>
+                                                </tr>
+                                                <tr style=""border-radius:0px;padding:0px;margin:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;border-style:none;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px"">
+                                                    <td valign=""top"" style=""border-radius:0px;padding:0px;margin:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;border-style:none;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px"">
+                                                        <div style=""opacity: 0.7;"">
+                                                            <strong style=""border-radius:0px;border-style:none;padding:0px;margin:0px;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;box-sizing:border-box;font-weight:bolder;"">Attention</strong>
+                                                             ne pas transférer cet email !
+                                                            <br/>
+                                                            Toute personne recevant cet email aurait accès aux documents qu'il contient.
+                                                            <br/>
+                                                            Votre adresse IP et votre localisation sont utilisées pour assurer la tracabilité de votre signature.
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody></table>
+                                            --<br/>
+<t t-esc=""object.env.user.name""/><br/></td>
+                                    </tr>
+                                    <tr style=""border-radius:0px;padding:0px;margin:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;border-style:none;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px"">
+                                        <td align=""center"" style=""border-radius:0px;margin:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;border-style:none;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;min-width:590px;padding:08px08px;font-size:11px"">
+                                            <hr width=""100%"" style=""border-radius:0px;padding:0px;margin:12px0px12px0px;border-left-width:medium;border-bottom-width:medium;border-right-width:medium;border-top-width:medium;border-style:none;box-sizing:border-box;height:1px;opacity:0.25;border-width:medium;color:#454748;background-color:#cccccc;clear:both;display:block;font-size:0px;min-height:1px;line-height:0""/>
+                                            <b style=""border-radius:0px;border-style:none;padding:0px;margin:0px;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;box-sizing:border-box;font-weight:bolder;"">Captivea</b>
+                                            <br/>
+                                            <div style=""color: #999999;"">
+                                                Votre espace client sur :&nbsp;<a style=""border-radius:0px;border-style:none;padding:0px;margin:0px;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;color:#008f8c;box-sizing: border-box; text-decoration: none;"" href=""https://www.captivea.com/my""><font style=""color: #999999;"">https://www.captivea.com/my</font></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr style=""border-radius:0px;padding:0px;margin:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;border-style:none;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px"">
+                        <td align=""center"" style=""border-radius:0px;padding:0px;margin:0px;border-left-color:inherit;border-bottom-color:inherit;border-right-color:inherit;border-top-color:inherit;border-style:none;box-sizing:border-box;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;min-width:590px"">
+                            Powered by
+                            <a target=""_blank"" href=""https://www.odoo.com?utm_source=db&amp;utm_medium=email"" style=""border-radius:0px;border-style:none;padding:0px;margin:0px;border-left-width:0px;border-bottom-width:0px;border-right-width:0px;border-top-width:0px;color:#008f8c;text-decoration: none; box-sizing: border-box;""><font style=""color: #875a7b;"">Odoo&nbsp;</font></a>
+                        </td>
+                    </tr>
+                </tbody></table>
+            
+        ",

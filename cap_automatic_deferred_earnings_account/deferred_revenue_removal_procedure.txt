@@ -1,0 +1,36 @@
+This text file contains instruction to remove functionality of automatic deferred revenue
+This file is referenced to module "cap_automatic_deferred_earnings_account" of odoo v16 by captivea india
+
+* Instructions
+=> Perform below steps in order of their serial numbers
+
+
+* Steps
+======================================================================================================================================================================
+[Model =  account.asset]
+[1] field = "value_left_of_the_previous_fiscal_period"
+	- views >> remove from studio customization views arch
+[2] field = "is_automatic_deferred_earnings_account"
+    - views >> view.account.asset.deferred.earning.form
+[3] field = "x_studio_project_id"
+    - views >> account.deferred.earning.form.inherit
+[4]  field = "revenue_amount"
+    - views >> account.deferred.earning.form.inherit
+
+    
+======================================================================================================================================================================
+[Model =  sale.order]
+[1] field = "count_asset"
+	- views >> remove from studio customization views arch
+[2] field = "deferred_revenue_status"
+	- views >> remove from studio customization views arch
+[3] field = "is_automatic_deferred_earnings_account"
+	- remove automated action with name="Remove Followers when Revenue is Created Automatic"
+[4] field = "last_day_of_previous_month"
+	- views >> remove from studio customization views arch
+
+    
+
+	
+    	
+    	

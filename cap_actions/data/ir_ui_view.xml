@@ -1,0 +1,275 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+<record id="default_tree_view_action" model="ir.ui.view" >
+<field name="active" eval="True"/>
+<field name="arch" type="xml">
+<list string="Action">
+	<field name="date"/>
+	<field name="template_id"/>
+	<field name="description" />
+	<field name="status"/>
+	<field name="user_id"/>
+	<field name="company_id"/>
+	<field name="deadline"/>
+	<field name="scoreimpact"/>
+	<field name="resolution_status"/>
+	<button name="set_status_done"
+		string="OK" type="object"
+		class="btn btn-success" invisible="status != 'todo'"/>
+	<button name="set_status_reset"
+		string="Reset" type="object"
+		class="btn btn-warning" invisible="status != 'invalidation'"/>
+</list>
+</field>
+<field name="group_ids" eval="[(6, 0, [])]"/>
+<field name="model">action.action</field>
+<field name="name">Default tree view for action</field>
+<field name="priority">1</field>
+<field name="type">list</field>
+</record>
+
+    <record id="default_tree_view_action_template" model="ir.ui.view">
+        <field name="active" eval="True"/>
+        <field name="arch" type="xml">
+<!--            TODO:We may need to restrict creation of record from tree view to avoid traceback-->
+            <list string="Action Template">
+                <field name="name"/>
+                <field name="user_id"/>
+                <field name="company_id"/>
+            </list>
+        </field>
+        <field name="group_ids" eval="[(6, 0, [])]"/>
+        <field name="model">action.template</field>
+        <field name="name">Default tree view for action template</field>
+        <field name="priority">1</field>
+        <field name="type">list</field>
+    </record>
+
+  <record id="default_form_view_action_meta_template" model="ir.ui.view" >
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <form>
+        <sheet string="Action Meta Template">
+          <group>
+			<field name="name" required="True"/>
+            <field name="description"/>
+			<field name="eval_expresion" widget="ace" options="{'mode': 'python'}"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+    <field name="group_ids" eval="[(6, 0, [])]"/>
+    <field name="model">action.meta.template</field>
+    <field name="name">Default form view for action meta template</field>
+    <field name="priority">1</field>
+    <field name="type">form</field>
+  </record>
+  <record id="default_form_view_action" model="ir.ui.view" >
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <form>
+		  <header>
+		  <button name="set_status_done"
+		string="OK" type="object"
+		class="oe_highlight" invisible="status != 'todo'"/>
+			<field name="status" widget="statusbar"/>
+		  </header>
+        <sheet string="Action">
+          <group>
+            <group>
+			  <field name="company_id"  readonly="1"/>
+              <field name="template_id" readonly="1"/>
+			  <field name="description" readonly="1"/>
+			   <field name="is_current_user_validator" readonly="1" invisible="True"/>
+			  
+			  <field name="user_id" can_create="False" can_write="True" required="True"/>
+            </group>
+          </group>
+          <group>
+            <field name="validation_ids" required="True" can_create="False" readonly="True"
+                   invisible="is_current_user_validator == False">
+              <list string="Action Validation" studio_subview_inlined="1" >
+				<field name="user_id"/>
+				<field name="action_id" column_invisible="True"/>
+				<field name="sequence" column_invisible="True"/>
+				<field name="is_current_user" column_invisible="True"/>
+				<field name="is_same_sequence" column_invisible="True"/>
+				<field name="status" readonly="1"/>
+				<button name="set_status_done"
+					string="OK" type="object"
+					class="btn btn-success"
+                        invisible="status != 'tovalidate' or is_current_user != True or is_same_sequence != True"/>
+				<button name="set_status_failed"
+					string="KO" type="object"
+					class="btn btn-danger"
+                        invisible="status != 'tovalidate' or is_current_user != True or is_same_sequence != True"/>
+              </list>
+            </field>
+          </group>
+        </sheet>
+		<div class="o_attachment_preview"/>
+        <chatter/>
+      </form>
+    </field>
+    <field name="group_ids" eval="[(6, 0, [])]"/>
+    <field name="model">action.action</field>
+    <field name="name">Default form view for action</field>
+    <field name="priority">1</field>
+    <field name="type">form</field>
+  </record>
+  <record id="default_form_view_action_template" model="ir.ui.view" >
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <form>
+        <header>
+			<button name="reset_template_template"
+					string="Apply Template Template" type="object"
+					class="oe_highlight" />
+		</header>
+		<sheet string="Action Template">
+          <group>
+            <group>
+              <field name="company_id" can_create="True" can_write="True" required="True"/>
+			  <field name="meta_template_id" can_create="False" can_write="True" />
+			  
+			  <field name="custom_name"
+                     required="meta_template_id == False"/>
+			  
+			  <field name="override_description" />
+			  <field name="description" readonly="False"/>
+			  <field name="template_template_id" can_create="False" can_write="True" />
+			  
+            </group>
+            <group>
+              <field name="user_id" can_create="False" can_write="True" required="True"/>
+			  <field name="score_impact" can_write="True" />
+			  <field name="start_date" />
+			  <field name="frequency" required="True"/>
+			  <field name="deadline_in_days" can_write="True" required="True"/>
+			  <field name="month" can_write="True"
+                     invisible="frequency != 'yearly'"/>
+			  <field name="day_of_month" can_write="True"
+                     invisible="frequency != 'yearly' and frequency != 'Monthly'"/>
+
+            </group>
+          </group>
+          <group>
+            <field name="substitute_ids">
+              <list string="Action Template Substitute" studio_subview_inlined="1" editable="bottom">
+                <field name="sequence" widget="handle"/>
+				<field name="user_id" required="True"/>
+              </list>
+            </field>
+          </group>
+          <group>
+            <field name="validation_ids">
+              <list string="Action Template Validation" studio_subview_inlined="1" editable="bottom">
+                <field name="sequence" widget="handle"/>
+				<field name="user_id" required="True"/>
+				<field name="probability" required="True"/>
+              </list>
+            </field>
+          </group>
+
+        </sheet>
+      </form>
+    </field>
+    <field name="group_ids" eval="[(6, 0, [])]"/>
+    <field name="model">action.template</field>
+    <field name="name">Default form view action template</field>
+    <field name="priority">1</field>
+    <field name="type">form</field>
+  </record>
+  
+   <record id="default_form_view_action_template_template" model="ir.ui.view" >
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <form>
+        <sheet string="Action Template Template">
+          <group>
+            <group>
+			  <field name="name" can_write="True" />
+            </group>
+          </group>
+          <group>
+            <field name="substitute_ids">
+              <list string="Action Template Tempalte Substitute" studio_subview_inlined="1" editable="bottom">
+                <field name="sequence" widget="handle"/>
+				<field name="user_id" required="True"/>
+              </list>
+            </field>
+          </group>
+          <group>
+            <field name="validation_ids">
+              <list string="Action Template Template Validation" studio_subview_inlined="1" editable="bottom">
+                <field name="sequence" widget="handle"/>
+				<field name="user_id" required="True"/>
+				<field name="start" required="True"/>
+				<field name="ko_impact" required="True"/>
+				<field name="ok_impact" required="True"/>
+				<field name="max" required="True"/>
+				<field name="min" required="True"/>
+              </list>
+            </field>
+          </group>
+
+        </sheet>
+      </form>
+    </field>
+    <field name="group_ids" eval="[(6, 0, [])]"/>
+    <field name="model">action.template.template</field>
+    <field name="name">Default form view action template template</field>
+    <field name="priority">1</field>
+    <field name="type">form</field>
+  </record>
+  
+  <record id="default_form_view_action_template_validation" model="ir.ui.view" >
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <form>
+        <sheet string="Action Template Validation">
+          <group>
+			  <field name="template_id" can_create="False" can_write="True" required="True"/>
+			  <field name="user_id" can_create="False" can_write="True" required="True"/>
+			  <field name="probability" required="True"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+    <field name="group_ids" eval="[(6, 0, [])]"/>
+    <field name="model">action.template.validation</field>
+    <field name="name">Default form view for Action Template Validation</field>
+    <field name="priority">1</field>
+    <field name="type">form</field>
+  </record>
+  
+  
+  <record id="action_search_view" model="ir.ui.view">
+            <field name="name">action.search.view</field>
+            <field name="model">action.action</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="template_id"/>
+                    <filter string="My actions" name="my_action" domain="[('user_id', '=', uid)]"/>
+					<separator name="separator"/>
+                    <filter string="In Progress" name="status_progress" domain="[('status', 'in', ['todo', 'invalidation'])]"/>
+                    <filter string="Done" name="status_done" domain="[('status', '=', 'done')]"/>
+					<separator name="separator"/>
+					<filter string="On time" name="status_on_time" domain="[('resolution_status', '=', 'ontime')]"/>
+                    <filter string="In Late" name="status_in_late" domain="[('resolution_status', '=', 'inlate')]"/>
+
+                        <filter string="Company" name="company_id"
+                                context="{'group_by':'company_id'}"/>
+                        <filter string="Template" name="template_id"
+                                context="{'group_by':'template_id'}"/>
+                        <filter string="User" name="user_id" context="{'group_by':'user_id'}"/>
+                        <filter string="Status" name="status" context="{'group_by':'status'}"/>
+						<filter string="Resolution Status" name="resolution_status" context="{'group_by':'resolution_status'}"/>
+						<filter string="date" name="date"
+                                context="{'group_by':'date'}"/>
+
+                </search>
+            </field>
+        </record>
+</odoo>

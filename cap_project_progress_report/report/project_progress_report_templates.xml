@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_project_progress_document">
+        <t t-call="cap_project_progress_report.cap_custom_external_layout">
+            <t t-set="doc" t-value="doc.with_context(lang=doc.project_id.partner_id.lang)"/>
+            <div class="page" style="margin-left:20px;">
+                <div class="oe_structure"/>
+                <h6 class="text-end">
+                    <span t-esc="doc.signatory_progress_report_partner_id.name"/>
+                </h6>
+                <h6 class="text-end">
+                    <span  t-esc="datetime.date.today()"/>
+                </h6>
+                <h1 class="text-center">
+                    <span t-esc="doc.project_id.partner_id.name"/>
+                </h1>
+                <h2 style="text-color=red;">1. Project progress</h2>
+                <div class="col-12">
+                    <p class="p1">
+                        Signing this document acknowledges that you are informed of the project progress and project decisions reported in this document.
+                    </p>
+                </div>
+                <t t-if="doc.phase_id">
+                    <h4>
+                        1.1 Global progress of the <span t-esc="doc.phase_id.name"/>
+                    </h4>
+                </t>
+                <div class="row mt32 mb32" id="progress">
+                    <div class="col-auto col-4 mw-100 mb-2 text-center">
+                        <strong>Global progress (Delivered tasks*time/All tasks time)</strong>
+                        <p class="m-0 text-center" t-esc="('%.2f' % (doc.global_progress * 100)) + ' %'"/>
+                    </div>
+                    <div class="col-auto col-4 mw-100 mb-2 text-center">
+                        <strong>Validation progress (Validated tasks*time/All tasks time)</strong>
+                        <p class="m-0 text-center" t-esc="('%.2f' % (doc.validation_progress * 100)) + ' %'"/>
+                    </div>
+                    <div class="col-auto col-4 mw-100 mb-2 text-center">
+                        <strong>Out of scope included in current phase</strong>
+                        <p class="m-0 text-center" t-esc="'%.2f' % doc.out_of_scope_included_in_current_phase + ' hours'"/>
+                    </div>
+                </div>
+                <div class="row mt32 mb32" id="informations">
+                    <div class="col-auto col-4 mw-100 mb-2 text-center">
+                        <strong>Estimate of remaining tasks for go-live</strong>
+                        <p class="m-0 text-center" t-esc="'%.2f' % doc.remaining_hours + ' hours'"/>
+                    </div>
+                    <div class="col-auto col-4 mw-100 mb-2 text-center">
+                        <strong>Hours left in current bucket</strong>
+                        <p class="m-0 text-center" t-esc="'%.2f' % doc.left_hours + ' hours'"/>
+                    </div>
+                    <div class="col-auto col-4 mw-100 mb-2 text-center" name="expiration_date">
+                        <strong>Go live date / End of analysis</strong>
+                        <p class="m-0 text-center" t-field="doc.go_live_date"/>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <p class="p1">
+                        * Delivered tasks = tasks in stage “To valid by customer in staging”, “To push in production”, “To valid by customer in production”, “Done”.
+                        <br/>
+                        * Validated tasks = tasks in stage “To push in production”, “To valid by customer in production”, “Done”.
+                    </p>
+                </div>
+                <h4>1.2 Progress by domain</h4>
+                <table class="table table-sm o_main_table" style="border:1px solid grey">
+                    <thead style="display: table-row-group">
+                        <tr>
+                            <th style="border-left:1px solid grey">Domain</th>
+                            <th style="border-left:1px solid grey">Req estimated time</th>
+                            <th style="border-left:1px solid grey">Task estimated time</th>
+                            <th style="border-left:1px solid grey">Task passed time</th>
+                            <th style="border-left:1px solid grey">Status</th>
+                            <th style="border-left:1px solid grey">Progress</th>
+                        </tr>
+                    </thead>
+                    <tbody class="sale_tbody">
+                        <tr t-foreach="doc.project_domain_history_ids" t-as="project_domain_history">
+                            <t t-if="project_domain_history.estimated_time != 0 or project_domain_history.task_estimated_time != 0 or project_domain_history.task_passed_time != 0">
+                                <td style="border-left:1px solid grey">
+                                    <span t-esc="project_domain_history.name"/>
+                                </td>
+                                <td style="border-left:1px solid grey" class="text-center">
+                                    <span t-esc="'%.2f' % project_domain_history.estimated_time"/>
+                                </td>
+                                <td style="border-left:1px solid grey" class="text-center">
+                                    <span t-esc="'%.2f' % project_domain_history.task_estimated_time"/>
+                                </td>
+                                <td style="border-left:1px solid grey" class="text-center">
+                                    <span t-esc="'%.2f' % project_domain_history.task_passed_time"/>
+                                </td>
+                                <td t-if="project_domain_history.status and project_domain_history.status == 'done'"
+                                    style="background-color:#BBEDBE; border-left:1px solid grey" class="text-center">
+                                    <span t-esc="dict(doc.project_domain_history_ids.fields_get(allfields=['status'])['status']['selection'])[project_domain_history.status]"/>
+                                </td>
+                                <td t-if="project_domain_history.status and project_domain_history.status == 'in progress'"
+                                    style="background-color:#ACDDDE; border-left:1px solid grey" class="text-center">
+                                    <span t-esc="dict(doc.project_domain_history_ids.fields_get(allfields=['status'])['status']['selection'])[project_domain_history.status]"/>
+                                </td>
+                                <td t-if="project_domain_history.status and project_domain_history.status == 'feedback'"
+                                    style="background-color:#92f0c6; border-left:1px solid grey" class="text-center">
+                                    <span t-esc="dict(doc.project_domain_history_ids.fields_get(allfields=['status'])['status']['selection'])[project_domain_history.status]"/>
+                                </td>
+                                <td t-if="project_domain_history.status and project_domain_history.status == 'not started'"
+                                    style="background-color:#FFFFFF; border-left:1px solid grey" class="text-center">
+                                    <span t-esc="dict(doc.project_domain_history_ids.fields_get(allfields=['status'])['status']['selection'])[project_domain_history.status]"/>
+                                </td>
+                                <td style="border-left:1px solid grey" class="text-center">
+                                    <span t-esc="'%.2f' % project_domain_history.task_progress"/>%
+                                </td>
+                            </t>
+                            <t t-else="">
+                            </t>
+                        </tr>
+                    </tbody>
+                </table>
+                <br/>
+                <h2 style="text-color=red;">2. Work in progress</h2>
+                <h4>2.1 Task done since last report</h4>
+                All tasks presented in the demo meeting
+                <table class="table table-sm o_main_table" style="border:1px solid grey">
+                    <thead style="display: table-row-group">
+                        <tr>
+                            <th>ID</th>
+                            <th style="border:1px solid grey">Task name</th>
+                            <th style="border:1px solid grey">Domain</th>
+                            <th style="border:1px solid grey">Planned/Not planned</th>
+                            <th style="border:1px solid grey">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="sale_tbody">
+                        <tr t-foreach="doc.sudo().past_done_task_history_ids.sorted('sequence')" t-as="task">
+                            <td style="border:1px solid grey">
+                                <span t-esc="task.sudo().related_task_id"/>
+                            </td>
+                            <td style="border:1px solid grey">
+                                <span t-esc="task.sudo().task_id.name"/>
+                            </td>
+                            <td style="border:1px solid grey">
+                                <span t-esc="task.sudo().task_id.default_domain_id.name"/>
+                            </td>
+                            <td style="border:1px solid grey">
+                                <span t-esc="'Planned' if task.is_planned else 'Not Planned'"/>
+                            </td>
+                            <td style="border:1px solid grey">
+                                <span t-field="task.state"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h4>2.2 Tasks on hold</h4>
+                All tasks on hold that are:
+                <ul>
+                    <li>Waiting on documents / information</li>
+                    <li>Waiting on customer validation to continue</li>
+                </ul>
+                Go-Live date may be postponed if validation or information needed is not given on time
+                <br/>
+                <table class="table table-sm o_main_table" style="border:1px solid grey">
+                    <thead style="display: table-row-group">
+                        <tr>
+                            <th style="border:1px solid grey">ID</th>
+                            <th style="border:1px solid grey">Task</th>
+                            <th style="border:1px solid grey">Domain</th>
+                            <th style="border:1px solid grey">Date planned - start</th>
+                            <th style="border:1px solid grey">Date planned - end</th>
+                            <th style="border:1px solid grey">Estimated time</th>
+                        </tr>
+                    </thead>
+                    <tbody class="sale_tbody">
+                        <tr t-foreach="doc.sudo().hold_task_ids.sorted('sequence')" t-as="task">
+                            <td style="border:1px solid grey">
+                                <span t-esc="task.id"/>
+                            </td>
+                            <td style="border:1px solid grey">
+                                <span t-esc="task.name"/>
+                            </td>
+                            <td style="border:1px solid grey">
+                                <span t-esc="task.default_domain_id.name"/>
+                            </td>
+                            <td style="border:1px solid grey">
+                                <span t-if="task.planned_date_begin" t-esc="task.planned_date_begin.date()"/>
+                            </td>
+                            <td style="border:1px solid grey">
+                                <span t-if="task.planned_date_start" t-esc="task.planned_date_start.date()"/>
+                            </td>
+                            <td style="border:1px solid grey">
+                                <span t-esc="'%.2f' % task.allocated_hours" class="text-center"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h4>2.3 Task planned for next period</h4>
+                <table class="table table-sm o_main_table" style="border:1px solid grey">
+                    <thead style="display: table-row-group">
+                        <tr>
+                            <th style="border:1px solid grey">ID</th>
+                            <th>Task</th>
+                            <th>Domain</th>
+                            <th style="border:1px solid grey">Start date</th>
+                            <th style="border:1px solid grey">Estimated time</th>
+                            <th style="border:1px solid grey">Remaining time</th>
+                        </tr>
+                    </thead>
+                    <tbody class="sale_tbody">
+                        <tr t-foreach="doc.sudo().future_task_ids.sorted('sequence')" t-as="task">
+                            <td style="border:1px solid grey">
+                                <span t-esc="task.id"/>
+                            </td>
+                            <td style="border:1px solid grey">
+                                <span t-esc="task.name"/>
+                            </td>
+                            <td style="border:1px solid grey">
+                                <span t-esc="task.default_domain_id.name"/>
+                            </td>
+                            <td style="border:1px solid grey">
+                                <span t-if="task.planned_date_begin" t-esc="task.planned_date_begin.date()"/>
+                            </td>
+                            <td style="border:1px solid grey">
+                                <span t-esc="'%.2f' % task.allocated_hours" class="text-center"/>
+                            </td>
+                            <td style="border:1px solid grey">
+                                <span t-esc="'%.2f' % task.remaining_hours" class="text-center"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br/>
+                <h2 style="text-color=red;">3. Upcoming meetings</h2>
+                <br/>
+                <span t-raw="doc.demo_meeting_task"/>
+                <br/>
+                <h2 style="text-color=red;">4. Time tracking</h2>
+                <t t-if="doc.sudo().sale_order_line_ids">
+                    Global consumption of your credit time
+                    <table class="table table-sm o_main_table" style="border:1px solid grey">
+                        <thead style="display: table-row-group">
+                            <tr>
+                                <th>Sale order</th>
+                                <th style="border:1px solid grey">Hours ordered</th>
+                                <th style="border:1px solid grey">Hours consumed</th>
+                                <th style="border:1px solid grey">Hours remaining</th>
+                            </tr>
+                        </thead>
+                        <tbody class="sale_tbody">
+                            <tr t-foreach="doc.sudo().sale_order_line_ids" t-as="so_line">
+                                <td style="border:1px solid grey">
+                                    <span t-esc="so_line.order_id.name"/> - <span t-esc="so_line.product_id.name"/>
+                                </td>
+                                <td style="border:1px solid grey" class="text-center">
+                                    <span t-esc="so_line.product_uom_qty"/>
+                                </td>
+                                <td style="border:1px solid grey" class="text-center">
+                                    <span t-esc="round(so_line.x_studio_consumed_qty, 2)"/>
+                                </td>
+                                <td style="border:1px solid grey" class="text-center">
+                                    <span t-esc="round(so_line.x_studio_remaining_quantity,2)"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </t>
+                <br/>
+                Consumption of your credit time of last 4 weeks
+                <table class="table table-sm o_main_table" style="border:1px solid grey">
+                    <thead style="display: table-row-group">
+                        <tr>
+                            <th style="border:1px solid grey"></th>
+                            <th style="border:1px solid grey">
+                                <span t-esc="doc.get_consumed_hours_by_week().get('week_3', (0, 0))[0]"/>
+                            </th>
+                            <th style="border:1px solid grey">
+                                <span t-esc="doc.get_consumed_hours_by_week().get('week_2', (0, 0))[0]"/>
+                            </th>
+                            <th style="border:1px solid grey">
+                                <span t-esc="doc.get_consumed_hours_by_week().get('week_1', (0, 0))[0]"/>
+                            </th>
+                            <th style="border:1px solid grey">Current week</th>
+                        </tr>
+                    </thead>
+                    <tbody class="sale_tbody">
+                        <tr>
+                            <t t-if="doc.weekly_hour_consumption_ids">
+                                <td style="border:1px solid grey">
+                                    <span>Hours</span>
+                                </td>
+                                <td style="border:1px solid grey" class="text-center">
+                                    <span t-esc="round(doc.weekly_hour_consumption_ids[0].week_tminusthree, 2)"/>
+                                </td>
+                                <td style="border:1px solid grey" class="text-center">
+                                    <span t-esc="round(doc.weekly_hour_consumption_ids[0].week_tminustwo, 2)"/>
+                                </td>
+                                <td style="border:1px solid grey" class="text-center">
+                                    <span t-esc="round(doc.weekly_hour_consumption_ids[0].week_tminusone, 2)"/>
+                                </td>
+                                <td style="border:1px solid grey" class="text-center">
+                                    <span t-esc="round(doc.weekly_hour_consumption_ids[0].current_week, 2)"/>
+                                </td>
+                            </t>
+                        </tr>
+                    </tbody>
+                </table>
+                <br/>
+                <t t-if="doc.message">
+                    <h2 style="text-color=red;">5. Notes</h2>
+                    <span t-raw="doc.message"/>
+                </t>
+                <t t-else="">
+                    <t t-if="doc.message">
+                        <h2 style="text-color=red;">4. Notes</h2>
+                        <span t-raw="doc.message"/>
+                    </t>
+                </t>
+            </div>
+        </t>
+    </template>
+
+
+    <!-- custom external layout template -->
+    <template id="cap_custom_external_layout">
+        <t t-if="not o" t-set="o" t-value="doc"/>
+        <t t-if="not company">
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id"/>
+            </t>
+            <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                <t t-set="company" t-value="o.company_id.sudo()"/>
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company"/>
+            </t>
+        </t>
+        <t t-if="company.external_report_layout_id and company.id == 3" t-call="cap_project_progress_report.cap_custom_external_layout_standard">
+            <t t-out="0"/>
+        </t>
+        <t t-else="else" t-call="{{company.external_report_layout_id.sudo().key}}">
+            <t t-out="0"/>
+        </t>
+    </template>
+
+    <!-- custom external layout standard template -->
+    <template id="cap_custom_external_layout_standard">
+        <div t-attf-class="o_company_#{company.id}_layout header">
+            <div class="d-flex">
+                <div>
+                    <img t-if="company.logo" class="o_company_logo_big" t-att-src="image_data_uri(company.logo)"
+                         alt="Logo"/>
+                    <div t-if="company.report_header" t-field="company.report_header"
+                         class="o_company_tagline fw-bold mt-2">Company tagline
+                    </div>
+                </div>
+                <div class="ms-3" name="company_address">
+                    <ul class="list-unstyled" name="company_address_list">
+                        <li t-if="company.is_company_details_empty">
+                            <span t-field="company.partner_id"
+                                  t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: true}">
+                                <div class="bg-light border-1 rounded h-100 d-flex flex-column align-items-center justify-content-center p-4 w-100 opacity-75 text-muted text-center">
+                                    <strong>Company address block</strong>
+                                    <div>Contains the company address.</div>
+                                </div>
+                            </span>
+                        </li>
+                        <li t-else="">
+                            <span t-field="company.company_details" class="text-nowrap">
+                                <div class="bg-light border-1 rounded h-100 d-flex flex-column align-items-center justify-content-center p-4 w-100 opacity-75 text-muted text-center">
+                                    <strong>Company details block</strong>
+                                    <div>Contains the company details.</div>
+                                </div>
+                            </span>
+                        </li>
+                        <li t-if="not forced_vat"/>
+                        <li t-else="">
+                            <t t-esc="company.country_id.vat_label or 'Tax ID'">Tax ID</t>:
+                            <span t-esc="forced_vat">US12345671</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <t t-set="layout_background_url"
+           t-value="'data:image/png;base64,%s' % company.layout_background_image.decode('utf-8') if company.layout_background_image and company.layout_background == 'Custom' else                 '/base/static/img/demo_logo_report.png' if company.layout_background == 'Demo logo' else ''"/>
+        <div t-attf-class="o_company_#{company.id}_layout article o_report_layout_striped o_table_striped o_snail_mail {{'o_report_layout_background' if company.layout_background != 'Blank' else ''}}"
+             t-attf-style="{{ 'background-image: url(%s);' % layout_background_url if layout_background_url else '' }}"
+             t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id"
+             t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-call="web.address_layout"/>
+            <h2 t-out="layout_document_title"/>
+            <t t-out="0"/>
+        </div>
+
+        <div t-attf-class="footer o_company_#{company.id}_layout {{report_type != 'pdf' and 'mt-auto'}}">
+            <div class="o_footer_content border-top pt-2 text-center">
+                <div class="text-center">
+                    <ul class="list-inline">
+                        <li t-if="company.phone" class="list-inline-item" style="color:#AF1117;">
+                            <i class="fa fa-phone" role="img" aria-label="Phone" title="Phone"/>
+                            <span class="o_force_ltr" t-field="company.phone"/>
+                        </li>
+                        <li t-if="company.email" class="list-inline-item" style="color:#AF1117;">
+                            <i class="fa fa-at" role="img" aria-label="Email" title="Email"/>
+                            <span t-field="company.email"/>
+                        </li>
+                        <li t-if="company.website" class="list-inline-item" style="color:#AF1117;">
+                            <i class="fa fa-globe" role="img" aria-label="Website" title="Website"/>
+                            <span t-field="company.website"/>
+                        </li>
+                        <li t-if="company.vat" class="list-inline-item" style="color:#AF1117;">
+                            <i class="fa fa-building-o" role="img" aria-label="Fiscal number"/>
+                            <t t-esc="company.country_id.vat_label or 'Tax ID'"/>:
+                            <span t-field="company.vat"/>
+                        </li>
+                    </ul>
+                    <t t-if="company.id != 3">
+                        <div t-field="company.report_footer"/>
+                    </t>
+                    <div t-if="report_type == 'pdf'" class="text-muted"
+                         style="padding-bottom: 100px;">
+                        Page:
+                        <span class="page"/>
+                        of
+                        <span class="topage"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+
+    <template id="report_project_progress">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="cap_project_progress_report.report_project_progress_document"
+                   t-lang="doc.project_id.partner_id.lang"/>
+            </t>
+        </t>
+    </template>
+
+</odoo>

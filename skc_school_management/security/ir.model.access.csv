@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+scholl_mngm_for_all_users_stu,all users,model_student,base.group_user,1,1,1,1
+scholl_mngm_for_all_users_tea,all users,model_teacher,base.group_user,1,1,1,1
+scholl_mngm_for_all_users_lab,all users,model_library,base.group_user,1,1,1,1
+scholl_mngm_for_all_users_wiz,all users,model_update_student_fees,base.group_user,1,1,1,1

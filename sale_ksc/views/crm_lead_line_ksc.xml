@@ -1,0 +1,14 @@
+<odoo>
+    <record id="view_crm_lead_line_ksc_tree" model="ir.ui.view">
+        <field name="name">crm.lead.line.ksc.tree</field>
+        <field name="model">crm.lead.line.ksc</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="product_id"/>
+                <field name="name"/>
+                <field name="expected_sell_qty"/>
+                <field name="uom_id"/>
+            </list>
+        </field>
+    </record>
+</odoo>

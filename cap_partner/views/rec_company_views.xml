@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="cap_view_company_form" model="ir.ui.view">
+        <field name="name">cap.view.company.form</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="priority">16</field>
+        <field name="arch" type="xml">
+             <xpath expr="//form[1]/sheet[1]/notebook[1]" position="inside">
+				<page name="maintenance_support_term" string="Maintenance and support terms">
+                    <field name="maintenance_support_terms"/>
+                </page>
+             </xpath>
+
+            <xpath expr="//page[@name='general_info']/group[1]" position="inside">
+                <group string="Project Configurator">
+                    <field name="number_of_days_authorized_in_late"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

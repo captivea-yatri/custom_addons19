@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record model="project.status" id="status_analysis_data">
+            <field name="name">Analysis</field>
+            <field name="code">analysis</field>
+        </record>
+        <record model="project.status" id="status_pre_live_data">
+            <field name="name">Pre-Live Configuration</field>
+            <field name="code">pre_live</field>
+        </record>
+        <record model="project.status" id="status_live_data">
+            <field name="name">Live</field>
+            <field name="code">live</field>
+        </record>
+        <record model="project.status" id="status_dead_data">
+            <field name="name">Dead</field>
+            <field name="code">dead</field>
+        </record>
+        <record model="project.status" id="status_duplicate_data">
+            <field name="name">Duplicate</field>
+            <field name="code">duplicate</field>
+        </record>
+        <record model="project.status" id="status_internal_data">
+            <field name="name">Internal</field>
+            <field name="code">internal</field>
+        </record>
+        <record model="project.status" id="status_internal_p2p3_data">
+            <field name="name">Internal P2 P3</field>
+            <field name="code">internal_p2p3</field>
+        </record>
+
+    </data>
+</odoo>

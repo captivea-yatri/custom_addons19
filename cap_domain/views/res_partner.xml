@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="cap_view_partner_form_01_inherit" model="ir.ui.view">
+        <field name="name">cap.view.partner.form.01</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="cap_partner.cap_view_partner_form_01"/>
+        <field name="priority">99</field>
+        <field name="arch" type="xml">
+             <xpath expr="//group[@name='invoicing']" position="after">
+                <group name="account_management" string="ACCOUNT MANAGEMENT">
+                    <label for="customer_followup_status"/>
+                    <div class="o_row" name="customer_followup_status">
+                        <button class="oe_stat_button" icon="fa-circle text-success" title="Follow-up Active" invisible="not (status == 'customer' and not customer_followup_status)"/>
+                        <button class="oe_stat_button" icon="fa-circle text-danger" title="Follow-up Inactive" invisible="not (status == 'customer' and customer_followup_status)"/>
+                    </div>
+                    <field name="followup_frequency" readonly="1"
+                           groups="!access_rights_management.role_president,!access_rights_management.role_ceo,!access_rights_management.role_vp_of_sales"/>
+                    <field name="followup_frequency" readonly="0"
+                           groups="access_rights_management.role_president,access_rights_management.role_ceo,access_rights_management.role_vp_of_sales"/>
+                    <field name="modules_used" widget="many2many_tags" domain="[('used_on_contact','=',True)]"
+                           options="{'no_create': True, 'no_create_edit': True}"/>
+                    <field name="last_followup_date"/>
+                    <field name="next_followup_date"/>
+                    <field name="is_followup_true" readonly="1" invisible="1"/>
+                    <field name="customer_followup_status" string="" readonly="1" class="o_hidden"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

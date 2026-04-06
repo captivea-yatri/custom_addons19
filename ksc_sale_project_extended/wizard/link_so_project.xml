@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="link_po_so_view_form" model="ir.ui.view">
+        <field name="name">link.so.project.wizard.form</field>
+        <field name="model">link.so.project.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="operation" widget="radio" required="1"/>
+                    <field name="project_id" options="{'no_create': True, 'no_create_edit': True}" invisible="operation != 'link'" required="operation == 'link'"/>
+                </group>
+
+                <footer>
+                    <button string="Submit" name="link_so_project" type="object" class="oe_highlight"/>
+                    <button string="Cancel" class="btn btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_link_po_so_view_form" model="ir.actions.act_window">
+        <field name="name">Create/Link SO Project</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">link.so.project.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

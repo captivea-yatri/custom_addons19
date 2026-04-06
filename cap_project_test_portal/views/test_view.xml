@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="test_form_view_inherited_project_test_portal" model="ir.ui.view">
+        <field name="name">test.form.view</field>
+        <field name="model">test.test</field>
+        <field name="inherit_id" ref="cap_project_test.test_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+                <button class="oe_stat_button"
+                        type="object" name="action_feedback" icon="fa-bullseye"
+                        string="Feedback"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

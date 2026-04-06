@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="report_session_test">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="cap_project_test_portal.report_session_test_document"/>
+            </t>
+        </t>
+    </template>
+
+    <template id="report_session_test_document">
+        <t t-call="web.external_layout">
+            <div class="page">
+                <div class="oe_structure"/>
+                <style>
+                    .o_heading {
+                    font-size: 45px;
+                    font-weight: bold;
+                    text-align:center;
+                    }
+                    .b1 {
+                    color:#C0C0C0;
+                    }
+                    .b2 {
+                    color:#ba131a;
+                    }
+                    .hr{
+                    width: 40%;
+                    height: 2px;
+                    margin-left: auto;
+                    margin-right: auto;
+                    }
+                    .p {
+                    font-size: 30px;
+                    color:#714b67;
+                    text-align:center;
+                    }
+                    .title {
+                    font-size: 30px;
+                    font-weight: bold;
+                    color:#ba131a;
+                    }
+                    .p1 {
+                    font-size: 20px;
+                    padding-top: 10px;
+                    }
+                    .page2 {
+                    page-break-before: always;
+                    padding-top: 5%;
+                    }
+                    .title1 {
+                    font-size: 25px;
+                    font-weight: bold;
+                    color:#ba131a;
+                    opacity: .5;
+                    }
+                    .o_task_head {
+                    font-size: 20px;
+                    font-weight: bold;
+                    font-style: italic;
+                    color:#black;
+                    }
+                    .o_table_task_and_feedback {
+                    border: 1px solid #714b67; page-break-inside: auto; position:relative;
+                    width: 100%;
+                    }
+                    .o_table_task_th {
+                    display: table-row-group; text-align:center; background-color: #714b67;
+                    }
+                    .o_table_body {
+                    font-size: 20px;
+                    text-align:center;
+                    }
+                </style>
+                <div class="col-12">
+                    <div class="o_heading">
+                        <b class="b2">
+                            <t t-esc="doc.project_id.sudo().partner_id.name"/>
+                        </b>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <hr class="hr"/>
+                </div>
+                <br/>
+                <br/>
+                <div class="col-12">
+                    <div class="title">
+                        1. Introduction
+                    </div>
+                </div>
+                <div class="col-12">
+                    <p class="p1">
+                        This document lists all tasks and tests included in the session.
+                        <br/>
+                        <br/>
+                        This document acknowledge that you agree with all results that you entered in the
+                        system
+                        during the test validation session.
+                    </p>
+                </div>
+
+                <div class="col-12"
+                     style="width: 100%; border: 1px solid #C0C0C0; padding: 5px; background-clip: content-box; background-color: #A2C4E0;">
+                    <table class="table table-sm table-borderless"
+                           style="color: #454748; width:100%; height:100%; border-color: none">
+                        <tbody>
+                            <tr style="background-color: #A2C4E0; color:#212529; margin-top: 20px;"
+                                class="margin-top: 20px;">
+                                <td colspan="6" style="width:50%;">
+                                    <span style="margin-left: 10px; font-size: 20px;">
+                                        <b>Session :</b>
+                                        <t t-esc="doc.name"/>
+                                    </span>
+                                </td>
+                                <td colspan="6" style="width:50%;">
+                                    <span style="margin-left: 10px; font-size: 20px;">
+                                        <b>Branch :</b>
+                                        <t t-esc="doc.branch"/>
+                                    </span>
+                                </td>
+                            </tr>
+
+                            <tr style="background-color: #A2C4E0; color:#212529; margin-top: 20px;"
+                                class="margin-top: 20px; text-black">
+                                <td colspan="6" style="width:50%;">
+                                    <span style="margin-left: 10px; font-size: 20px;">
+                                        <b>Date :</b>
+                                        <t t-esc="doc.date"/>
+                                    </span>
+                                </td>
+                                <td colspan="6" style="width:50%;">
+                                    <span style="margin-left: 10px; font-size: 20px;">
+                                        <b>Phase :</b>
+                                        <t t-if="doc.phase_id">
+                                            <t t-esc="doc.phase_id.name"/>
+                                        </t>
+                                        <t t-else="">
+                                            ALL
+                                        </t>
+                                    </span>
+                                </td>
+                            </tr>
+
+                            <tr style="background-color: #A2C4E0; color:#212529; margin-top: 20px;"
+                                class="margin-top: 20px; text-black">
+                                <td colspan="6" style="width:50%;">
+                                    <span style="margin-left: 10px; font-size: 20px;">
+                                        <b>Tasks :</b>
+                                        <t t-if="doc.task_ids">
+                                            <t t-foreach="doc.task_ids"
+                                               t-as="task_id">
+                                                <span class="badge rounded-pill border"
+                                                      style="max-width: 200px; overflow: hidden; text-overflow: ellipsis;
+                                                      background-color: #17a2b8; color: #FFFFFF;">
+                                                    <t t-esc="task_id.name"/>
+                                                </span>
+                                            </t>
+                                        </t>
+                                        <t t-else="">
+                                            <span class="badge rounded-pill border"
+                                                  style="background-color: #17a2b8; color: #FFFFFF;">
+                                                ALL
+                                            </span>
+                                        </t>
+                                    </span>
+                                </td>
+                                <td colspan="6" style="width:50%;">
+                                    <span style="margin-left: 10px; font-size: 20px;">
+                                        <b>Domains :</b>
+                                        <t t-if="doc.domain_ids">
+                                            <t t-foreach="doc.domain_ids"
+                                               t-as="domain_id">
+                                                <span class="badge rounded-pill border"
+                                                      style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; background-color: #17a2b8; color: #FFFFFF;">
+                                                    <t t-esc="domain_id.name"/>
+                                                </span>
+                                            </t>
+                                        </t>
+                                        <t t-else="">
+                                            <span class="badge rounded-pill border"
+                                                  style="background-color: #17a2b8; color: #FFFFFF;">
+                                                ALL
+                                            </span>
+                                        </t>
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="col-12" style="margin-top: 20px;">
+                    <div class="title">
+                        2. Validation
+                    </div>
+                </div>
+                <div class="col-12">
+                    <p class="p1">
+                        This session has been runned by
+                        <t t-esc="doc.env.user.name"/>
+                        and closed on
+                        <t t-esc="datetime.date.today()"/>.
+                    </p>
+                </div>
+
+                <div class="page2">
+                    <div class="title">
+                        3. Scope of this UAT Validation
+                    </div>
+                </div>
+                <div class="col-12">
+                    <p class="p1">
+                        Here is the list of tasks included in this milestone and that you tested.
+                    </p>
+                </div>
+
+                <div class="col-12" style="position:relative; page-break-inside: auto;">
+                    <t t-set="count_phase" t-value="1"/>
+                    <t t-foreach="doc.execution_test_ids.phase_id.sorted('sequence')" t-as="phase_id">
+                        <p class="title1">
+                            3.
+                            <t t-esc="count_phase"/>
+                            <t t-esc="phase_id.name"/>
+                        </p>
+                        <t t-set="count_domain" t-value="1"/>
+                        <t t-foreach="doc.execution_test_ids.filtered(lambda l: l.phase_id == phase_id).domain_id"
+                           t-as="domain_id">
+                            <p class="title1">
+                                3.
+                                <t t-esc="count_phase"/>.
+                                <t t-esc="count_domain"/>
+                                <t t-esc="domain_id.name"/>
+                            </p>
+
+                            <t t-set="count_task_validation" t-value="1"/>
+                            <t t-set="task_of_task_validation_status" t-value=""/>
+
+                            <t t-foreach="doc.task_validation_status_ids.filtered(lambda tv:tv.task_id.project_domain_id.id == domain_id.id and tv.task_id.default_phase_id.id == phase_id.id)"
+                               t-as="task_validation_status_id">
+                                <t t-set="task" t-value="task_validation_status_id.task_id"/>
+                                <div class="o_task_head">
+                                    3.<t t-esc="count_phase"/>.
+                                    <t t-esc="count_domain"/>.
+                                    <t t-esc="count_task_validation"/>
+                                    <t t-esc="task.name"/>
+                                    -
+                                    <t t-esc="task.stage_id.name"/>
+                                </div>
+                                <br/>
+                                <div class="o_task_head">
+                                    <u>Tests</u>
+                                </div>
+                                <t t-foreach="task_validation_status_id.execution_test_ids.filtered(lambda l: l.domain_id == domain_id and l.phase_id == phase_id)"
+                                   t-as="execution_test_id">
+                                    <div class="col-12" style="padding-top: 10px;">
+                                        <table class="table table-sm o_table_task_and_feedback">
+                                            <thead class="o_table_task_th">
+                                                <tr>
+                                                    <th style="color: #FFFFFF;">
+                                                        <span>Test</span>
+                                                    </th>
+                                                    <th style="color: #FFFFFF;">
+                                                        <span>Test description</span>
+                                                    </th>
+                                                    <th style="color: #FFFFFF;">
+                                                        <span>Test status</span>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="o_table_body">
+                                                    <td>
+                                                        <span t-field="execution_test_id.test_id.name"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-field="execution_test_id.description"/>
+                                                    </td>
+                                                    <td>
+                                                        <t t-if="execution_test_id.status == 'success'">
+                                                            <span class="border rounded-pill"
+                                                                  style="background-color: #28a745; color: #FFFFFF; padding-bottom: 5px; padding-top: 2px; padding-right: 5px; padding-left: 5px;"
+                                                                  t-field="execution_test_id.status"/>
+                                                        </t>
+                                                        <t t-if="execution_test_id.status == 'skipped'">
+                                                            <span class="border rounded-pill"
+                                                                  style="background-color: #ffc107; color: #FFFFFF; padding-bottom: 5px; padding-top: 2px; padding-right: 5px; padding-left: 5px;"
+                                                                  t-field="execution_test_id.status"/>
+                                                        </t>
+                                                        <t t-if="execution_test_id.status == 'To do'">
+                                                            <span class="border rounded-pill"
+                                                                  style="background-color: #17a2b8; color: #FFFFFF; padding-bottom: 5px; padding-top: 2px; padding-right: 5px; padding-left: 5px;"
+                                                                  t-field="execution_test_id.status"/>
+                                                        </t>
+                                                        <t t-if="execution_test_id.status == 'failed'">
+                                                            <span class="border rounded-pill"
+                                                                  style="background-color: #DC3545; color: #FFFFFF; padding-bottom: 5px; padding-top: 2px; padding-right: 5px; padding-left: 5px;"
+                                                                  t-field="execution_test_id.status"/>
+                                                        </t>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </t>
+
+                                <!--   FeedBack code   -->
+                                <div class="col-12">
+                                    <t t-if="task_validation_status_id.feedback_ids">
+                                        <div class="o_task_head">
+                                            <u>Feedbacks</u>
+                                        </div>
+                                        <div style="padding-top: 10px;">
+                                            <table class="table table-sm o_table_task_and_feedback">
+                                                <thead class="o_table_task_th">
+                                                    <tr>
+                                                        <th style="color: #FFFFFF;">
+                                                            <span>Feedback</span>
+                                                        </th>
+                                                        <th style="color: #FFFFFF;">
+                                                            <span>Feedback description</span>
+                                                        </th>
+                                                        <th style="color: #FFFFFF;">
+                                                            <span>Feedback Status</span>
+                                                        </th>
+                                                        <th style="color: #FFFFFF;">
+                                                            <span>Test</span>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <t t-foreach="task_validation_status_id.feedback_ids"
+                                                       t-as="feedback_id">
+                                                        <tr class="o_table_body">
+                                                            <td>
+                                                                <span t-field="feedback_id.name"/>
+                                                            </td>
+                                                            <td>
+                                                                <span t-field="feedback_id.description"/>
+                                                            </td>
+                                                            <td>
+                                                                <span class="badge rounded-pill bg-info border text-black"
+                                                                      t-field="feedback_id.status"/>
+                                                            </td>
+                                                            <td>
+                                                                <span t-field="feedback_id.test_id.name"/>
+                                                            </td>
+                                                        </tr>
+                                                    </t>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </t>
+                                </div>
+                                <br/>
+                                <t t-set="count_task_validation" t-value="count_task_validation + 1"/>
+                            </t>
+                            <t t-set="count_domain" t-value="count_domain + 1"/>
+                        </t>
+                        <t t-set="count_phase" t-value="count_phase + 1"/>
+                    </t>
+                </div>
+
+                <div class="col-12" style="position:relative; page-break-inside: auto;">
+                    <t t-set="count" t-value="1"/>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

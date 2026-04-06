@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="group_expedite_production" model="res.groups">
+            <field name="name">Process all quality checks</field>
+<!--            <field name="category_id" ref="base.module_category_hidden"/>-->
+        </record>
+
+        <record model="ir.ui.view" id="mrp_form_workorder_view">
+            <field name="name">mrp.workorder.form</field>
+            <field name="model">mrp.workorder</field>
+            <field name="inherit_id" ref="mrp.mrp_production_workorder_form_view_inherit"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button name="action_all_next"
+                            type="object"
+                            string="Run All"
+                            confirm="Are you sure you want to run all production steps?"
+                            invisible = "state in ['done','cancelled']"
+                            groups="mrp_attachment.group_expedite_production"
+                            icon="fa-check"
+                            class="oe_stat_button"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="mrp_form_download_view">
+            <field name="name">mrp.download.form</field>
+            <field name="model">mrp.bom</field>
+            <field name="inherit_id" ref="mrp.mrp_bom_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <field name="bom_has_attachments" invisible="1"/>
+                    <button type="object"
+                            name="download_bom_attachments"
+                            string="Download Attachments"
+                            class="oe_stat_button"
+                            icon="fa-download"
+                            invisible="bom_has_attachments == False"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

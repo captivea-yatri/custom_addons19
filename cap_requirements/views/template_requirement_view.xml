@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="template_requirement_tree_view" model="ir.ui.view">
+            <field name="name">template.requirement.tree.view</field>
+            <field name="model">template.requirement</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+                    <field name="template_domain_id"/>
+                    <field name="description" optional="hide"/>
+                    <field name="role_id"/>
+                    <field name="default_estimate_time" widget="float_time"/>
+                    <field name="meta_template_requirement_id"/>
+                    <field name="all_apps"/>
+                    <field name="is_answer_mandatory"/>
+                    <field name="active" column_invisible="True"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="template_requirement_form_view" model="ir.ui.view">
+            <field name="name">template.requirement.form.view</field>
+            <field name="model">template.requirement</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <widget name="web_ribbon" title="Archived" bg_color="bg-danger" invisible="active == True"/>
+                        <div class="oe_title">
+                            <h1 class="d-flex flex-row">
+                                <field name="name" required="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="template_domain_id"
+                                       invisible="all_apps == True" required="all_apps==False"
+                                       options="{'no_create': True, 'no_create_edit': True}"/>
+                                <field name="role_id" options="{'no_create': True, 'no_create_edit': True}"/>
+                                <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                            </group>
+                            <group>
+                                <field name="default_estimate_time" widget="float_time"/>
+                                <field name="meta_template_requirement_id"/>
+                                <field name="all_apps"/>
+                                <field name="is_answer_mandatory"/>
+                                <field name="active" invisible="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="description" string="Description">
+                                <field name="description"/>
+                            </page>
+                            <page name="deliverable from customer" string="Deliverable From Customer">
+                                <field name="deliverable_from_the_customer"/>
+                            </page>
+                            <page name="questions to ask" string="Questions">
+                                <field name="questions_to_ask"/>
+                            </page>
+                            <page name="help" string="Help">
+                                <field name="help"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="template_requirement_search_view" model="ir.ui.view">
+            <field name="name">template.requirement.search.view</field>
+            <field name="model">template.requirement</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="tag_ids"/>
+                    <field name="template_domain_id"/>
+                    <field name="role_id"/>
+
+                        <filter string="Name" name="name" context="{'group_by':'name'}"/>
+                        <filter string="Template Domain" name="template_domain_id"
+                                context="{'group_by':'template_domain_id'}"/>
+                        <filter string="Role" name="role_id"
+                                context="{'group_by':'role_id'}"/>
+                        <filter string="Tags" name="tag_ids"
+                                context="{'group_by':'tag_ids'}"/>
+
+                </search>
+            </field>
+        </record>
+
+        <record id="action_template_requirement" model="ir.actions.act_window">
+            <field name="name">Template Requirement</field>
+            <field name="res_model">template.requirement</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <menuitem id="template_requirement_main_menu" name="Requirement Admin"
+                  groups="cap_domain.operation_quality_manager"
+                  parent="project.menu_main_pm" sequence="8"/>
+        <menuitem id="template_requirement_sub_menu" action="action_template_requirement"
+                  name="Template Requirement"
+                  parent="template_requirement_main_menu"/>
+    </data>
+</odoo>

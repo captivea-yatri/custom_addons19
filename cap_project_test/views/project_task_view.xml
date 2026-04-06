@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="cap_domain_extended_project_task_extended_view" model="ir.ui.view">
+            <field name="name">project.task.inherit.view</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="cap_domain.project_task_extended_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='tag_ids']" position="after">
+                    <field name="staging_branch_to_use"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="project_task_inherit_view" model="ir.ui.view">
+            <field name="name">project.task.inherit.view</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_form2"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="Test Result">
+                        <group>
+                            <field name="last_task_validation_status"/>
+                            <field name="last_task_validation_status_date"/>
+                        </group>
+                    </page>
+                </xpath>
+                <xpath expr="//page[@name='extra_info']" position="after">
+                    <page string="Task Tests">
+                        <field name="tests_ids"/>
+                        <!--                        <field name="session_test_id" invisible="1"/>-->
+                    </page>
+                </xpath>
+
+                <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+                    <button name="action_session_test_object"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-regular fa-check">
+                        <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_text">Session</span>
+                            <span class="o_stat_text">Test</span>
+                        </div>
+                    </button>
+                    <button name="action_task_execution_test_object"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-check-square-o icon">
+                        <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_text">Execution</span>
+                            <span class="o_stat_text">Test</span>
+                        </div>
+                    </button>
+                    <button name="action_task_validation_status"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-solid fa-check">
+                        <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_text">Task Validation</span>
+                            <span class="o_stat_text">Status</span>
+                        </div>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_project_milestone_user,project.milestone.user,model_project_milestone,base.group_user,1,0,0,0
+access_project_milestone_portal,project.milestone.portal,model_project_milestone,base.group_portal,0,0,0,0
+access_project_milestone_project_user,project.milestone.project.user,model_project_milestone,project.group_project_user,1,0,0,0
+access_project_milestone_project_manager,project.milestone.project.manager,model_project_milestone,project.group_project_manager,1,1,1,1
+access_project_progress,project.progress,model_project_progress,,1,1,1,1
+access_task_history_log,task.history.log,model_task_history_log,,1,1,1,1
+access_project_milestone_history,project.milestone.history,model_project_milestone_history,,1,1,1,1
+access_sign_request,access_sign_request,sign.model_sign_request,base.group_user,1,0,0,0
+access_weekly_hour_consumption,access.weekly.hour.consumption,model_weekly_hour_consumption,,1,1,1,1

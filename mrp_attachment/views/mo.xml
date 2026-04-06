@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="mrp_mo_form_download_view">
+            <field name="name">mrp.mo.download.form</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <field name="production_has_attachments" invisible="1"/>
+                    <button type="object"
+                        name="download_production_attachments"
+                        string="Download Attachments"
+                        class="oe_stat_button" 
+                        icon="fa-download" 
+                        invisible="production_has_attachments == False"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

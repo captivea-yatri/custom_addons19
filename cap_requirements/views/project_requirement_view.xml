@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="project_requirement_tree_view_for_workshop" model="ir.ui.view">
+            <field name="name">project.requirement.tree.view</field>
+            <field name="model">project.requirement</field>
+            <field name="arch" type="xml">
+                <list editable="bottom" multi_edit="1">
+                    <field name="project_domain_id" readonly="1" optional="hide"
+                           options="{'no_create': True, 'no_create_edit': True}"/>
+                    <field name="default_domain_ids" widget="many2many_tags" column_invisible="True"/>
+                    <field name="default_domain_id" domain="[('id', 'in', default_domain_ids)]" required="1" options="{'no_create': True, 'no_create_edit': True}"/>
+                    <field name="name"/>
+                    <field name="project_id" column_invisible="True"/>
+                    <field name="description"/>
+                    <field name="phase_id" options="{'no_create': True, 'no_create_edit': True}"/>
+                    <field name="maturity" optional="show"/>
+                    <field name="used" optional="show"/>
+                    <field name="role_id" options="{'no_create': True, 'no_create_edit': True}" optional="show"/>
+                    <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}" optional="hide"/>
+                    <field name="deliverable_from_the_customer" optional="show" widget="html"/>
+                    <field name="questions_to_ask" widget="html" optional="show"/>
+                    <button name="open_form_of_requirement" string="SETUP" type="object"/>
+                    <button name="delete_project_requirement_record" icon="fa-trash-o" type="object" title=" " confirm="Are you sure to want delete this requirement?"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="project_requirement_tree_view_for_analysis" model="ir.ui.view">
+            <field name="name">project.requirement.tree.view</field>
+            <field name="model">project.requirement</field>
+            <field name="arch" type="xml">
+                <list editable="bottom" multi_edit="1" decoration-danger="estimate_time == 0.0">
+                    <field name="sequence" widget="handle"/>
+                    <field name="project_domain_id" readonly="1" optional="hide"
+                           options="{'no_create': True, 'no_create_edit': True}"/>
+                    <field name="default_domain_ids" widget="many2many_tags" column_invisible="True"/>
+                    <field name="default_domain_id"  domain="[('id', 'in', default_domain_ids)]" required="1" options="{'no_create': True, 'no_create_edit': True}"/>
+                    <field name="name"/>
+                    <field name="description" optional="hide"/>
+                    <field name="phase_id" options="{'no_create': True, 'no_create_edit': True}"/>
+                    <field name="project_id" column_invisible="True"/>
+                    <field name="maturity" optional="show"/>
+                    <field name="used" optional="show"/>
+                    <field name="role_id" optional="show" options="{'no_create': True, 'no_create_edit': True}"/>
+                    <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}" optional="hide"/>
+                    <field name="deliverable_from_the_customer" optional="hide"/>
+                    <field name="questions_to_ask" optional="hide"/>
+                    <field name="features_not_discussed_in_pre_sales" optional="show"/>
+                    <field name="advised_estimated_time" widget="float_time" readonly="True" optional="show"/>
+                    <field name="manual_estimate" optional="show"/>
+                    <field name="estimate_time" widget="float_time"
+                           readonly="manual_estimate == False" optional="show"/>
+                    <field name="module_cost" optional="show"/>
+                    <button name="open_form_of_requirement" string="SETUP" type="object"/>
+                    <button name="delete_project_requirement_record" icon="fa-trash-o" type="object" title=" " confirm="Are you sure to want delete this requirement?" />
+                </list>
+            </field>
+        </record>
+
+        <record id="project_requirement_form_view" model="ir.ui.view">
+            <field name="name">project.requirement.form.view</field>
+            <field name="model">project.requirement</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1 class="d-flex flex-row">
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="template_requirements_id"
+                                       options="{'no_create': True, 'no_create_edit': True}"/>
+                                <field name="meta_project_requirement_id" readonly="True"/>
+                                <field name="project_id" options="{'no_create': True, 'no_create_edit': True}"/>
+                                <field name="project_domain_id" invisible="1"
+                                       options="{'no_create': True, 'no_create_edit': True}"/>
+                                <field name="default_domain_ids" widget="many2many_tags" invisible="1"/>
+                                <field name="default_domain_id"  domain="[('id', 'in', default_domain_ids)]" options="{'no_create': True, 'no_create_edit': True}" required="1"/>
+                                <field name="phase_id" options="{'no_create': True, 'no_create_edit': True}"/>
+                                <field name="role_id" options="{'no_create': True, 'no_create_edit': True}"/>
+                                <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                            </group>
+                            <group>
+                                <field name="advised_estimated_time" widget="float_time" readonly="True"/>
+                                <!--                                       attrs="{'readonly':[('manual_estimate', '=', False)]}"/>-->
+                                <field name="manual_estimate"/>
+                                <field name="estimate_time" widget="float_time"
+                                       readonly="manual_estimate == False"/>
+                                <field name="module_cost"/>
+                                <field name="maturity"/>
+                                <field name="used"/>
+                                <field name="features_not_discussed_in_pre_sales"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="description" string="Description">
+                                <field name="description" widget="html"/>
+                            </page>
+                            <page name="deliverable from customer" string="Deliverable From Customer">
+                                <field name="deliverable_from_the_customer" widget="html"/>
+                            </page>
+                            <page name="questions to ask" string="Questions To Ask">
+                                <field name="questions_to_ask" widget="html"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="project_requirement_pivot_view" model="ir.ui.view">
+            <field name="name">project.requirement.pivot.view</field>
+            <field name="model">project.requirement</field>
+            <field name="arch" type="xml">
+                <pivot>
+                    <field name="phase_id" type="row"/>
+                    <field name="project_domain_id" type="row"/>
+                    <field name="advised_estimated_time" type="measure"/>
+                    <field name="estimate_time" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="project_requirement_search_view" model="ir.ui.view">
+            <field name="name">project.requirement.search.view</field>
+            <field name="model">project.requirement</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="phase_id"/>
+                    <field name="template_requirements_id"/>
+                    <field name="project_id"/>
+                    <field name="tag_ids"/>
+                    <field name="role_id"/>
+                    <field name="project_domain_id"/>
+                    <filter string="Used" name="used" domain="[('used', '!=', 'no')]"/>
+                    <separator/>
+                    <filter name="custom_requirement" string="Custom Requirements"
+                            domain="[['template_requirements_id', '=', False]]"/>
+                    <separator/>
+                    <filter string="Not discussed in presale" name="features_not_discussed_in_pre_sales"
+                            domain="[('features_not_discussed_in_pre_sales', '=', 'yes')]"/>
+                    <separator/>
+                    <filter string="Remove analysis" name="remove_analysis"
+                            domain="[('default_domain_id.name', 'not ilike', 'analysis')]"/>
+                    <separator/>
+                    <filter string="Functional requirements" name="functional_requirements"
+                            domain="['|', ('template_requirements_id', '=', False), ('template_requirements_id.all_apps', '=', False)]"/>
+                    <separator/>
+                    <filter string="PM" name="role_id_pm"
+                            domain="[('role_id.is_project_manager', '=', True)]"/>
+                    <filter string="BA" name="role_id" domain="[('role_id.is_business_analyst', '=', True)]"/>
+                    <filter string="Architect" name="role_id" domain="[('role_id.is_architect', '=', True)]"/>
+                    <filter string="Configurator" name="role_id" domain="[('role_id.is_configurator', '=', True)]"/>
+                    <filter string="Developer" name="role_id" domain="[('role_id.is_developer', '=', True)]"/>
+                    <separator/>
+                    <filter string="Time not set" name="estimate_time" domain="[('estimate_time', '=', 0)]"/>
+                    <separator/>
+                    <filter string="Used not set" name="estimate_time" domain="[('used', '=', False)]"/>
+                        <filter string="Name" name="name" context="{'group_by':'name'}"/>
+                        <filter string="Project" name="project_id"
+                                context="{'group_by':'project_id'}"/>
+                        <filter string="Phase" name="phase_id"
+                                context="{'group_by':'phase_id'}"/>
+                        <filter string="Domain" name="default_domain_id" context="{'group_by':'default_domain_id'}"/>
+                        <filter string="Project Domain" name="project_domain_id"
+                                context="{'group_by':'project_domain_id'}"/>
+                        <filter string="Role" name="role_id"
+                                context="{'group_by':'role_id'}"/>
+                        <filter string="Features Not Discussed In Pre Sales" name="features_not_discussed_in_pre_sales"
+                                context="{'group_by':'features_not_discussed_in_pre_sales'}"/>
+                        <filter string="Maturity" name="maturity"
+                                context="{'group_by':'maturity'}"/>
+                        <filter string="Tags" name="tag_ids"
+                                context="{'group_by':'tag_ids'}"/>
+
+                </search>
+            </field>
+        </record>
+
+        <record id="action_project_requirement" model="ir.actions.act_window">
+            <field name="name">Project Requirement</field>
+            <field name="res_model">project.requirement</field>
+            <field name="view_mode">pivot,list</field>
+            <field name="view_id" ref="cap_requirements.project_requirement_tree_view_for_analysis"/>
+        </record>
+
+<!--        embedded action-->
+
+        <record id="project_embedded_action_requirement_for_workshop" model="ir.embedded.actions">
+            <field name="parent_res_model">project.project</field>
+            <field name="sequence">100</field>
+            <field name="name">Requirements for Workshop</field>
+            <field name="parent_action_id" ref="project.act_project_project_2_project_task_all"/>
+            <field name="python_method">action_project_workshop</field>
+            <field name="context">{"from_embedded_action": true}</field>
+        </record>
+
+        <record id="project_embedded_action_requirement_for_analysis" model="ir.embedded.actions">
+            <field name="parent_res_model">project.project</field>
+            <field name="sequence">100</field>
+            <field name="name">Requirements for Analysis</field>
+            <field name="parent_action_id" ref="project.act_project_project_2_project_task_all"/>
+            <field name="python_method">action_project_analysis</field>
+            <field name="context">{"from_embedded_action": true}</field>
+        </record>
+
+        <menuitem id="Project_requirement_sub_menu" action="action_project_requirement"
+                  name="Project Requirement"
+                  parent="template_requirement_main_menu"/>
+    </data>
+</odoo>

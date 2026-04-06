@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="session_test_portal_report_action" model="ir.actions.report">
+        <field name="name">Session Test Portal Report</field>
+        <field name="model">session.test</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">cap_project_test_portal.report_session_test</field>
+        <field name="report_file">cap_project_test_portal.report_session_test</field>
+        <field name="print_report_name">'%s - %s' % (object.project_id.name, object.name)
+        </field>
+        <field name="binding_model_id" ref="model_session_test"/>
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>

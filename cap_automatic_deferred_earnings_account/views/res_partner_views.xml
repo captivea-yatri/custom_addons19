@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="cap_res_partner_time_credit_form" model="ir.ui.view">
+        <field name="name">cap.view.partner.time.credit.status.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="account.view_partner_property_form"/>
+        <field name="priority">17</field>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@id='invoice_send_settings']" position="after">
+                <group string="Credit Time Status" name="credit_time_status">
+	                <field name="credit_time_balance" string="Credit Time Balance" readonly="1"/>
+	                <field name="deferred_revenue_balance" readonly="1"/>
+	                <field name="credit_time_synchronized" readonly="1"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_res_partner_filter_credit_time_sync" model="ir.ui.view">
+        <field name="name">view.res.partner.filter.inherit.credit.time.sync</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='type_company']" position="after">
+                <separator/>
+                <filter name="credit_time_synchronized" string="Not Synchronizes" domain="[('credit_time_synchronized', '=',False),('is_company', '=', True)]"/>
+            </xpath>
+            <xpath expr="//filter[@name='group_country']" position="after">
+                <filter name="credit_time_synchronized" string="Synchronization Status" context="{'group_by': 'credit_time_synchronized'}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

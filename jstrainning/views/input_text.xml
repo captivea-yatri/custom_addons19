@@ -1,0 +1,9 @@
+<odoo>
+    <template id="homepage_button_template" name="Homepage Button Template" inherit_id="website.homepage">
+        <xpath expr="//div[@id='wrap']" position="inside">
+            <div class="o_custom_button">
+                <button class="hello-btn btn-primary o_button_action">Hello </button>
+            </div>
+        </xpath>
+    </template>
+</odoo>

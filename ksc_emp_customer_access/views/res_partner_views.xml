@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="contacts_extended_view_form_extended" model="ir.ui.view">
+        <field name="name">contacts.extended.view.form.extended</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="/form/sheet/group/group/div[2]" position="after">
+    <field name="accessible_user_ids"/>
+  </xpath>
+
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="view_access_req"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-universal-access"
+                        invisible="not is_company"
+                        groups="base.group_user">
+<!--                        groups="access_rights_management.group_access_request">-->
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_text">Access</span>
+                        <span class="o_stat_text">Requests</span>
+                    </div>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="res_partner_view_form_inherit_mail_roles" model="ir.ui.view">
+        <field name="name">res.partner.view.form.inherit.mail.roles</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="mail.res_partner_view_form_inherit_mail"/>
+        <field name="arch" type="xml">
+            <xpath expr="//chatter" position="after">
+                <field name="is_access" invisible="1"/>
+                <chatter invisible="not is_access" groups="access_rights_management.role_operation_on_boarder,access_rights_management.role_operation,access_rights_management.role_team_manager,access_rights_management.role_team_director"/>
+            </xpath>
+            <xpath expr="//chatter" position="replace">
+                <chatter groups="!access_rights_management.role_operation_on_boarder,!access_rights_management.role_operation,!access_rights_management.role_team_manager,!access_rights_management.role_team_director"/>
+            </xpath>
+        </field>
+    </record>
+
+<!--    TODO : check it in v18-->
+<!--    <record id="view_res_partner_form_sales_access_request" model="ir.ui.view">-->
+<!--        <field name="name">view.res.partner.form.sale.access.request</field>-->
+<!--        <field name="model">res.partner</field>-->
+<!--        <field name="inherit_id" ref="sale.res_partner_view_buttons"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <button name="action_view_sale_order" position="after">-->
+<!--&lt;!&ndash;                <button class="oe_stat_button" type="object" name="action_view_sale_order"&ndash;&gt;-->
+<!--&lt;!&ndash;                        groups="access_rights_management.role_team_manager,access_rights_management.role_team_director,access_rights_management.role_operation,access_rights_management.role_operation_on_boarder"&ndash;&gt;-->
+<!--&lt;!&ndash;                        attrs="{'invisible': &quot;['|', ('parent_id', '!=', False), ('accessible_user_ids', 'not in', uid)]&quot;}"&ndash;&gt;-->
+<!--&lt;!&ndash;                        invisible="parent_id"&ndash;&gt;-->
+<!--&lt;!&ndash;                        icon="fa-usd">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <field string="Sales" name="sale_order_count" widget="statinfo"/>&ndash;&gt;-->
+<!--&lt;!&ndash;                </button>&ndash;&gt;-->
+<!--                <button class="oe_stat_button" type="object" name="action_view_sale_order"-->
+<!--                    groups="access_rights_management.role_team_manager,access_rights_management.role_team_director,access_rights_management.role_operation,access_rights_management.role_operation_on_boarder"-->
+<!--                    invisible="parent_id"-->
+<!--                    icon="fa-usd">-->
+<!--&lt;!&ndash;                    or 'accessible_user_ids', 'not in', uid&ndash;&gt;-->
+<!--                    <field string="Sales" name="sale_order_count" widget="statinfo"/>-->
+<!--                </button>-->
+<!--                <button class="oe_stat_button" type="object" name="action_view_sale_order"-->
+<!--                        groups="access_rights_management.role_team_manager,access_rights_management.role_team_director,access_rights_management.role_operation,access_rights_management.role_operation_on_boarder"-->
+<!--                        invisible="not parent_id"-->
+<!--                        icon="fa-usd">-->
+<!--                    <field string="Sales" name="sale_order_count" widget="statinfo"/>-->
+<!--                </button>-->
+<!--            </button>-->
+<!--        </field>-->
+<!--    </record>-->
+
+<record id="view_res_partner_form_sales_access_request" model="ir.ui.view">
+    <field name="name">view.res.partner.form.sale.access.request</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="sale.res_partner_view_buttons"/>
+    <field name="arch" type="xml">
+
+        <!-- Target the existing Sales stat button inside the button_box -->
+        <xpath expr="//div[@name='button_box']/button[@name='sale.act_res_partner_2_sale_order']" position="after">
+
+            <!-- Button for records without a parent -->
+            <!--                groups="access_rights_management.role_team_manager,-->
+<!--                        access_rights_management.role_team_director,-->
+<!--                        access_rights_management.role_operation,-->
+<!--                        access_rights_management.role_operation_on_boarder"-->
+            <button class="oe_stat_button" type="object" name="action_view_sale_order"
+            groups="base.group_user"
+                invisible="parent_id"
+                icon="fa-usd">
+                <field string="Sales" name="sale_order_count" widget="statinfo"/>
+            </button>
+
+            <!-- Button for records *with* a parent -->
+              groups="access_rights_management.role_team_manager,
+                        access_rights_management.role_team_director,
+                        access_rights_management.role_operation,
+                        access_rights_management.role_operation_on_boarder"
+            <button class="oe_stat_button" type="object" name="action_view_sale_order"
+              groups="base.group_user"
+                invisible="not parent_id"
+                icon="fa-usd">
+                <field string="Sales" name="sale_order_count" widget="statinfo"/>
+            </button>
+
+        </xpath>
+
+    </field>
+</record>
+</odoo>

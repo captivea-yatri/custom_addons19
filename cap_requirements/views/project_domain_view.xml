@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="project_domain_form_view_inherit_cap_project_requirement" model="ir.ui.view">
+        <field name="name">project.domain.form.view.requirement</field>
+        <field name="model">project.domain</field>
+        <field name="inherit_id" ref="cap_domain.project_domain_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group" position="before">
+                <div class="oe_button_box" name="button_box">
+                    <button name="action_list_task_requirement"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-list">
+                        <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_text">Project</span>
+                            <span class="o_stat_text">Requirement</span>
+                        </div>
+                    </button>
+                </div>
+            </xpath>
+            <xpath expr="//group" position="after">
+                <notebook>
+                    <page string="KPI Based on requirements">
+                        <group>
+                            <group>
+                                <field name="project_manager_time" widget="float_time"/>
+                                <field name="business_analyst_time" widget="float_time"/>
+                                <field name="configurator_time" widget="float_time"/>
+                                <field name="developer_time" widget="float_time"/>
+                                <field name="architect_time" widget="float_time"/>
+                            </group>
+                            <group>
+                                <field name="estimated_time" widget="float_time"/>
+                                <field name="core_time" widget="float_time"/>
+                                <field name="implementation_time" widget="float_time"/>
+                                <field name="local_time" widget="float_time"/>
+                                <field name="offshore_time" widget="float_time"/>
+                            </group>
+                        </group>
+                    </page>
+                    <page string="KPI based on tasks">
+                        <group>
+                            <group>
+                                <field name="task_estimated_time" widget="float_time"/>
+                            </group>
+                            <group>
+                                <field name="task_passed_time" widget="float_time"/>
+                            </group>
+                        </group>
+                    </page>
+                </notebook>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="project_domain_tree_view_for_project_view_inherited_requirement" model="ir.ui.view">
+        <field name="name">project.domain.tree.view</field>
+        <field name="model">project.domain</field>
+        <field name="inherit_id" ref="cap_domain.project_domain_tree_view_for_project_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='status']" position="after">
+                <field name="estimated_time" widget="float_time" optional="show" sum="estimated_time"/>
+                <field name="project_manager_time" widget="float_time" sum="project_manager_time" optional="hide"/>
+                <field name="business_analyst_time" widget="float_time" sum="business_analyst_time" optional="hide"/>
+                <field name="configurator_time" widget="float_time" sum="configurator_time" optional="hide"/>
+                <field name="developer_time" widget="float_time" sum="developer_time" optional="hide"/>
+                <field name="architect_time" widget="float_time" sum="architect_time" optional="hide"/>
+                <field name="core_time" widget="float_time" sum="core_time" optional="hide"/>
+                <field name="implementation_time" widget="float_time" sum="implementation_time" optional="hide"/>
+                <field name="local_time" widget="float_time" sum="local_time" optional="hide"/>
+                <field name="offshore_time" widget="float_time" sum="offshore_time" optional="hide"/>
+                <field name="task_estimated_time" widget="float_time" optional="show"/>
+                <field name="task_passed_time" widget="float_time" optional="show"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="project_domain_pivot_view_inherited" model="ir.ui.view">
+        <field name="name">project.domain.pivot.view.inherited</field>
+        <field name="model">project.domain</field>
+        <field name="inherit_id" ref="cap_domain.project_domain_pivot_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='phase_id']" position="after">
+                <field name="estimated_time" type="measure"/>
+                <field name="task_estimated_time" type="measure"/>
+                <field name="task_passed_time" type="measure"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

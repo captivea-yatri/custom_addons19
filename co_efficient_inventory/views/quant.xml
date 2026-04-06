@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="co_efficient_inventory.stock_quant_tree">
+            <field name="name">co_efficient_inventory tree</field>
+            <field name="model">stock.quant</field>
+            <field name="inherit_id" ref="stock.view_stock_quant_tree"/>
+            <field name="arch" type="xml">
+                <field name="quantity" position="attributes">
+                    <attribute name="sum">Total</attribute>
+                </field>
+                <field name="quantity" position="before">
+                    <field name="product_categ_id" />
+                </field>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="co_efficient_inventory.stock_quant_search">
+            <field name="name">co_efficient_inventory search</field>
+            <field name="model">stock.quant</field>
+            <field name="inherit_id" ref="stock.quant_search_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[last()]" position="after">
+                    <filter string="Product Category" name="product_categorized" context="{'group_by': 'product_categ_id'}"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

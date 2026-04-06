@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!--============================= <Server Action for export Requirement==========================>-->
+        <record id="export_project_rquirement_xls_card" model="ir.actions.server">
+            <field name="name">Export Payslip XLS for HDFC</field>
+            <field name="model_id" ref="ksc_hr_payroll.model_hr_payslip_run"/>
+            <field name="binding_model_id" ref="ksc_hr_payroll.model_hr_payslip_run"/>
+            <field name="state">code</field>
+            <field name="code">action = records.export_batches_payslip()</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_emp_access_request_base_user,emp.access.request.base.user,model_emp_access_request,base.group_user,1,1,1,0
+access_emp_access_request_admin,emp.access.request.base.user,model_emp_access_request,base.group_system,1,1,1,1
+access_integrated_access_request,access_integrated_access_request,model_integrated_access_request,,1,1,1,1

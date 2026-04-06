@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="view_account_move_cost_form">
+        <field name="name">account.move.cost</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@id='invoice_tab']/field[@name='invoice_line_ids']/list/field[@name='price_subtotal']"
+                   position="before">
+                <field name="cost" readonly="1" optional="hide"/>
+            </xpath>
+            <field name="amount_residual" position="after">
+                <field name="total_margin" invisible="state == 'draft' or move_type != 'out_invoice'"/>
+            </field>
+            <div name="button_box" position="inside">
+                <field name="timesheet_riss_total_duration" invisible="1"/>
+                <button class="oe_stat_button" type="object" name="get_riss_group_timesheet" icon="fa-clock-o"
+                        invisible="timesheet_riss_total_duration == 0">
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_value">
+                            <field name="timesheet_riss_total_duration"/>Hour(S)
+                        </span>
+                        <span class="o_stat_text">Recorded</span>
+                    </div>
+                </button>
+            </div>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_account_move_cost_form_1">
+        <field name="name">account.move.cost.one</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="ksc_auto_invoice.view_account_move_cost_form"/>
+        <field name="arch" type="xml">
+            <field name="cost" position="replace">
+                <field name="cost" groups="account.group_account_user" readonly="0" optional="hide"/>
+            </field>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="skill_validation_request_tree_view" model="ir.ui.view">
+            <field name="name">skill.validation.request.tree.view</field>
+            <field name="model">hr.skill.validation.request</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="employee_id"/>
+                    <field name="status"/>
+                    <field name="skill_id"/>
+                    <field name="validator_id"/>
+                    <field name="request_to_be_private"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="skill_validation_request_view_form" model="ir.ui.view">
+            <field name="name">skill.validation.request.form.view</field>
+            <field name="model">hr.skill.validation.request</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_scheduled" type="object" string="Scheduled" class="btn btn-primary"
+                                invisible="status != 'requested' or is_login_user != True"/>
+                        <button name="action_success" type="object" string="Success" class="btn btn-primary"
+                                invisible="status != 'scheduled' or is_login_user != True"/>
+                        <button name="action_failed" type="object" string="Failed" class="btn btn-primary"
+                                invisible="status != 'scheduled' or is_login_user != True"/>
+                        <field name="status" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="employee_id" readonly="True"/>
+                                <field name="skill_id" options="{'no_create': True}"
+                                       readonly="status !=  'requested' or is_login_user_employee == False"
+                                       required="status == 'requested'"/>
+                                <field name="validator_id" readonly="True" force_save="True" groups="!cap_domain.operation_quality_manager"/>
+                                <field name="validator_id" groups="cap_domain.operation_quality_manager"
+                                       options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"
+                                       readonly="status != 'requested'" force_save="True"/>
+                            </group>
+                            <group>
+                                <field name="url" widget="url"
+                                       required="type_of_valivation == 'recording'"
+                                       readonly="status != 'requested' or is_login_user_employee != True"/>
+                                <field name="type_of_valivation"/>
+                                <field name="survey_user_input_id" readonly="1"/>
+                                <field name="request_to_be_private"
+                                       readonly="status != 'requested' or is_login_user_employee == False"/>
+                                <field name="is_login_user" invisible="True"/>
+                                <field name="is_login_user_employee" invisible="True"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <record id="skill_validation_request_search_view" model="ir.ui.view">
+            <field name="name">skill.validation.request.search.view</field>
+            <field name="model">hr.skill.validation.request</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field string="Employee" name="employee_id"/>
+                    <field string="Skill" name="skill_id"/>
+                    <field string="Validator" name="validator_id"/>
+                    <field string="Status" name="status"/>
+                    <filter string="Validate By Me" name="validator_id" domain="[('validator_id', '=', uid)]"/>
+                    <filter string="Status Requested" name="status" domain="[('status','=','requested')]"/>
+
+                        <filter string="Employee" name="employee_id" context="{'group_by':'employee_id'}"/>
+                        <filter string="Skill" name="skill_id" context="{'group_by':'skill_id'}"/>
+                        <filter string="Validator" name="validator_id" context="{'group_by':'validator_id'}"/>
+                        <filter string="Status" name="status" context="{'group_by':'status'}"/>
+                        <filter string="Type Of Valivation" name="type_of_valivation"
+                                context="{'group_by':'type_of_valivation'}"/>
+
+                </search>
+            </field>
+        </record>
+
+        <record id="action_skill_validation_request" model="ir.actions.act_window">
+            <field name="name">Skills Validation Request</field>
+            <field name="res_model">hr.skill.validation.request</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <menuitem id="skill_validation_request_main_menu" action="action_skill_validation_request"
+                  name="Skills Validation Request" sequence="5" parent="hr.menu_hr_root"/>
+    </data>
+</odoo>

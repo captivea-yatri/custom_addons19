@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="project.type" id="type_internal_project">
+            <field name="name">Internal</field>
+        </record>
+        <record model="project.type" id="type_template_project">
+            <field name="name">Template</field>
+        </record>
+        <record model="project.type" id="type_client_project">
+            <field name="name">Client</field>
+        </record>
+
+    </data>
+</odoo>

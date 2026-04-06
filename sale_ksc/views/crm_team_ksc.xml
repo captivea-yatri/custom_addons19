@@ -1,0 +1,36 @@
+<odoo>
+    <record id="view_team_list_ksc" model="ir.ui.view">
+        <field name="name">crm.team.ksc.list</field>
+        <field name="model">crm.team.ksc</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="leader_name"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_team_form_ksc" model="ir.ui.view">
+        <field name="name">crm.team.ksc.form</field>
+        <field name="model">crm.team.ksc</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="name"/>
+                    <field name="leader_name"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_crm_team" model="ir.actions.act_window">
+        <field name="name">CRM Team</field>
+        <field name="res_model">crm.team.ksc</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_crm_team"
+              name="Sales Team"
+              parent="menu_my_sales_category"
+              action="action_crm_team"/>
+</odoo>

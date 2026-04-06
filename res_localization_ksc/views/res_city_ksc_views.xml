@@ -1,0 +1,20 @@
+<odoo>
+    <record id="view_city_ksc_list" model="ir.ui.view">
+        <field name="name">res.city.ksc.list</field>
+        <field name="model">res.city.ksc</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="name"/>
+                <field name="state_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_city_ksc" model="ir.actions.act_window">
+        <field name="name">Cities</field>
+        <field name="res_model">res.city.ksc</field>
+        <field name="view_mode">list</field>
+    </record>
+<menuitem id="Localization" name="Localization"/>
+<menuitem id="city_child" name="City" parent="Localization" action="action_city_ksc"/>
+</odoo>

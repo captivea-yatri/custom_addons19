@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_saleorder_document_inherit_cap_appraisal" inherit_id="sale.report_saleorder_document">
+            <xpath expr="//div[@class='page']/div/span[@t-field='doc.note']" position="after">
+                <t t-if="doc.display_maintenance_support_terms">
+                    <hr style="width:100%;text-align:left;margin-left:0;"/>
+                    <p t-field="doc.company_id.maintenance_support_terms" name="order_maintenance_support_terms"/>
+                    <hr style="width:100%;text-align:left;margin-left:0;"/>
+                </t>
+            </xpath>
+            <xpath expr="//div[@t-if='doc.user_id.name']" position="replace">
+                <div t-if="doc.user_id.name" class="col">
+                    <strong>Salesperson</strong>
+                    <div t-field="doc.user_id">Mitchell Admin</div>
+                </div>
+            </xpath>
+        </template>
+
+        <!--<======================================INHERIT PORTAL VIEW================================================>-->
+
+        <template id="sale_order_portal_content_inherit_cap_appraisal" inherit_id="sale.sale_order_portal_content">
+            <xpath expr="//div/section[@id='terms']" position="after">
+                <section t-if="sale_order.display_maintenance_support_terms" class="mt-5">
+                    <h3 class="">Maintenance and support terms</h3>
+                    <hr class="mt-0 mb-1"/>
+                    <span t-field="sale_order.company_id.maintenance_support_terms"/>
+                    <hr style="width:100%;text-align:left;margin-left:0;"/>
+                </section>
+            </xpath>
+        </template>
+
+    </data>
+</odoo>

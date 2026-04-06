@@ -1,0 +1,36 @@
+<odoo>
+    <record id="view_product_uom_list_ksc" model="ir.ui.view">
+        <field name="name">product.uom.ksc.list</field>
+        <field name="model">product.uom.ksc</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="category_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_product_uom_form_ksc" model="ir.ui.view">
+        <field name="name">product.uom.ksc.form</field>
+        <field name="model">product.uom.ksc</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="name"/>
+                    <field name="category_id"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_product_uom_ksc" model="ir.actions.act_window">
+        <field name="name">Units of Measure</field>
+        <field name="res_model">product.uom.ksc</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_product_uom_ksc"
+              name="UOM"
+              parent="menu_my_sales_category"
+              action="action_product_uom_ksc"/>
+</odoo>

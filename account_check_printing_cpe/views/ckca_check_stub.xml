@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <template id="account_check_printing_cpe.ckca_check_stub_cpe" name="ckca_check_stub CPE" inherit_id="l10n_ca_check_printing.ckca_stub">
+        <xpath expr="//div" position="replace">
+            <div t-attf-class="ckca_stub ckca_stub_{{ stub_num }}" t-attf-style="padding-right: {{ o.company_id.account_check_printing_margin_right }}in">
+                <!--                <div class="sequence_number" t-if="page['sequence_number']" t-esc="page['sequence_number']"/>-->
+                <div class="row summary_line">
+                    <div class="col-6 text-left">
+                        <span t-esc="page['partner_name']"/>
+                    </div>
+                    <div class="col-6 text-right">
+                        <span t-esc="page['payment_date_canada']"/>
+                    </div>
+                </div>
+
+                <table class="table table-bordered table-sm stub_lines" t-if="page['stub_lines']">
+                    <thead><tr>
+                        <th class="text-left" style="font-weight: 800 !important">Due Date</th>
+                        <th class="text-left" style="font-weight: 800 !important">Description</th>
+                        <th class="text-right" style="font-weight: 800 !important">Invoice Amount</th>
+                        <th class="text-right" style="font-weight: 800 !important">Amount Due</th>
+                        <th class="text-right" style="font-weight: 800 !important">Payment</th>
+                    </tr></thead>
+                    <tbody>
+                        <t t-foreach="page['stub_lines']" t-as="stub_line">
+                            <t t-if="stub_line.get('header')">
+                                <tr><th colspan="6"><t t-esc="stub_line['name']"/></th></tr>
+                            </t>
+                            <t t-if="not stub_line.get('header')"><tr>
+                                <td class="text-left"><t t-if="stub_line['due_date']" t-esc="stub_line['due_date']"/></td>
+                                <td class="text-left"><t t-esc="stub_line['number']"/></td>
+                                <td class="text-right"><t t-esc="stub_line['amount_total']"/></td>
+                                <td class="text-right">
+                                    <t t-esc="stub_line['amount_residual']"/>
+                                </td>
+                                <td class="text-right"><t t-esc="stub_line['amount_paid']"/></td>
+                            </tr></t>
+                        </t>
+                        <tr t-if="page['stub_cropped']"><td colspan="6" class="text-right">...</td></tr>
+                    </tbody>
+                </table>
+                <div class="stub_total_amount" style="white-space: nowrap !important">Check Amount: <t t-esc="page['amount']"/></div>
+            </div>
+        </xpath>
+    </template>
+
+</odoo>

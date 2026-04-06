@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- LIST VIEW -->
+    <record id="student_list_view" model="ir.ui.view">
+        <field name="name">student.list.view</field>
+        <field name="model">student</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="age"/>
+                <field name="dob"/>
+                <field name="std"/>
+                <field name="div"/>
+                <field name="roll_no"/>
+                <field name="fees"/>
+                <field name="img" widget="image" class="oe_avtar" nolabel="1"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- FORM VIEW -->
+    <record id="student_form_view" model="ir.ui.view">
+        <field name="name">student.form.view</field>
+        <field name="model">student</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <button string="Open Wizard" type="object" name="open_wiz"/>
+                    <button string="Open Wizard using Action" type="action" name="skc_school_management.update_fees_view_action"/>
+                </group>
+                <group>
+                    <field name="name"/>
+                    <field name="age"/>
+                    <field name="dob"/>
+                    <field name="std"/>
+                    <field name="div"/>
+                    <field name="roll_no"/>
+                    <field name="fees"/>
+                    <field name="img" widget="image" class="oe_avtar" nolabel="1"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- GRAPH VIEW -->
+    <record id="student_graph_view" model="ir.ui.view">
+        <field name="name">student.graph.view</field>
+        <field name="model">student</field>
+        <field name="arch" type="xml">
+            <graph>
+                <field name="name"/>
+                    <field name="age"/>
+                    <field name="dob"/>
+                    <field name="std"/>
+                    <field name="div"/>
+                    <field name="roll_no"/>
+                <field name="img" widget="image" class="oe_avtar" nolabel="1"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- PIVOT VIEW -->
+    <record id="student_pivot_view" model="ir.ui.view">
+        <field name="name">student.pivot.view</field>
+        <field name="model">student</field>
+        <field name="arch" type="xml">
+        <pivot>
+            <field name="name"/>
+            <field name="age"/>
+            <field name="dob"/>
+            <field name="std"/>
+            <field name="div"/>
+            <field name="roll_no"/>
+            <field name="img" widget="image" class="oe_avtar" nolabel="1"/>
+        </pivot>
+        </field>
+    </record>
+
+    <!--Kanban VIEW-->
+    <record id="view_student_kanban" model="ir.ui.view">
+    <field name="name">student.kanban.view</field>
+    <field name="model">student</field>
+    <field name="arch" type="xml">
+        <kanban>
+            <field name="name"/>
+            <field name="age"/>
+            <field name="dob"/>
+            <field name="std"/>
+            <field name="div"/>
+            <field name="roll_no"/>
+            <field name="img" widget="image" class="oe_avtar" nolabel="1"/>
+            <templates>
+                <t t-name="card">
+                    <div class="oe_kanban_global_click">
+                        <img t-att-src="'/web/image/student/' + record.id + '/img'" class="o_kanban_image"/>
+                        <strong><t t-esc="record.name.value"/></strong>
+                        <div>Standard: <t t-esc="record.name.value"/></div>
+                        <div>Division: <t t-esc="record.age.value"/></div>
+                        <div>Standard: <t t-esc="record.dob.value"/></div>
+                        <div>Division: <t t-esc="record.std.value"/></div>
+                        <div>Standard: <t t-esc="record.div.value"/></div>
+                        <div>Division: <t t-esc="record.roll_no.value"/></div>
+                        <div>Image: <t t-esc="record.img.value"/></div>
+                    </div>
+                </t>
+            </templates>
+        </kanban>
+    </field>
+</record>
+
+
+    <!-- ACTION -->
+    <record id="student_action" model="ir.actions.act_window">
+        <field name="name">student</field>
+        <field name="res_model">student</field>
+        <field name="view_mode">list,form,graph,pivot,kanban</field>
+    </record>
+
+    <!-- MENUS -->
+    <menuitem id="School_management" name="School_management"/>
+    <menuitem id="student_child" name="Student" parent="School_management" action="student_action"/>
+    <menuitem id="new_menu" name="Action Menu" parent="School_management"/>
+
+
+
+</odoo>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="view_hr_job_form_inherit_cap_gamification" model="ir.ui.view">
+            <field name="name">hr.job.studio_customization</field>
+            <field name="model">hr.job</field>
+            <field name="inherit_id" ref="hr.view_hr_job_form"/>
+            <field name="arch" type="xml">
+
+                <!-- Add custom fields after recruitment target -->
+                <xpath expr="//page[@name='recruitment_page']//div[@name='recruitment_target']" position="after">
+                    <field name="minimum_quality_score_required"/>
+                    <field name="bonus_tm_target_quality_score_reached"/>
+                    <field name="overtarget_hours_team_manager_criteria"/>
+                </xpath>
+
+                <!-- Make recruitment page visible -->
+                <xpath expr="//page[@name='recruitment_page']" position="attributes">
+                    <attribute name="invisible">0</attribute>
+                </xpath>
+
+                <!-- Make job description page visible -->
+                <xpath expr="//page[@name='job_description_page']" position="attributes">
+                    <attribute name="invisible">0</attribute>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>
